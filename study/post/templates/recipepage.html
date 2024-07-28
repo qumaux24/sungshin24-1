@@ -1,0 +1,81 @@
+<html>
+    <head>
+        <title>레시피 페이지</title>
+        <link rel="stylesheet" href="styles.css">
+        <script>
+            function clip() {
+                var url = '';
+                var textarea = document.createElement("textarea");
+                document.body.appendChild(textarea);
+                url = 'window.location.href';
+                textarea.value = url;
+                textarea.select();
+                document.execCommand("copy");
+                document.body.removeChild(textarea);
+                alert("링크가 복사되었습니다. 필요하신 곳에 붙여넣기 하세요!")
+            };
+        </script>
+        <style>
+            main {
+                padding: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+        </style>
+
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <a href="main.html"><span class="blue">냉</span>Jango()</a>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="search">
+                <button><img src="search-icon.png" alt="search"></button>
+            </div>
+
+            <div class="menu-icon">
+                <img src="menu-icon.png" alt="menu">
+                <div class="dropdown-menu">
+                    <a href="koreapost.html">한식</a>
+                    <a href="chinapost.html">중식</a>
+                    <a href="japanpost.html">일식</a>
+                    <a href="diet.html">식단</a>
+                    <a href="recipeRegistration.html">레시피 등록</a>
+                </div>
+            </div>
+
+        </header>
+       
+        <main>
+            <section class="recipe-details">
+                <h1>레시피 이름</h1>
+                <div class="recipe-image">
+                    <img src="recipe-image.jpg" alt="Recipe Image">
+                </div>
+                <div class="recipe-info">
+                    <p><strong>조리 시간:</strong> 00분</p>
+                    <p><strong>좋아요 수:</strong> 00</p>
+                </div>
+                <div class="recipe-ingredients">
+                    <h2>재료</h2>
+                    <ul>
+                        <li>재료 1</li>
+                        <li>재료 2</li>
+                        <li>재료 3</li>
+                    </ul>
+                </div>
+                <div class="recipe-instructions">
+                    <h2>만드는 방법</h2>
+                    <p>1. 첫 번째 단계</p>
+                    <p>2. 두 번째 단계</p>
+                    <p>3. 세 번째 단계</p>
+                </div>
+            </section>
+        </main>
+        <button onclick="clip()">링크 복사</button>
+
+    </body>
+
+</html>
