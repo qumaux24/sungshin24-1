@@ -2,6 +2,8 @@
 <html lang="ko">
     <head>
         <title>사용자 게시판</title>
+        {% load static %}
+        <link rel="stylesheet" href="{%static 'css/styles-post.css' %}">
     </head>
     <body>
         <header>
@@ -19,10 +21,11 @@
                     <a href="koreapost.html">한식</a>
                     <a href="chinapost.html">중식</a>
                     <a href="japanpost.html">일식</a>
-                    <a href="diet.html">식단</a>
                     <a href="recipeRegistration.html">레시피 등록</a>
                 </div>
             </div>
+        </header>
+        <br>
         <h1>사용자 게시판</h1>
         <p>게시판 이동하기</p>
         <a href="#" onclick="location.href='koreapost.html'">한식 게시판</a>

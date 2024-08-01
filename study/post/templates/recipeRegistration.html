@@ -5,15 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>레시피 등록</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-    main {
-        padding: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-    </style>
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'css/styles-recipeRegistration.css' %}">
+    
 </head>
 
 <body>
@@ -32,12 +26,12 @@
                 <a href="koreapost.html">한식</a>
                 <a href="chinapost.html">중식</a>
                 <a href="japanpost.html">일식</a>
-                <a href="diet.html">식단</a>
                 <a href="recipeRegistration.html">레시피 등록</a>
             </div>
         </div>
     
     </header>
+    
     <main>
         <section class="recipe-form">
             <h2>레시피 등록</h2>
@@ -49,6 +43,13 @@
                 <div class="form-group">
                     <label for="recipe-image">대표 이미지</label>
                     <input type="file" id="recipe-image" name="recipe-image" accept="image/*" required>
+                </div>
+                <div class="form-group">
+                    <select>
+                        <option value="korean">한식</option>
+                        <option value="chinese">중식</option>
+                        <option value="japanese">일식</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="cooking-time">조리 시간</label>

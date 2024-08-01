@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
     <head>
-        <title>일식 게시판</title>
+        <title>로그인</title>
         {% load static %}
-        <link rel="stylesheet" href="{%static 'css/styles-japanpost.css' %}">
+        <link rel="stylesheet" href="{%static 'css/styles-login.css' %}">
     
     </head>
-    
     <body>
         <header>
             <div class="logo">
@@ -16,7 +15,7 @@
                 <input type="text" placeholder="search">
                 <button><img src="search-icon.png" alt="search"></button>
             </div>
-    
+        
             <div class="menu-icon">
                 <img src="menu-icon.png" alt="menu">
                 <div class="dropdown-menu">
@@ -26,8 +25,20 @@
                     <a href="recipeRegistration.html">레시피 등록</a>
                 </div>
             </div>
-    
+
         </header>
-        <h1>일식 게시판</h1>
-        </body>
+
+       <h2>로그인</h2> 
+        <form class="login-box">
+            <input type="text" placeholder="아이디">
+            <br>
+            <input type="password" placeholder="패스워드">
+            <a href="findPW.html">Forgot password?</a>
+            <br>
+            
+            <button type="submit">로그인</button>
+            
+        </form>
+
+    </body>
 </html>
