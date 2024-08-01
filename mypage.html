@@ -1,13 +1,38 @@
 <!DOCTYPE html>
 <html lang="ko">
-    <head>
-        <title>마이페이지</title>
-    </head>
-    <body>
-        <a href="#" onclick="location.href='membership.html'">회원정보수정</a>
-        <br>
-        <a href="#" onclick="location.href='my.html'">My</a>
-        <br>
-        <br>
-        <p>//이왕이면 세로보다는 왼/오 가로로 정렬되었으면 좋겠습니다!//</p>
-    </body>
+<head>
+    <meta charset="UTF-8">
+    <title>마이페이지</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span class="blue">냉</span>Jango()
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="search">
+            <button><img src="search-icon.png" alt="search"></button>
+        </div>
+            
+        <div class="menu-icon">
+            <img src="menu-icon.png" alt="menu">
+            <div class="dropdown-menu">
+                <a href="koreapost.html">한식</a>
+                <a href="chinapost.html">중식</a>
+                <a href="japanpost.html">일식</a>
+                <a href="recipeRegistration.html">레시피 등록</a>
+            </div>
+        </div>
+    </header>
+    <h1>&nbsp;&nbsp;MYPAGE</h1>
+    <div class="dropdown-mypage">
+        <input type="radio" id="my" name="page" value="my.html">
+        <label for="my">My</label>
+        <input type="radio" id="membership" name="page" value="membership.html">
+        <label for="membership">회원정보수정</label>
+    </div>
+    <div id="content">
+        <!-- 선택한 페이지의 내용이 여기에 표시됩니다 -->
+    </div>
+</body>
+</html>
