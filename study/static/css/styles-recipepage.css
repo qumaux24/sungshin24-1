@@ -4,8 +4,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0 auto;
     padding: 0;
-    
-    width: 1400px;
+
+    width: 960px;
     overflow-x: auto;
 }
 
@@ -33,6 +33,7 @@ a {
 a:visited {
     color: black;
 }
+
 a:hover {
     color: blue;
 }
@@ -82,7 +83,7 @@ a:hover {
 }
 
 .menu-icon img {
-    margin-top:3px;
+    margin-top: 3px;
     width: 24px;
     height: 24px;
     cursor: pointer;
@@ -118,7 +119,7 @@ a:hover {
 }
 
 /*--여기까지 헤더--*/
-button {
+#link {
     width: 100px;
     padding: 10px;
     background-color: #333;
@@ -128,6 +129,7 @@ button {
     cursor: pointer;
     margin-bottom: 10px;
 }
+
 
 
 .recipe-details {
@@ -153,6 +155,35 @@ button {
 .recipe-image img {
     max-width: 100%;
     border-radius: 5px;
+}
+
+.likes {
+    height: 30px;
+    text-align: center;
+    align-items: center;
+    padding-top: 5px;
+
+}
+
+#like-button {
+    width: 100px;
+    padding: 3px;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.likes img {
+    height: 17px;
+    width: 17px;
+
+    padding-right: 10px;
+}
+
+.likenum {
+    padding-top: 7px;
 }
 
 .recipe-info {

@@ -1,141 +1,161 @@
 <!DOCTYPE html>
 <html lang="ko">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>냉jango()</title>
-    {% load static %}
-    <link rel="stylesheet" href ="{%static 'css/styles-main.css' %}">
-    
-       
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>냉jango()</title>
+        {% load static %}
+        <link rel="stylesheet" href ="{%static 'css/styles-main.css' %}">
 
-<body>
-    <header>
-        <div class="logo">
-            <span class="blue">냉</span>Jango()
-        </div>
-        <div class="search-bar">
-            <input type="text" placeholder="search">
-            <button><img src="search-icon.png" alt="search"></button>
-        </div>
+        <script>
+            let isLoggedIn = false; 
+            function checklogin() {
+                if (!isLoggedIn) {
+                    if (confirm("로그인이 필요합니다.")) {
+                        window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
+                    }
+                }
+                else{
+                    window.location.href="recipeRegistration.html";
+                }
+            };
+        </script>
+        
+        
+    </head>
+
+    <body>
+        <header>
+            <div class="logo">
+                <span class="blue">냉</span>Jango()
+            </div>
+            <select id="search-type">
+                <option value="all">전체</option>
+                <option value="ingredient">재료</option>
+                <option value="title">제목</option>
+            </select>
+            <div class="search-bar">
+                <input type="text" placeholder="search">
+                <button><img src="search-icon.png" alt="search"></button>
+            </div>
+                
+            <div class="menu-icon">
+                <img src="menu-icon.png" alt="menu">
+                <div class="dropdown-menu">
+                    <a href="koreapost.html">한식</a>
+                    <a href="chinapost.html">중식</a>
+                    <a href="japanpost.html">일식</a>
+                    <a href="infopost.html">공지사항</a>
+                    <a onclick="checklogin()">레시피 등록</a>
+                </div>
+            </div>
             
-        <div class="menu-icon">
-            <img src="menu-icon.png" alt="menu">
-            <div class="dropdown-menu">
-                <a href="koreapost.html">한식</a>
-                <a href="chinapost.html">중식</a>
-                <a href="japanpost.html">일식</a>
-                <a href="recipeRegistration.html">레시피 등록</a>
-            </div>
-        </div>
-        
-    </header>
+        </header>
 
-    <main>
-        <section class="daily-and-login">
-            <section class="daily-recipe">
-                <h2>DAILY ♡</h2>
-                <div class="recipe-card">
-                    
-                    <h3>레시피 이름</h3>
-                    <div class="likes">
-                        <img src="like-icon.jpg" alt="Like">
-                        <span class="likenum">00</span>
-                    </div>
-                    <br>
-                    <img src="recipe-image.png" alt="Recipe Image">
-                    <br>
-                    <button onclick="location.href='recipepage.html'">레시피 이용하기</button>
-                </div>
-
-                <div class="recipe-card">
-                    
-                    <h3>레시피 이름</h3>
-                    <div class="likes">
-                        <img src="like-icon.jpg" alt="Like">
-                        <span class="likenum">00</span>
-                    </div>
-                    <br>
-                    <img src="recipe-image.png" alt="Recipe Image">
-                    <br>
-                    <button onclick="location.href='recipepage.html'">레시피 이용하기</button>
-
-                </div>
-
-                <div class="recipe-card">
-                    <h3>레시피 이름</h3>                    
-                    <div class="likes">
+        <main>
+            <section class="daily-and-login">
+                <section class="daily-recipe">
+                    <h2>DAILY ♡</h2>
+                    <div class="recipe-card">
                         
-                        <img src="like-icon.jpg" alt="Like">
-                        <span class="likenum">00</span>
+                        <h3>레시피 이름</h3>
+                        <div class="likes">
+                            <img src="like-icon.jpg" alt="Like">
+                            <span class="likenum">00</span>
+                        </div>
+                        <br>
+                        <img src="recipe-image.png" alt="Recipe Image">
+                        <br>
+                        <button onclick="location.href='recipepage.html'">레시피 이용하기</button>
                     </div>
-                    <br>
-                    <img src="recipe-image.png" alt="Recipe Image">
-                    <br>
-                    <button onclick="location.href='recipepage.html'">레시피 이용하기</button>
 
-                </div>
+                    <div class="recipe-card">
+                        
+                        <h3>레시피 이름</h3>
+                        <div class="likes">
+                            <img src="like-icon.jpg" alt="Like">
+                            <span class="likenum">00</span>
+                        </div>
+                        <br>
+                        <img src="recipe-image.png" alt="Recipe Image">
+                        <br>
+                        <button onclick="location.href='recipepage.html'">레시피 이용하기</button>
 
-            </section>
-        
-            <aside class="login-box">
-                <!--로그인전-->
-                <div>
-                        <button onclick="location.href='login.html'">로그인</button>
-                        <button onclick="location.href='signUp.html'">회원가입</button>
-                     
-                    <br>
+                    </div>
+
+                    <div class="recipe-card">
+                        <h3>레시피 이름</h3>                    
+                        <div class="likes">
+                            
+                            <img src="like-icon.jpg" alt="Like">
+                            <span class="likenum">00</span>
+                        </div>
+                        <br>
+                        <img src="recipe-image.png" alt="Recipe Image">
+                        <br>
+                        <button onclick="location.href='recipepage.html'">레시피 이용하기</button>
+
+                    </div>
+
+                </section>
+            
+                <aside class="login-box">
+                    <!--로그인전-->
                     <div>
-                        <button onclick="location.href='recipeRegistration.html'">레시피 등록하기</button>
+                            <button onclick="location.href='login.html'">로그인</button>
+                            <button onclick="location.href='signUp.html'">회원가입</button>
+                        
+                        <br>
+                        
                     </div>
+
+                    <!--로그인후-->
+                    
+                    <div id="user-info-section" >
+                        <p id="user-id">아이디: </p>
+                        <p id="user-gender">성별: </p>
+                        <p id="user-posts">게시글 수: </p>
+                        <button onclick="location.href='mypage.html'">마이페이지</button>
+                    
+                        <button onclick="location.href='#'">로그아웃</button>
+                        <div>
+                            <button onclick="location.href='recipeRegistration.html'">레시피 등록하기</button>
+                        </div>
+
+
+                    </div>
+                </aside>
+            </section>
+
+            <br>
+                    
+            <section class="category-top">
+                <div class="category">
+                    <h3>HOT 한식 게시판</h3>
+                    <ul>
+                        <li><a href="recipepage.html">레시피 1</a></li>
+                        <li><a href="recipepage.html">레시피 2</a></li>
+                    </ul>
                 </div>
-
-                <!--로그인후-->
-                
-                <div id="user-info-section" >
-                    <p id="user-id">아이디: </p>
-                    <p id="user-email">이메일: </p>
-                    <p id="user-gender">성별: </p>
-                    <p id="user-posts">게시글 수: </p>
-                    <button onclick="location.href='mypage.html'">마이페이지</button>
-                   
-                    <button onclick="location.href='#'">로그아웃</button>
-
-
+                <div class="category">
+                    <h3>HOT 중식 게시판</h3>
+                    <ul>
+                        <li><a href="recipepage.html">레시피 1</a></li>
+                        <li><a href="recipepage.html">레시피 2</a></li>
+                    </ul>
                 </div>
-            </aside>
-        </section>
+                <div class="category">
+                    <h3>HOT 일식 게시판</h3>
+                    <ul>
+                        <li><a href="recipepage.html">레시피 1</a></li>
+                        <li><a href="recipepage.html">레시피 2</a></li>
+                    </ul>
+                </div>
+            </section>
 
-        <br>
-                
-        <section class="category-top">
-            <div class="category">
-                <h3>HOT 한식 게시판</h3>
-                <ul>
-                    <li><a href="recipepage.html">레시피 1</a></li>
-                    <li><a href="recipepage.html">레시피 2</a></li>
-                </ul>
-            </div>
-            <div class="category">
-                <h3>HOT 중식 게시판</h3>
-                <ul>
-                    <li><a href="recipepage.html">레시피 1</a></li>
-                    <li><a href="recipepage.html">레시피 2</a></li>
-                </ul>
-            </div>
-            <div class="category">
-                <h3>HOT 일식 게시판</h3>
-                <ul>
-                    <li><a href="recipepage.html">레시피 1</a></li>
-                    <li><a href="recipepage.html">레시피 2</a></li>
-                </ul>
-            </div>
-        </section>
-
-        
-    </main>
-</body>
+            
+        </main>
+    </body>
 
 </html>

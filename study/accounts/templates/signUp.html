@@ -4,69 +4,60 @@
         <title>회원가입</title>
         {% load static %}
         <link rel="stylesheet" href="{%static 'css/styles-signUp.css' %}">
+        <script>
+            let isLoggedIn = false; 
+            function checklogin() {
+                if (!isLoggedIn) {
+                    if (confirm("로그인이 필요합니다.")) {
+                        window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
+                    }
+                }
+                else{
+                    window.location.href="recipeRegistration.html";
+                }
+            };
+        </script>
+        
+        
     </head>
+
     <body>
         <header>
             <div class="logo">
-                <a href="main.html"><span class="blue">냉</span>Jango()</a>
+                <span class="blue">냉</span>Jango()
             </div>
+            <select id="search-type">
+                <option value="all">전체</option>
+                <option value="ingredient">재료</option>
+                <option value="title">제목</option>
+            </select>
             <div class="search-bar">
                 <input type="text" placeholder="search">
                 <button><img src="search-icon.png" alt="search"></button>
             </div>
-        
+                
             <div class="menu-icon">
                 <img src="menu-icon.png" alt="menu">
                 <div class="dropdown-menu">
                     <a href="koreapost.html">한식</a>
                     <a href="chinapost.html">중식</a>
                     <a href="japanpost.html">일식</a>
-                    <a href="recipeRegistration.html">레시피 등록</a>
+                    <a href="infopost.html">공지사항</a>
+                    <a onclick="checklogin()">레시피 등록</a>
                 </div>
             </div>
-
+            
         </header>
 
        <h2>회원가입</h2> 
-        <form id="signUp-pt-1" class="login-box">
-            <input type="text" placeholder="아이디">
+        <form method="POST" id="signUp-pt-1" class="login-box">
+            <input type="text" placeholder="아이디" required>
             <br>
-            <input type="text" placeholder="이메일">
+            <input type="password" placeholder="패스워드" required>
             <br>
-            <input type="password" placeholder="패스워드">
+            <input type="password" placeholder="패스워드 확인" required>
             <br>
-            <input type="password" placeholder="패스워드 확인">
-            <br>
-            <button>다음</button>
-            
-        </form>
-
-        <form id="signUp-pt-2" class="login-box">
-            <div>
-                <span>성별</span>
-                <select name="gender">
-                    <option>여성</option>
-                    <option>남성</option>
-                </select>
-            </div>
-            <br>
-            <div>
-                <span>거주지</span>
-                <select name="residence">
-                    <option>자취</option>
-                    <option>기숙사</option>
-                    <option>본가</option>
-                </select>
-            </div>
-            <br>
-            <input type="text" placeholder="나이">
-            <br>
-            <input type="password" placeholder="알레르기">
-            <br>
-            <input type="password" placeholder="패스워드 확인">
-            <br>
-            <a href="#">나중에 입력할래요</a>
-            <br>
+            <!-- 아래 버튼 누르면 accInfo.html로 넘어가게 연결 필요 -->
             <button type="submit">회원가입</button>
         
         </form>

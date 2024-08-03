@@ -3,8 +3,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 0 auto;
     padding: 0;
-    
-    width: 1400px;
+
+    width: 960px;
     overflow-x: auto;
 }
 
@@ -107,6 +107,7 @@ a:hover {
 .menu-icon:hover .dropdown-menu {
     display: block;
 }
+
 /*  */
 .pagination {
     display: flex;

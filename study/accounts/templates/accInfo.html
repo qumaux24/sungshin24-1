@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="ko">
     <head>
-        <title>일식 게시판</title>
+        <title>회원가입</title>
         {% load static %}
-        <link rel="stylesheet" href="{%static 'css/styles-japanpost.css' %}">
-        <script>
+        <link rel="stylesheet" href="{%static 'css/styles-accInfo.css' %}">
+
+    <script>
         let isLoggedIn = false; 
         function checklogin() {
             if (!isLoggedIn) {
@@ -18,7 +19,7 @@
         };
     </script>
     
-       
+        
     </head>
 
     <body>
@@ -48,6 +49,41 @@
             </div>
             
         </header>
-        <h1>일식 게시판</h1>
-        </body>
+
+       <h2>추가 정보</h2>
+       
+       <div>선택사항</div>
+
+        <br>
+        <form method="POST" id="signUp-pt-2" class="login-box">
+            
+            <div>
+                <span>성별</span>
+                <select name="gender">
+                    <option>여성</option>
+                    <option>남성</option>
+                </select>
+            </div>
+            <br>
+            <div>
+                <span>거주지</span>
+                <select name="residence">
+                    <option>자취</option>
+                    <option>기숙사</option>
+                    <option>본가</option>
+                </select>
+            </div>
+            <br>
+            <input type="text" placeholder="나이">
+            <br>
+            <input type="password" placeholder="알레르기">
+            <br>
+            <input type="password" placeholder="패스워드 확인">
+            <br>
+            
+            <button type="submit">회원가입</button>
+        
+        </form>
+
+    </body>
 </html>

@@ -7,35 +7,55 @@
     <title>레시피 등록</title>
     {% load static %}
     <link rel="stylesheet" href="{%static 'css/styles-recipeRegistration.css' %}">
+    <script>
+        let isLoggedIn = false; 
+        function checklogin() {
+            if (!isLoggedIn) {
+                if (confirm("로그인이 필요합니다.")) {
+                    window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
+                }
+            }
+            else{
+                window.location.href="recipeRegistration.html";
+            }
+        };
+    </script>
     
+       
 </head>
 
 <body>
     <header>
         <div class="logo">
-            <a href="main.html"><span class="blue">냉</span>Jango()</a>
+            <span class="blue">냉</span>Jango()
         </div>
+        <select id="search-type">
+            <option value="all">전체</option>
+            <option value="ingredient">재료</option>
+            <option value="title">제목</option>
+        </select>
         <div class="search-bar">
             <input type="text" placeholder="search">
             <button><img src="search-icon.png" alt="search"></button>
         </div>
-    
+            
         <div class="menu-icon">
             <img src="menu-icon.png" alt="menu">
             <div class="dropdown-menu">
                 <a href="koreapost.html">한식</a>
                 <a href="chinapost.html">중식</a>
                 <a href="japanpost.html">일식</a>
-                <a href="recipeRegistration.html">레시피 등록</a>
+                <a href="infopost.html">공지사항</a>
+                <a onclick="checklogin()">레시피 등록</a>
             </div>
         </div>
-    
+        
     </header>
     
     <main>
         <section class="recipe-form">
             <h2>레시피 등록</h2>
-            <form action="submit-recipe.php" method="post" enctype="multipart/form-data">
+            <form action="submit-recipe.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="recipe-name">레시피 이름</label>
                     <input type="text" id="recipe-name" name="recipe-name" required>
@@ -45,6 +65,7 @@
                     <input type="file" id="recipe-image" name="recipe-image" accept="image/*" required>
                 </div>
                 <div class="form-group">
+                    <label></label>
                     <select>
                         <option value="korean">한식</option>
                         <option value="chinese">중식</option>
