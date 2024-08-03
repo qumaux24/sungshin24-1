@@ -18,6 +18,13 @@ header {
     border-bottom: 1px solid #ccc;
 }
 
+main {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 a {
     text-decoration-line: none;
     text-decoration-color: black;
@@ -31,16 +38,34 @@ a:hover {
     color: blue;
 }
 
+
+
 .logo {
     font-size: 24px;
     font-weight: bold;
+    margin-right: 20px;
 }
 
 .logo .blue {
     color: blue;
 }
 
+#search-type {
+    margin-top: 6px;
+    margin-left: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-size: 14px;
+}
+
+#search-type option {
+    background-color: #fff;
+}
+
 .search-bar {
+    padding-top: 6px;
     display: flex;
     align-items: center;
     flex-grow: 1;
@@ -74,7 +99,7 @@ a:hover {
 }
 
 .menu-icon img {
-    margin-top: 3px;
+    margin-top: 10px;
     width: 24px;
     height: 24px;
     cursor: pointer;
@@ -111,9 +136,8 @@ a:hover {
 
 /*--여기까지 헤더--*/
 
-
 .login-box {
-    width: 20%;
+    width: 300px;
     margin: auto;
     padding: 20px;
     border-radius: 5px;

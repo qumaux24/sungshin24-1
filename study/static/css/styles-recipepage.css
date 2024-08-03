@@ -43,13 +43,29 @@ a:hover {
 .logo {
     font-size: 24px;
     font-weight: bold;
+    margin-right: 20px;
 }
 
 .logo .blue {
     color: blue;
 }
 
+#search-type {
+    margin-top: 6px;
+    margin-left: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-size: 14px;
+}
+
+#search-type option {
+    background-color: #fff;
+}
+
 .search-bar {
+    padding-top: 6px;
     display: flex;
     align-items: center;
     flex-grow: 1;
@@ -83,7 +99,7 @@ a:hover {
 }
 
 .menu-icon img {
-    margin-top: 3px;
+    margin-top: 10px;
     width: 24px;
     height: 24px;
     cursor: pointer;
@@ -270,11 +286,11 @@ a:hover {
     background-color: #858585;
     color: white;
     border: none;
-    padding: 10px 20px;
+    padding: 5px 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 10px;
     cursor: pointer;
     border-radius: 5px;
 }

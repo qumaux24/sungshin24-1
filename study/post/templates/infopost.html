@@ -1,26 +1,26 @@
 <!DOCTYPE html>
 <html lang="ko">
     <head>
-        <title>회원가입</title>
+        <title>공지사항 게시판</title>
         {% load static %}
-        <link rel="stylesheet" href="{%static 'css/styles-signUp.css' %}">
+        <link rel="stylesheet" href="{%static 'css/infopost.css' %}">
         <script>
-            let isLoggedIn = false; 
+            let isLoggedIn = false;
             function checklogin() {
                 if (!isLoggedIn) {
                     if (confirm("로그인이 필요합니다.")) {
                         window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
                     }
                 }
-                else{
-                    window.location.href="recipeRegistration.html";
+                else {
+                    window.location.href = "recipeRegistration.html";
                 }
             };
         </script>
-        
-        
+    
+    
     </head>
-
+    
     <body>
         <header>
             <div class="logo">
@@ -35,7 +35,7 @@
                 <input type="text" placeholder="search">
                 <button><img src="search-icon.png" alt="search"></button>
             </div>
-                
+    
             <div class="menu-icon">
                 <img src="menu-icon.png" alt="menu">
                 <div class="dropdown-menu">
@@ -46,22 +46,8 @@
                     <a onclick="checklogin()">레시피 등록</a>
                 </div>
             </div>
-            
+    
         </header>
-        <br>
-        <h2>회원가입</h2> 
-        <form method="POST" id="signUp-pt-1" class="login-box">
-            <br>
-            <input type="text" name="username" placeholder="아이디" required>
-            <br>
-            <input type="password" name="password" placeholder="패스워드" required>
-            <br>
-            <input type="password" name="password-confirm" placeholder="패스워드 확인" required>
-            <br>
-            <!-- 아래 버튼 누르면 accInfo.html로 넘어가게 연결 필요 -->
-            <button type="submit">회원가입</button>
-        
-        </form>
-
+        <h1>공지사항</h1>
     </body>
 </html>
