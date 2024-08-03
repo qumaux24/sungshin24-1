@@ -22,6 +22,8 @@
     </head>
 
     <body>
+        {% load bootstrap4 %}
+        {% block content %}
         <header>
             <div class="logo">
                 <span class="blue">냉</span>Jango()
@@ -51,17 +53,19 @@
         <br>
         <h2>회원가입</h2> 
         <form method="POST" id="signUp-pt-1" class="login-box">
+            {% csrf_token %} 
             <br>
             <input type="text" name="username" placeholder="아이디" required>
             <br>
-            <input type="password" name="password" placeholder="패스워드" required>
+            <input type="password" name="password1" placeholder="패스워드" required>
             <br>
-            <input type="password" name="password-confirm" placeholder="패스워드 확인" required>
+            <input type="password" name="password2" placeholder="패스워드 확인" required>
+            <!-- 이름 값 때문에 (password -> password1) / (password-confirm -> password2)로 변경했습니다. -->
             <br>
             <!-- 아래 버튼 누르면 accInfo.html로 넘어가게 연결 필요 -->
             <button type="submit">회원가입</button>
         
         </form>
-
+        {% endblock %}
     </body>
 </html>

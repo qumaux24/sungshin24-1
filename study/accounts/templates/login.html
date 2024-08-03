@@ -52,9 +52,10 @@
         <h2>로그인</h2> 
         <br>
         <form method="POST" class="login-box">
-            <input type="text" placeholder="아이디">
+            {% csrf_token %} 
+            <input type="text" placeholder="아이디" name="username">
             <br>
-            <input type="password" placeholder="패스워드">
+            <input type="password" placeholder="패스워드" name="password">
             <br>
             <a href="findPW.html">Forgot password?</a>
             <br>

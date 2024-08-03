@@ -106,12 +106,12 @@
                     <!--로그인전-->
                     <div>
                         <div class="box1">
+                            {% csrf_token %} 
                             <h2>LOGIN</h2>
                             <br>
                             <br>
-                            <button onclick="location.href='login.html'">로그인</button>
-                            <button onclick="location.href='signUp.html'">회원가입</button>
-                        
+                            <a href="login"><button onclick="location.href='login.html'">로그인</button></a>
+                            <a href="signup"><button onclick="location.href='signUp.html'">회원가입</button></a>
                             <br>
                         </div>
                         <div class="info">
@@ -131,11 +131,10 @@
                         
                     </div>
                     <!--로그인후-->
-                    
                     <div id="user-info-section" hidden>
                         <div class="box1">
                             <h2>PROFILE</h2>
-                            <p id="user-id">아이디: </p>
+                            <p id="user-id">아이디: {{user}}</p>
                             <p id="user-gender">성별: </p>
                             <p id="user-posts">게시글 수: </p>
                             <button onclick="location.href='mypage.html'">마이페이지</button>
@@ -160,7 +159,7 @@
 
 
                         </div>
-                   
+                    {% endif %}
 
                 </aside>
             </section>
