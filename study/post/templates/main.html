@@ -38,11 +38,11 @@
             <div class="search-bar">
                 
                 <input type="text" placeholder="search">
-                <button><img src="search-icon.png" alt="search"></button>
+                <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
             </div>
                 
             <div class="menu-icon">
-                <img src="menu-icon.png" alt="menu">
+                <img src="{% static 'image/menu-icon.png' %}" alt="menu">
                 <div class="dropdown-menu">
                     <a href="koreapost.html">한식</a>
                     <a href="chinapost.html">중식</a>
@@ -62,11 +62,11 @@
                         
                         <h3>레시피 이름</h3>
                         <div class="likes">
-                            <img src="like-icon.jpg" alt="Like">
+                            <img src="{% static 'image/like-icon.jpg' %}" alt="Like">
                             <span class="likenum">00</span>
                         </div>
                         <br>
-                        <img src="recipe-image.png" alt="Recipe Image">
+                        <img src="{% static 'image/recipe-image.png' %}" alt="Recipe Image">
                         <br>
                         <button onclick="location.href='recipepage.html'">레시피 이용하기</button>
                     </div>
@@ -75,11 +75,11 @@
                         
                         <h3>레시피 이름</h3>
                         <div class="likes">
-                            <img src="like-icon.jpg" alt="Like">
+                            <img src="{% static 'image/like-icon.jpg' %}" alt="Like">
                             <span class="likenum">00</span>
                         </div>
                         <br>
-                        <img src="recipe-image.png" alt="Recipe Image">
+                        <img src="{% static 'image/recipe-image.png' %}" alt="Recipe Image">
                         <br>
                         <button onclick="location.href='recipepage.html'">레시피 이용하기</button>
 
@@ -89,11 +89,11 @@
                         <h3>레시피 이름</h3>                    
                         <div class="likes">
                             
-                            <img src="like-icon.jpg" alt="Like">
+                            <img src="{% static 'image/like-icon.jpg' %}" alt="Like">
                             <span class="likenum">00</span>
                         </div>
                         <br>
-                        <img src="recipe-image.png" alt="Recipe Image">
+                        <img src="{% static 'image/recipe-image.png' %}" alt="Recipe Image">
                         <br>
                         <button onclick="location.href='recipepage.html'">레시피 이용하기</button>
 
@@ -102,8 +102,37 @@
                 </section>
             
                 <aside class="login-box">
-                
+
+                    <!--로그인후-->
+                    {% if user.is_authenticated %}
+                    <div id="user-info-section" hidden>
+                        <div class="box1">
+                            <h2>PROFILE</h2>
+                            <p id="user-id">아이디: {{user}}</p>
+                            <p id="user-gender">성별: </p>
+                            <p id="user-posts">게시글 수: </p>
+                            <button onclick="location.href='mypage.html'">마이페이지</button>
+                        
+                            <button onclick="location.href='#'">로그아웃</button>
+                            <div>
+                                <button onclick="location.href='recipeRegistration.html'">레시피 등록하기</button>
+                            </div>
+                        </div>
+
+                        <div class="info">
+                            <h3>공지사항</h3>
+                            <br>
+                            <ul>
+                                <li><a href="infopost.html">공지사항 1</a></li>
+                                <li><a href="infopost.html">공지사항 2</a></li>
+                                <li><a href="infopost.html">공지사항 3</a></li>
+                                <li><a href="infopost.html">공지사항 4</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
                     <!--로그인전-->
+                    {% else %}
                     <div>
                         <div class="box1">
                             {% csrf_token %} 
@@ -129,36 +158,7 @@
                             </ul>
                         </div>
                         
-                    </div>
-                    <!--로그인후-->
-                    <div id="user-info-section" hidden>
-                        <div class="box1">
-                            <h2>PROFILE</h2>
-                            <p id="user-id">아이디: {{user}}</p>
-                            <p id="user-gender">성별: </p>
-                            <p id="user-posts">게시글 수: </p>
-                            <button onclick="location.href='mypage.html'">마이페이지</button>
-                        
-                            <button onclick="location.href='#'">로그아웃</button>
-                            <div>
-                                <button onclick="location.href='recipeRegistration.html'">레시피 등록하기</button>
-                            </div>
-                        </div>
-
-                        <div class="info">
-                            <h3>공지사항</h3>
-                            <br>
-                            <ul>
-                                <li><a href="infopost.html">공지사항 1</a></li>
-                                <li><a href="infopost.html">공지사항 2</a></li>
-                                <li><a href="infopost.html">공지사항 3</a></li>
-                                <li><a href="infopost.html">공지사항 4</a></li>
-                                
-                            </ul>
-                        </div>
-
-
-                        </div>
+                    </div>                     
                     {% endif %}
 
                 </aside>
