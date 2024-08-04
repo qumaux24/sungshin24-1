@@ -31,9 +31,9 @@ def login(request):
     else:
         return render(request, 'login.html')
     
-# def logout(request):
-#     auth.logout(request)
-#     return redirect('home')
+def logout(request):
+    auth.logout(request)
+    return redirect('return_main')
 
-# def home(request):
-#     return render(request, 'main.html')
+def return_main(request):
+    return render(request, 'main.html')

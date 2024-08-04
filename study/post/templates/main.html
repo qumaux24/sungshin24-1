@@ -105,7 +105,7 @@
 
                     <!--로그인후-->
                     {% if user.is_authenticated %}
-                    <div id="user-info-section" hidden>
+                    <div id="user-info-section">
                         <div class="box1">
                             <h2>PROFILE</h2>
                             <p id="user-id">아이디: {{user}}</p>
@@ -113,7 +113,7 @@
                             <p id="user-posts">게시글 수: </p>
                             <button onclick="location.href='mypage.html'">마이페이지</button>
                         
-                            <button onclick="location.href='#'">로그아웃</button>
+                            <a href="logout"><button onclick="location.href='#'">로그아웃</button></a>
                             <div>
                                 <button onclick="location.href='recipeRegistration.html'">레시피 등록하기</button>
                             </div>
