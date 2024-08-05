@@ -57,12 +57,13 @@
             <h2>레시피 등록</h2>
             <form action="submit-recipe.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
+                    {% csrf_token %} 
                     <label for="recipe-name">레시피 이름</label>
-                    <input type="text" id="recipe-name" name="recipe-name" required>
+                    {{ form.title }}
                 </div>
                 <div class="form-group">
                     <label for="recipe-image">대표 이미지</label>
-                    <input type="file" id="recipe-image" name="recipe-image" accept="image/*" required>
+                    <input type="file" name="image" multiple aceept="image/*" id="id_image">
                 </div>
                 <div class="form-group">
                     <label></label>
@@ -83,12 +84,13 @@
                 </div>
                 <div class="form-group">
                     <label for="instructions">만드는 방법</label>
-                    <textarea id="instructions" name="instructions" rows="10" required></textarea>
+                    {{form.content}}
                 </div>
                 <div class="form-group">
                     <button type="submit">레시피 등록</button>
                 </div>
             </form>
+            <a href="{% url 'post:list' %}"><button>목록으로</button></a>
         </section>
 
 

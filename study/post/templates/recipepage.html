@@ -2,6 +2,7 @@
     <head>
         <title>레시피 페이지</title>
         {% load static %}
+        <title>{{ post.title }}</title>
         <link rel="stylesheet" href="{%static 'css/styles-recipepage.css' %}">
         <script>
             function clip() {
@@ -57,6 +58,35 @@
             </div>
             
         </header>
+
+        <p id='title'>제목 : </p>
+    <p class="form">{{ post.title }}</p>
+    <p>작성자: {{post.writer}}</p>
+    <p>날짜 : {{post.created_at}}</p>
+    {% if post.updated_at != post.created_at %}
+        <p>최종 수정: {{post.updated_at}}</p>
+    {% endif %}
+    <pre>내용 : {{ post.content }}</pre>
+    {% for image in images %}
+        <p><img src="{{image.image.url}}" alt="Image"></p>
+    {%endfor%}
+
+    <form action="{% url 'post:likes' post.pk %}" method='POST'>
+        {% csrf_token %}
+        {% if user in post.like_users.all %}
+            <input type="submit" value="좋아요 취소">
+        {% else %}
+            <input type="submit" value="좋아요">
+        {% endif %}
+        {{ post.like_users.count }} 명이 좋아합니다.
+    </form>
+    <br>
+
+
+    {% if post.writer == request.user %}
+        <a href="{% url 'post:updateget' post.id %}"><button>수정하기</button></a><br>
+        <a href="/deleteget/{{post.id}}"><button>삭제하기</button></a><br>
+    {% endif %}
        
         <main>
             <section class="recipe-details">
@@ -105,18 +135,18 @@
             <ul><!-- 댓글 쭉 보여줌 -->
                 {% for comment in comments %}
                 <li>
-                    {{ comment.user }} - {{ comment.content }}<!-- '댓글 작성자 - 댓글 내용' 형식으로 댓글 나타냄 -->
+                    {{ comment.writer }} - {{ comment.comment }}<!-- '댓글 작성자 - 댓글 내용' 형식으로 댓글 나타냄 -->
                     <!--댓글 삭제부분-->
-                    {% if user == comment.user %}
+                    {% if comment.writer == request.user %}
                     <form action="{% url 'post:comments_delete' post.pk comment.pk %}" method="POST" class="d-inline">
                         <!-- 폼 건들지 말것. 클래스는 바꿔도 상관없음 -->
                         {% csrf_token %}
-                        <input type="submit" value="DELETE"><!-- 댓글 삭제 버튼 -->
+                        <input type="submit" value="댓글 삭제"><!-- 댓글 삭제 버튼 -->
                     </form>
                     {% endif %}
                 </li>
                 {% empty %}
-                <p>댓글이 없어요..</p><!-- 댓글이 없을 때 나타나는 글 -->
+                <p>댓글이 없습니다.</p><!-- 댓글이 없을 때 나타나는 글 -->
                 {% endfor %}
             </ul>
             
