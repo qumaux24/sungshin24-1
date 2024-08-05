@@ -95,7 +95,7 @@
         </main>
         
         
-        <div id="comments">
+        {% comment %} <div id="comments">
             <h4>댓글 목록</h4>
             
             <!--댓글읽을 수 있는 부분-->
@@ -132,9 +132,9 @@
             {% else %}
             <a href="{% url 'login:login' %}">[댓글을 작성하려면 로그인하세요.]</a><!-- 로그인 안하면 댓글작성기능 사용 불가 -->
             {% endif %}
-            {% endblock content %}
+            {% comment %} {% endblock content %} 
 
-        </div>
+        </div> {% endcomment %}
         
 
     </body>
