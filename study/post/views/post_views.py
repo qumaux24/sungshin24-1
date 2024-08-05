@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
 
 # Create your views here.
-def list(request):
+def main(request):
     return render(request, 'main.html')

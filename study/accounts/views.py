@@ -33,7 +33,7 @@ def login(request):
     
 def logout(request):
     auth.logout(request)
-    return redirect('return_main')
+    return redirect('post:main')
 
 def return_main(request):
     return render(request, 'main.html')
