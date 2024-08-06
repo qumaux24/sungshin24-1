@@ -28,7 +28,7 @@
     <body>
         <header>
             <div class="logo"><a href="{% url 'post:main' %}">
-                <span class="blue">냉</span>Jango()
+                <span class="blue">냉</span>Jango()</a>
             </div>
             <select id="search-type">
                 <option value="all">전체</option>
@@ -115,7 +115,7 @@
                         
                             <a href="{% url 'accounts:logout' %}"><button>로그아웃</button></a>
                             <div>
-                                <button onclick="location.href='recipeRegistration.html'">레시피 등록하기</button>
+                                <a href="{% url 'post:write' %}"><button onclick="location.href='recipeRegistration.html'">레시피 등록하기</button></a>
                             </div>
                         </div>
 

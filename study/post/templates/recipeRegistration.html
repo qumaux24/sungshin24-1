@@ -26,8 +26,8 @@
 
 <body>
     <header>
-        <div class="logo">
-            <span class="blue">냉</span>Jango()
+        <div class="logo"><a href="{% url 'post:main' %}">
+            <span class="blue">냉</span>Jango()</a>
         </div>
         <select id="search-type">
             <option value="all">전체</option>
@@ -55,9 +55,9 @@
     <main>
         <section class="recipe-form">
             <h2>레시피 등록</h2>
-            <form action="submit-recipe.php" method="POST" enctype="multipart/form-data">
+            <form method="POST" enctype="multipart/form-data">
                 <div class="form-group">
-                    {% csrf_token %} 
+                    {% csrf_token %}
                     <label for="recipe-name">레시피 이름</label>
                     {{ form.title }}
                 </div>
@@ -75,24 +75,22 @@
                 </div>
                 <div class="form-group">
                     <label for="cooking-time">조리 시간</label>
-                    <input type="text" id="cooking-time" name="cooking-time" required>
+                    {{ form.cooktime }}
                 </div>
                
                 <div class="form-group">
                     <label for="ingredients">재료</label>
-                    <textarea id="ingredients" name="ingredients" rows="5" required></textarea>
+                    {{ form.ingredient }}
                 </div>
                 <div class="form-group">
                     <label for="instructions">만드는 방법</label>
-                    {{form.content}}
+                    {{ form.cookmethod }}
                 </div>
                 <div class="form-group">
                     <button type="submit">레시피 등록</button>
                 </div>
             </form>
-            <a href="{% url 'post:list' %}"><button>목록으로</button></a>
         </section>
-
 
     </main>
     

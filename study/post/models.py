@@ -5,7 +5,9 @@ from django.conf import settings
 # Create your models here.
 class Post(models.Model):
     title = models.CharField(max_length=200)
-    content = models.TextField()
+    cooktime = models.IntegerField()
+    ingredient = models.TextField()
+    cookmethod = models.TextField()
     created_at=models.DateTimeField(auto_now_add=True)
     writer=models.ForeignKey(User, on_delete=models.CASCADE)
     like_users=models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='like_posts', blank=True)

@@ -125,4 +125,36 @@ a:hover {
 .menu-icon:hover .dropdown-menu {
     display: block;
 }
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+}
+
+.page-item {
+    margin: 0 5px;
+}
+
+.page-link {
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+    color: #007bff;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+}
+
+.page-item.disabled .page-link {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.page-item.active .page-link {
+    color: white;
+    background-color: #007bff;
+    border-color: #007bff;
+}
 /*--여기까지 헤더--*/

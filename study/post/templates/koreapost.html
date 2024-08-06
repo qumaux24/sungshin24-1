@@ -24,8 +24,8 @@
 
 <body>
     <header>
-        <div class="logo">
-            <span class="blue">냉</span>Jango()
+        <div class="logo"><a href="{% url 'post:main' %}">
+            <span class="blue">냉</span>Jango()</a>
         </div>
         <select id="search-type">
             <option value="all">전체</option>
@@ -53,7 +53,7 @@
         <h1>목록</h1>
     <ul>
         {% for post in list %}
-        <li><a href="{% url 'post:show' post.id %}">{{ post.title }}</a>&nbsp;&nbsp;&nbsp;작성자: {{post.writer}}</p></li>
+        <li><a href="{% url 'post:show' post.id %}">{{ post.title }}</a>&nbsp;&nbsp;&nbsp;작성자: {{ post.writer }}</p></li>
         {% endfor %}
     </ul>
     
