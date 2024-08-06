@@ -2,7 +2,9 @@
     <head>
         <title>게시글 페이지</title>
         {% load static %}
-        <link rel="stylesheet" href="styles-post-detail.css">
+        <link rel="stylesheet" href="{%static 'css/styles-post-detail.css' %}">
+        <!-- {% load static %}
+        <link rel="stylesheet" href="styles-post-detail.css"> -->
         <script>
             function clip() {
                 var url = '';
@@ -61,6 +63,8 @@
         <main>
             <section class="post-details">
                 <h1>게시글 제목</h1>
+
+                <h3>작성자</h3>
                 
                 <div class="likes">
                     <button id="like-button">
@@ -72,6 +76,11 @@
                 
                 <div class="post-text">
                     <p>내용</p>
+                </div>
+                <br>
+                <div class="button-container">
+                    <button class="btn">수정하기</button>
+                    <button class="btn">삭제하기</button>
                 </div>
                 
             </section>

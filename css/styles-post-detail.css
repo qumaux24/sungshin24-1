@@ -369,3 +369,24 @@ table tr:hover {
     color: #fff;
     border-color: #007bff;
 }
+
+.button-container {
+    display: block;
+    gap: 20px;
+    /* 버튼 사이의 간격 조절 */
+}
+
+.btn {
+    padding: 5px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #858585;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #333;
+}

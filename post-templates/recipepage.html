@@ -3,6 +3,8 @@
         <title>레시피 페이지</title>
         {% load static %}
         <link rel="stylesheet" href="{%static 'css/styles-recipepage.css' %}">
+        <!-- {% load static %}
+        <link rel="stylesheet" href="styles-recipepage.css"> -->
         <script>
             function clip() {
                 var url = '';
@@ -61,6 +63,9 @@
         <main>
             <section class="recipe-details">
                 <h1>레시피 이름</h1>
+                <p id="date">작성일 0000-00-00 수정일 0000-00-00</p>
+               
+                <h3>작성자</h3>
                 <div class="recipe-image">
                     <img src="recipe-image.jpg" alt="Recipe Image">
                 </div>
@@ -90,6 +95,11 @@
                     <p>2. 두 번째 단계</p>
                     <p>3. 세 번째 단계</p>
                 </div>
+                <div class="button-container">
+                    <button class="btn">수정하기</button>
+                    <button class="btn">삭제하기</button>
+                </div>
+                <br>
                 <button id="link" onclick="clip()">링크 복사</button>
             </section>
         </main>
