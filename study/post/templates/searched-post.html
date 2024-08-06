@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
     <head>
-        <title>일식 게시판</title>
+        <title>검색 결과</title>
         {% load static %}
-        <link rel="stylesheet" href="{%static 'css/styles-japanpost.css' %}">
+        <link rel="stylesheet" href="{%static 'css/styles-searched.css' %}">
         <!-- {% load static %}
-        <link rel="stylesheet" href="styles-japanpost.css"> -->
+        <link rel="stylesheet" href="styles-searched.css"> -->
         <script>
-        let isLoggedIn = false; 
-        function checklogin() {
-            if (!isLoggedIn) {
-                if (confirm("로그인이 필요합니다.")) {
-                    window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
+            let isLoggedIn = false; 
+            function checklogin() {
+                if (!isLoggedIn) {
+                    if (confirm("로그인이 필요합니다.")) {
+                        window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
+                    }
                 }
-            }
-            else{
-                window.location.href="recipeRegistration.html";
-            }
-        };
-    </script>
-    
-       
+                else{
+                    window.location.href="recipeRegistration.hrml";
+                }
+            };
+        </script>
+        
+        
     </head>
 
     <body>
@@ -50,50 +50,51 @@
             </div>
             
         </header>
-        <h1>일식 게시판</h1>
-        <br>
-        <div class="container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>제목</th>
-                        <th>글쓴이</th>
-                        <th>작성시간</th>
-                        <th>좋아요</th>
-                        <th>댓글 수</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="fixed">
-                        <td>1</td>
-                        <td>게시글1</td>
-                        <td>A</td>
-                        <td>2024-08-06</td>
-                        <td>10</td>
-                        <td>3</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>게시글2</td>
-                        <td>A</td>
-                        <td>2024-08-06</td>
-                        <td>10</td>
-                        <td>10</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>게시글3</td>
-                        <td>A</td>
-                        <td>2024-08-06</td>
-                        <td>10</td>
-                        <td>10</td>
-                    </tr>
-                    <!-- 추가적인 레시피 항목들을 필요에 따라 추가할 수 있습니다 -->
-                </tbody>
-            </table>
-        </div>
-        <br>
+        <!-- 글 목록 뜨는 부분 -->
+        <!--  -->
+        <h1>게시글 목록</h1>
+        <ul>
+            <!-- 글 목록 깔끔하게 나열하기 위한 table태그 이용. 여기는 table태그 빼고 구조 바꿔도 상관 없음 -->
+            <div class="container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>제목</th>
+                            <th>글쓴이</th>
+                            <th>작성시간</th>
+                            <th>좋아요</th>
+                            <th>댓글 수</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                        {% for post in post_list %}<!--작성되어 저장된 글 다 불러옴-->
+                        <tr>
+                            <td>게시글 no.</td>
+                            <!--글 제목 보여줌, 제목 누르면 글로 이동-->
+                            <td><a href="{% url 'post:show' post.id %}">{{ post.title }}</a></td>
+                            <!--글 작성자 보여줌, &nbsp 삭제 상관 없음-->
+                            <td>{{post.user}}</td>
+                            <!--작성시간-->
+                            <td>0000.00.00</td>
+                            <!--좋아요 수 보여줌, &nbsp 삭제 상관 없음-->
+                            <td>좋아요수 : {{post.like_users.all.count}}</td>
+                            <!--댓글 수 보여줌, &nbsp 삭제 상관 없음-->
+                            <td>댓글수 : {{ post.comment_count }}</td>
+                            
+                           
+                        </tr>
+                    </tbody>
+                    {% endfor %}<!--for문 끝냄-->
+                </table>
+            </div>
+        
+        
+        </ul>
+        
+        <!--페이징부분-->
+        <!--클래스 바꿔도 됨. 단, 클래스 바꾸면 css도 바꿔야함-->
         <div>
             <!-- 페이징처리 시작 -->
             <ul class="pagination justify-content-center">
@@ -118,7 +119,7 @@
                         <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
                     </li>
                     {% endif %}
-                    {% endif %}
+                    
                     {% endfor %}
                     <!-- 다음페이지 -->
                     {% if post_list.has_next %}
@@ -132,7 +133,5 @@
                     {% endif %}
             </ul>
             <!-- 페이징처리 끝 -->
-        </div>
     </body>
-        
 </html>

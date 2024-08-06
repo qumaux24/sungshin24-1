@@ -28,8 +28,8 @@
     <body>
         <header>
             <div class="logo"><a href="{% url 'post:main' %}">
-                <span class="blue">냉</span>Jango()</a>
-            </div>
+                <span class="blue">냉</span>Jango()
+            </div></a>
             <select id="search-type">
                 <option value="all">전체</option>
                 <option value="ingredient">재료</option>
@@ -95,7 +95,7 @@
                         <br>
                         <img src="{% static 'image/recipe-image.png' %}" alt="Recipe Image">
                         <br>
-                        <button onclick="location.href='recipepage.html'">레시피 이용하기</button>
+                        <a href="{% url 'post:write' %}"><button>레시피 이용하기</button></a>
 
                     </div>
 
@@ -105,7 +105,7 @@
 
                     <!--로그인후-->
                     {% if user.is_authenticated %}
-                    <div id="user-info-section">
+                    <div class="user-info-section">
                         <div class="box1">
                             <h2>PROFILE</h2>
                             <p id="user-id">아이디: {{user}}</p>
@@ -115,25 +115,26 @@
                         
                             <a href="{% url 'accounts:logout' %}"><button>로그아웃</button></a>
                             <div>
-                                <a href="{% url 'post:write' %}"><button onclick="location.href='recipeRegistration.html'">레시피 등록하기</button></a>
+                                <button onclick="location.href='recipeRegistration.html'">레시피 등록하기</button>
                             </div>
                         </div>
 
-                        <div class="info">
+                        <div id="info2">
                             <h3>공지사항</h3>
-                            <br>
+                            
                             <ul>
                                 <li><a href="infopost.html">공지사항 1</a></li>
                                 <li><a href="infopost.html">공지사항 2</a></li>
                                 <li><a href="infopost.html">공지사항 3</a></li>
                                 <li><a href="infopost.html">공지사항 4</a></li>
+
                             </ul>
                         </div>
                     </div>
 
                     <!--로그인전-->
                     {% else %}
-                    <div>
+                    <div class="user-info-section">
                         <div class="box1">
                             {% csrf_token %} 
                             <h2>LOGIN</h2>
@@ -145,18 +146,14 @@
                             {% comment %} onclick="location.href='signUp.html'" {% endcomment %}
                             <br>
                         </div>
-                        <div class="info">
+                        <div id="info">
                             <h3>공지사항</h3>
-                            <br>
+                            
                             <ul>
                                 <li><a href="infopost.html">공지사항 1</a></li>
                                 <li><a href="infopost.html">공지사항 2</a></li>
                                 <li><a href="infopost.html">공지사항 3</a></li>
                                 <li><a href="infopost.html">공지사항 4</a></li>
-                                <li><a href="infopost.html">공지사항 5</a></li>
-                                <li><a href="infopost.html">공지사항 6</a></li>
-                                <li><a href="infopost.html">공지사항 7</a></li>
-                                <li><a href="infopost.html">공지사항 8</a></li>
                             </ul>
                         </div>
                         

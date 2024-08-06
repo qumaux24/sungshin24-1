@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <title>사용자 게시판</title>
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'css/styles-post.css' %}">
+    <!-- {% load static %}
+    <link rel="stylesheet" href="styles-post.css"> -->
+    <script>
+        let isLoggedIn = false;
+        function checklogin() {
+            if (!isLoggedIn) {
+                if (confirm("로그인이 필요합니다.")) {
+                    window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
+                }
+            }
+            else {
+                window.location.href = "recipeRegistration.html";
+            }
+        };
+    </script>
+
+
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <span class="blue">냉</span>Jango()
+        </div>
+        <select id="search-type">
+            <option value="all">전체</option>
+            <option value="ingredient">재료</option>
+            <option value="title">제목</option>
+        </select>
+        <div class="search-bar">
+            <input type="text" placeholder="search">
+            <button><img src="search-icon.png" alt="search"></button>
+        </div>
+
+        <div class="menu-icon">
+            <img src="menu-icon.png" alt="menu">
+            <div class="dropdown-menu">
+                <a href="koreapost.html">한식</a>
+                <a href="chinapost.html">중식</a>
+                <a href="japanpost.html">일식</a>
+                <a href="infopost.html">공지사항</a>
+                <a onclick="checklogin()">레시피 등록</a>
+            </div>
+        </div>
+
+    </header>
+    <h1>사용자 게시판</h1>
+    <br>
+    <div class="container">
+        <table>
+            <thead>
+                <tr>
+                    <th>No</th>
+                    <th>제목</th>
+                    <th>글쓴이</th>
+                    <th>작성시간</th>
+                    <th>좋아요</th>
+                    <th>댓글 수</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class ="fixed">
+                    <td>1</td>
+                    <td>게시글1</td>
+                    <td>A</td>
+                    <td>2024-08-06</td>
+                    <td>10</td>
+                    <td>3</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>게시글2</td>
+                    <td>A</td>
+                    <td>2024-08-06</td>
+                    <td>10</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>게시글3</td>
+                    <td>A</td>
+                    <td>2024-08-06</td>
+                    <td>10</td>
+                    <td>10</td>
+                </tr>
+                <!-- 추가적인 레시피 항목들을 필요에 따라 추가할 수 있습니다 -->
+            </tbody>
+        </table>
+    </div>
+    <br>
+    <div>
+        <!-- 페이징처리 시작 -->
+        <ul class="pagination justify-content-center">
+            <!-- 이전페이지 -->
+            {% if post_list.has_previous %}<!--이전페이지가 있을 때 이전 버튼 활성화-->
+            <li class="page-item">
+                <a class="page-link" href="?page={{ post_list.previous_page_number }}">이전</a>
+            </li>
+            {% else %}<!--이전페이지 없으면 이전 버튼 비활성화-->
+            <li class="page-item disabled">
+                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+            </li>
+            {% endif %}
+            <!-- 페이지리스트(페이지번호) -->
+            {% for page_number in post_list.paginator.page_range %}
+            {% if page_number >= post_list.number|add:-5 and page_number <= post_list.number|add:5 %} {% if
+                page_number==post_list.number %} <li class="page-item active" aria-current="page">
+                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                </li>
+                {% else %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                </li>
+                {% endif %}
+                {% endif %}
+                {% endfor %}
+                <!-- 다음페이지 -->
+                {% if post_list.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ post_list.next_page_number }}">다음</a><!--다음페이지가 있을 때 다음 버튼 활성화-->
+                </li>
+                {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a><!--다음페이지가 없을 때 다음 버튼 비활성화-->
+                </li>
+                {% endif %}
+        </ul>
+        <!-- 페이징처리 끝 -->
+    </div>
+</body>
+
+</html>
