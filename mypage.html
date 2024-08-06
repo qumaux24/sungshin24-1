@@ -9,6 +9,11 @@
         <div class="logo">
             <span class="blue">냉</span>Jango()
         </div>
+        <select id="search-type">
+            <option value="all">전체</option>
+            <option value="ingredient">재료</option>
+            <option value="title">제목</option>
+        </select>
         <div class="search-bar">
             <input type="text" placeholder="search">
             <button><img src="search-icon.png" alt="search"></button>
@@ -32,7 +37,21 @@
         <label for="membership">회원정보수정</label>
     </div>
     <div id="content">
-        <!-- 선택한 페이지의 내용이 여기에 표시됩니다 -->
+        <div class="passkey">
+            <label for="passkey">패스 키를 입력해주세요.</label>
+            <input type="text" id="passkey" name="passkey" value="">
+            <br>
+            <button type="submit">확인</button>
+        </div>
+        <div>
+            <label for="post">게시글</label>
+            <select name="posts" id="post">
+                <option value="registration">등록한 글</option>
+                <option value="like">좋아요한 글</option>
+                <option value="review">댓글 단 글</option>
+            </select>
+            <input type="submit" value="submit" />
+        </div>
     </div>
 </body>
 </html>
