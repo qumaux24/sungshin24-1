@@ -2,12 +2,24 @@
 <html lang="ko">
     <head>
         <title>회원정보수정</title>
+        <script>
+            function handleSubmit(event) {
+                event.preventDefault();
+                alert('회원정보가 성공적으로 변경되었습니다!');
+                window.location.href = 'main.html';
+            }
+        </script>
     </head>
     <body>
         <header>
             <div class="logo">
                 <span class="blue">냉</span>Jango()
             </div>
+            <select id="search-type">
+                <option value="all">전체</option>
+                <option value="ingredient">재료</option>
+                <option value="title">제목</option>
+            </select>
             <div class="search-bar">
                 <input type="text" placeholder="search">
                 <button><img src="search-icon.png" alt="search"></button>
@@ -29,19 +41,36 @@
                 <label for="username">사용자 이름</label>
                 <input type="text" id="username" name="username" value="홍길동">
 
-                <label for="email">이메일</label>
-                <input type="email" id="email" name="email" value="hong@example.com">
-
                 <label for="password">비밀번호</label>
                 <input type="password" id="password" name="password" value="">
 
                 <label for="confirm_password">비밀번호 확인</label>
                 <input type="password" id="confirm_password" name="confirm_password" value="">
 
+                <div>
+                    <span>성별</span>
+                    <select name="gender">
+                        <option>여성</option>
+                        <option>남성</option>
+                    </select>
+                </div>
+
+                <br>
+
+                <div>
+                    <span>거주지</span>
+                    <select name="residence">
+                        <option>자취</option>
+                        <option>기숙사</option>
+                        <option>본가</option>
+                    </select>
+                </div>
+                <br>
+
                 <label for="allergy">알러지</label>
                 <input type="allergy" id="allergy" name="allergy" value="">
                 <br>
-                <button type="submit">정보 수정</button>
+                <button type="submit">저장</button>
             </form>
         </div>
     </body>
