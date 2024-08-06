@@ -1,0 +1,134 @@
+<html>
+    <head>
+        <title>게시글 페이지</title>
+        {% load static %}
+        <link rel="stylesheet" href="{%static 'css/styles-post-detail.css' %}">
+        <!-- {% load static %}
+        <link rel="stylesheet" href="styles-post-detail.css"> -->
+        <script>
+            function clip() {
+                var url = '';
+                var textarea = document.createElement("textarea");
+                document.body.appendChild(textarea);
+                url = 'window.location.href';
+                textarea.value = url;
+                textarea.select();
+                document.execCommand("copy");
+                document.body.removeChild(textarea);
+                alert("링크가 복사되었습니다. 필요하신 곳에 붙여넣기 하세요!")
+            };
+            let isLoggedIn = false; 
+        function checklogin() {
+            if (!isLoggedIn) {
+                if (confirm("로그인이 필요합니다.")) {
+                    window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
+                }
+            }
+            else{
+                window.location.href="recipeRegistration.html";
+            }
+        };
+        </script>
+        
+
+    </head>
+    <body>
+        <header>
+            <div class="logo">
+                <span class="blue">냉</span>Jango()
+            </div>
+            <select id="search-type">
+                <option value="all">전체</option>
+                <option value="ingredient">재료</option>
+                <option value="title">제목</option>
+            </select>
+            <div class="search-bar">
+                <input type="text" placeholder="search">
+                <button><img src="search-icon.png" alt="search"></button>
+            </div>
+                
+            <div class="menu-icon">
+                <img src="menu-icon.png" alt="menu">
+                <div class="dropdown-menu">
+                    <a href="koreapost.html">한식</a>
+                    <a href="chinapost.html">중식</a>
+                    <a href="japanpost.html">일식</a>
+                    <a href="infopost.html">공지사항</a>
+                    <a onclick="checklogin()">레시피 등록</a>
+                </div>
+            </div>
+            
+        </header>
+       
+        <main>
+            <section class="post-details">
+                <h1>게시글 제목</h1>
+
+                <h3>작성자</h3>
+                
+                <div class="likes">
+                    <button id="like-button">
+                        <img src="like-icon.jpg" alt="Like">
+                        <span class="likenum">00</span>
+                    </button>
+                </div>
+                <br>
+                
+                <div class="post-text">
+                    <p>내용</p>
+                </div>
+                <br>
+                <div class="button-container">
+                    <button class="btn">수정하기</button>
+                    <button class="btn">삭제하기</button>
+                </div>
+                
+            </section>
+        </main>
+        
+        
+        <div id="comments">
+            <h4>댓글 목록</h4>
+            
+            <!--댓글읽을 수 있는 부분-->
+            {% if comments %}
+            <p><b>{{ comments|length }}개의 댓글이 있습니다.</b></p><!-- 댓글 몇개있는지 보여줌. -->
+            {% endif %}
+            <ul><!-- 댓글 쭉 보여줌 -->
+                {% for comment in comments %}
+                <li>
+                    {{ comment.user }} - {{ comment.content }}<!-- '댓글 작성자 - 댓글 내용' 형식으로 댓글 나타냄 -->
+                    <!--댓글 삭제부분-->
+                    {% if user == comment.user %}
+                    <form action="{% url 'post:comments_delete' post.pk comment.pk %}" method="POST" class="d-inline">
+                        <!-- 폼 건들지 말것. 클래스는 바꿔도 상관없음 -->
+                        {% csrf_token %}
+                        <input type="submit" value="DELETE"><!-- 댓글 삭제 버튼 -->
+                    </form>
+                    {% endif %}
+                </li>
+                {% empty %}
+                <p>댓글이 없어요..</p><!-- 댓글이 없을 때 나타나는 글 -->
+                {% endfor %}
+            </ul>
+            
+            <hr>
+            
+            <!--댓글 작성부분-->
+            {% if request.user.is_authenticated %}
+            <form action="{% url 'post:comments_create' post.pk %}" method="POST">
+                {% csrf_token %}
+                {{ comment_form.as_p }}<!-- 댓글 작성 창(p태그로 감싸고 css 입히면 스타일 변경 가능)-->
+                <input type="submit" value="댓글 작성"><!-- 댓글 작성 버튼 -->
+            </form>
+            {% else %}
+            <a href="{% url 'login:login' %}">[댓글을 작성하려면 로그인하세요.]</a><!-- 로그인 안하면 댓글작성기능 사용 불가 -->
+            {% endif %}
+            {% endblock content %}
+
+        </div>
+        
+
+    </body>
+
+</html>

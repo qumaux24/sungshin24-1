@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 등록</title>
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'css/styles-post-write.css' %}">
+    <!-- {% load static %}
+    <link rel="stylesheet" href="styles-post-write.css"> -->
+    <script>
+        let isLoggedIn = false; 
+        function checklogin() {
+            if (!isLoggedIn) {
+                if (confirm("로그인이 필요합니다.")) {
+                    window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
+                }
+            }
+            else{
+                window.location.href="recipeRegistration.html";
+            }
+        };
+    </script>
+    
+       
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <span class="blue">냉</span>Jango()
+        </div>
+        <select id="search-type">
+            <option value="all">전체</option>
+            <option value="ingredient">재료</option>
+            <option value="title">제목</option>
+        </select>
+        <div class="search-bar">
+            <input type="text" placeholder="search">
+            <button><img src="search-icon.png" alt="search"></button>
+        </div>
+            
+        <div class="menu-icon">
+            <img src="menu-icon.png" alt="menu">
+            <div class="dropdown-menu">
+                <a href="koreapost.html">한식</a>
+                <a href="chinapost.html">중식</a>
+                <a href="japanpost.html">일식</a>
+                <a href="infopost.html">공지사항</a>
+                <a onclick="checklogin()">레시피 등록</a>
+            </div>
+        </div>
+        
+    </header>
+    
+    <main>
+        <section class="post-form">
+            <h2>게시글 등록</h2>
+            <form action="submit-notice.php" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="notice-name">제목</label>
+                    <input type="text" id="notice-name" name="notice-name" required>
+                </div>
+                <br>
+                <div class="form-group">
+                    <label for="notice-text">내용</label>
+                    <textarea id="notice-text" name="notice-text" rows="10" required></textarea>
+                </div>
+                <div class="form-group">
+                    <button type="submit">등록</button>
+                </div>
+            </form>
+        </section>
+
+
+    </main>
+    
+        
+    
+</body>
+
+</html>
