@@ -57,7 +57,8 @@
 
         <br>
         <form method="POST" id="signUp-pt-2" class="login-box">
-            
+            {% csrf_token %}
+
             <div>
                 <span>성별</span>
                 <select name="gender">
@@ -78,6 +79,7 @@
             <input type="text" placeholder="나이">
             <br>
             <input id="allergy"  type="password" placeholder="알레르기">
+            알레르기 : <p id="allergy">{{user_details.allergy}}</p>
             <br>
             
             
