@@ -121,6 +121,7 @@ a:hover {
 }
 
 .container {
+    margin-top: 50px;
     position: center;
     background: white;
     padding: 20px;
@@ -140,7 +141,7 @@ label {
     font-weight: bold;
 }
 
-input[type="text"], input[type="email"], input[type="password"], input[type="allergy"] {
+input[type="text"], input[type="email"], input[type="password"], input[type="allergy"], input[type="age"] {
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
@@ -149,7 +150,7 @@ input[type="text"], input[type="email"], input[type="password"], input[type="all
 
 button {
     padding: 10px;
-    background-color: #007bff;
+    background-color: #000000;
     color: white;
     border: none;
     border-radius: 4px;
@@ -158,5 +159,5 @@ button {
 }
 
 button:hover {
-    background-color: #0056b3;
+    background-color: #000000;
 }
