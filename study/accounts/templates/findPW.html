@@ -4,18 +4,20 @@
 <head>
     <title>회원가입</title>
     {% load static %}
+    {% load bootstrap4 %}
+    {% load custom_filters %}
     <link rel="stylesheet" href="{%static 'css/styles-findPW.css' %}">
 
     <script>
-        let isLoggedIn = false; 
+        let isLoggedIn = false;
         function checklogin() {
             if (!isLoggedIn) {
                 if (confirm("로그인이 필요합니다.")) {
                     window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
                 }
             }
-            else{
-                window.location.href="recipeRegistration.html";
+            else {
+                window.location.href = "recipeRegistration.html";
             }
         };
     </script>
@@ -36,7 +38,7 @@
             <input type="text" placeholder="search">
             <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
         </div>
-            
+
         <div class="menu-icon">
             <img src="{% static 'image/menu-icon.png' %}" alt="menu">
             <div class="dropdown-menu">
@@ -47,22 +49,29 @@
                 <a onclick="checklogin()">레시피 등록</a>
             </div>
         </div>
-        
+
     </header>
 
-    
+
     <div class="center">
-        
+
         <h2 class="daily">비밀번호 찾기</h2>
         <br>
-    <form method = "POST" class="login-box">
-        
-        <input type="text" placeholder="아이디">
-        <br>
-        <input type="email" placeholder="이메일">
-        <button type="submit">비번찾기</button>
+        <form method="POST" class="login-box">
+            {% csrf_token %}
 
-    </form>
+            <input name="inputID" type="text" placeholder="아이디">
+            <br>
+            <input name="inputkeyword" type="password" placeholder="패스키">
+            <br>
+            <input name="new_password1" type="password" placeholder="새 비밀번호">
+            <br>
+            <input name="new_password2" type="password" placeholder="새 비밀번호 확인">
+            <br>
+            <button type="submit">비밀번호 변경</button>
+
+
+        </form>
     </div>
 
 </body>

@@ -57,8 +57,9 @@
 
         <br>
         <form method="POST" id="signUp-pt-2" class="login-box">
-            
-            <div>
+            {% csrf_token %}
+
+            {% comment %} <div>
                 <span>성별</span>
                 <select name="gender">
                     <option>여성</option>
@@ -73,11 +74,13 @@
                     <option>기숙사</option>
                     <option>본가</option>
                 </select>
-            </div>
+            </div> {% endcomment %}
             <br>
-            <input type="text" placeholder="나이">
+            {% comment %} <input type="text" placeholder="나이"> {% endcomment %}
+            나이 : <p>{{user_details.age}}</p>
             <br>
-            <input id="allergy"  type="password" placeholder="알레르기">
+            {% comment %} <input id="allergy"  type="password" placeholder="알레르기"> {% endcomment %}
+            알레르기 : <p id="allergy">{{user_details.allergy}}</p>
             <br>
             
             

@@ -135,20 +135,11 @@ a:hover {
 }
 
 /*--여기까지 헤더--*/
-#link {
-    width: 100px;
-    padding: 10px;
-    background-color: #333;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 10px;
-}
 
 
 
-.recipe-details {
+
+.post-details {
     background-color: #fff;
     padding: 20px;
     border-radius: 5px;
@@ -158,21 +149,18 @@ a:hover {
     max-width: 800px;
 }
 
-.recipe-details h1 {
+.post-details h1 {
     text-align: center;
     margin-bottom: 20px;
 }
 
-.recipe-image {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.recipe-image img {
-    width: 500px;
-    height: 300px;
+.post-image {
+    width: 260px;
+    height: 150px;
     object-fit: cover;
 }
+
+
 
 .likes {
     height: 30px;
@@ -382,12 +370,8 @@ table tr:hover {
     border-color: #007bff;
 }
 
-#date{
-    font-size:12px;
-}
-
 .button-container {
-    display:block;
+    display: block;
     gap: 20px;
     /* 버튼 사이의 간격 조절 */
 }
@@ -396,7 +380,7 @@ table tr:hover {
     padding: 5px 20px;
     font-size: 16px;
     color: #fff;
-    background-color:#858585;
+    background-color: #858585;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -404,5 +388,5 @@ table tr:hover {
 }
 
 .btn:hover {
-    background-color:#333;
+    background-color: #333;
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>로그인</title>
+        <title>검색 결과</title>
         {% load static %}
         <link rel="stylesheet" href="{%static 'css/styles-searched.css' %}">
         <script>
@@ -35,7 +35,7 @@
                 <input type="text" placeholder="search">
                 <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
             </div>
-                
+    
             <div class="menu-icon">
                 <img src="{% static 'image/menu-icon.png' %}" alt="menu">
                 <div class="dropdown-menu">
@@ -46,37 +46,51 @@
                     <a onclick="checklogin()">레시피 등록</a>
                 </div>
             </div>
-            
+    
         </header>
         <!-- 글 목록 뜨는 부분 -->
         <!--  -->
-        <h1>목록</h1>
+        <h1>게시글 목록</h1>
         <ul>
             <!-- 글 목록 깔끔하게 나열하기 위한 table태그 이용. 여기는 table태그 빼고 구조 바꿔도 상관 없음 -->
-            <table>
-                <tr>
-                    <th style="text-align: left;">제목</th>
-                    <th style="text-align: left;">&nbsp;&nbsp;작성자</th>
-                </tr>
-                <tr>
-                    <td colspan="3">
-                </tr>
-                {% for post in post_list %}<!--작성되어 저장된 글 다 불러옴-->
-                <tr>
-                    <th style="text-align: left;"><a href="{% url 'post:show' post.id %}">{{ post.title }}</a></th>
-                    <!--글 제목 보여줌, 제목 누르면 글로 이동-->
-                    <td style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;{{post.user}}</td><!--글 작성자 보여줌, &nbsp 삭제 상관 없음-->
-                    <td style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;댓글수 : {{ post.comment_count }}</td>
-                    <!--댓글 수 보여줌, &nbsp 삭제 상관 없음-->
-                    <td style="text-align: left;">&nbsp;&nbsp;&nbsp;&nbsp;좋아요수 : {{post.like_users.all.count}}</td>
-                    <!--좋아요 수 보여줌, &nbsp 삭제 상관 없음-->
-                </tr>
-                {% endfor %}<!--for문 끝냄-->
-            </table>
-        
-        
+            <div class="container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>제목</th>
+                            <th>글쓴이</th>
+                            <th>작성시간</th>
+                            <th>좋아요</th>
+                            <th>댓글 수</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+    
+                        {% for post in post_list %}<!--작성되어 저장된 글 다 불러옴-->
+                        <tr>
+                            <td>게시글 no.</td>
+                            <!--글 제목 보여줌, 제목 누르면 글로 이동-->
+                            <td><a href="{% url 'post:show' post.id %}">{{ post.title }}</a></td>
+                            <!--글 작성자 보여줌, &nbsp 삭제 상관 없음-->
+                            <td>{{post.user}}</td>
+                            <!--작성시간-->
+                            <td>0000.00.00</td>
+                            <!--좋아요 수 보여줌, &nbsp 삭제 상관 없음-->
+                            <td>좋아요수 : {{post.like_users.all.count}}</td>
+                            <!--댓글 수 보여줌, &nbsp 삭제 상관 없음-->
+                            <td>댓글수 : {{ post.comment_count }}</td>
+    
+    
+                        </tr>
+                    </tbody>
+                    {% endfor %}<!--for문 끝냄-->
+                </table>
+            </div>
+    
+    
         </ul>
-        
+    
         <!--페이징부분-->
         <!--클래스 바꿔도 됨. 단, 클래스 바꾸면 css도 바꿔야함-->
         <div>
@@ -103,12 +117,13 @@
                         <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
                     </li>
                     {% endif %}
-                    {% endif %}
+    
                     {% endfor %}
                     <!-- 다음페이지 -->
                     {% if post_list.has_next %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ post_list.next_page_number }}">다음</a><!--다음페이지가 있을 때 다음 버튼 활성화-->
+                        <a class="page-link"
+                            href="?page={{ post_list.next_page_number }}">다음</a><!--다음페이지가 있을 때 다음 버튼 활성화-->
                     </li>
                     {% else %}
                     <li class="page-item disabled">
@@ -118,4 +133,5 @@
             </ul>
             <!-- 페이징처리 끝 -->
     </body>
-</html>
+    
+    </html>

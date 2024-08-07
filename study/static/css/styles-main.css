@@ -1,5 +1,4 @@
 /* styles.css */
-
 body {
     font-family: Arial, sans-serif;
     margin: 0 auto;
@@ -128,8 +127,6 @@ a:hover {
 
 
 /*--여기까지 헤더--*/
-
-
 
 .daily-and-login {
     display: flex;
@@ -281,37 +278,71 @@ a:hover {
     text-decoration: underline;
 }
 
+.user-info-section{
+    height:656px;
+}
 
 
-.info {
+#info {
     width:268px;
     text-align: center;
-    height: fit-content;
-    margin-top: 10px;
+    height:350px;
+    margin-top: 13px;
     background-color: #ffffff;
     border: 2px solid #ccc;
     border-radius: 5px;
     padding:15px;
+    
+    align-items:center;
 }
 
-.info h3 {
-    margin-bottom: 10px;
+#info h3 {
     font-size: 20px;
 }
 
-.info ul {
+#info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+   line-height: 45px;
+}
+
+#info li {
+    padding: 10px 0px 15px;
+    border-top: 1px solid #ccc;
+}
+
+#info li:first-child {
+    border-top: none;
+}
+
+#info2 {
+    width: 268px;
+    text-align: center;
+    height: 245px;
+    margin-top: 13px;
+    background-color: #ffffff;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+#info2 h3 {
+    font-size: 20px;
+}
+
+#info2 ul {
     list-style: none;
     padding: 0;
     margin: 0;
 }
 
-.info li {
-    padding: 5px 0;
-
+#info2 li {
+    padding: 10px 0px 15px;
     border-top: 1px solid #ccc;
 }
 
-.info li:first-child {
+#info2 li:first-child {
     border-top: none;
 }
 
