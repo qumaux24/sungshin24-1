@@ -13,7 +13,7 @@ class User_detail(models.Model):
     def __str__(self):
         # return self.user
         return self.user.username
-    
+     
 class Pass_keyword(models.Model):
     user=models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     pass_keyword = models.CharField(max_length=100)
