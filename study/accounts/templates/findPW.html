@@ -5,6 +5,7 @@
     <title>회원가입</title>
     {% load static %}
     {% load bootstrap4 %}
+    {% load custom_filters %}
     <link rel="stylesheet" href="{%static 'css/styles-findPW.css' %}">
 
     <script>
@@ -61,7 +62,7 @@
 
             <input name="inputID" type="text" placeholder="아이디">
             <br>
-            <input name="inputkeyword" type="text" placeholder="패스키">
+            <input name="inputkeyword" type="password" placeholder="패스키">
             <br>
             <input name="new_password1" type="password" placeholder="새 비밀번호">
             <br>

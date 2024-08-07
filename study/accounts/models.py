@@ -7,6 +7,7 @@ from django.contrib.auth.models import User
 class User_detail(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # user_id = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
+    age = models.IntegerField()
     allergy = models.TextField()
     
     def __str__(self):
