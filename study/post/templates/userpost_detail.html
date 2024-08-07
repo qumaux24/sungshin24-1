@@ -122,7 +122,7 @@
                 <input type="submit" value="댓글 작성"><!-- 댓글 작성 버튼 -->
             </form>
             {% else %}
-            <a href="{% url 'login:login' %}">[댓글을 작성하려면 로그인하세요.]</a><!-- 로그인 안하면 댓글작성기능 사용 불가 -->
+            <a href="{% url 'accounts:login' %}">[댓글을 작성하려면 로그인하세요.]</a><!-- 로그인 안하면 댓글작성기능 사용 불가 -->
             {% endif %}
             {% endblock content %}
 

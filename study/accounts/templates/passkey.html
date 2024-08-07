@@ -1,0 +1,9 @@
+{% load bootstrap4 %}
+{% comment %} {% load custom_filters %} {% endcomment %}
+
+<form method="POST">
+    {% csrf_token %}
+    키워드 : {{passkeyword.pass_keyword}}
+    {% comment %} |password_mask {% endcomment %}
+    <button type="submit">저장</button>
+</form>

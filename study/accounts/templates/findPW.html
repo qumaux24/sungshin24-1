@@ -4,6 +4,8 @@
 <head>
     <title>회원가입</title>
     {% load static %}
+    {% load bootstrap4 %}
+    {% load custom_filters %}
     <link rel="stylesheet" href="{%static 'css/styles-findPW.css' %}">
 
     <script>
@@ -56,14 +58,15 @@
         <h2 class="daily">비밀번호 찾기</h2>
         <br>
         <form method="POST" class="login-box">
+            {% csrf_token %}
 
-            <input name="id" type="text" placeholder="아이디">
+            <input name="inputID" type="text" placeholder="아이디">
             <br>
-            <input name="passkey" type="text" placeholder="패스키">
+            <input name="inputkeyword" type="password" placeholder="패스키">
             <br>
-            <input name="newpw1" type="password" placeholder="새 비밀번호">
+            <input name="new_password1" type="password" placeholder="새 비밀번호">
             <br>
-            <input name="newpw2" type="password" placeholder="새 비밀번호 확인">
+            <input name="new_password2" type="password" placeholder="새 비밀번호 확인">
             <br>
             <button type="submit">비밀번호 변경</button>
 
