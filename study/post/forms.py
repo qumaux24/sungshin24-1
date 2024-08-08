@@ -1,11 +1,20 @@
 from django import forms
-from .models import Post, Comment
+from .models import Post, Comment, Userpost, Noticepost
 
 class PostForm(forms.ModelForm):
-    #작성하려고 했을 때 새 폼을 주는 것
     class Meta:
         model=Post
         fields=['title', 'cooktime', 'ingredient', 'cookmethod']
+        
+class UserpostForm(forms.ModelForm):
+    class Meta:
+        model=Userpost
+        fields=['title','content']
+        
+class NoticepostForm(forms.ModelForm):
+    class Meta:
+        model=Noticepost
+        fields=['title', 'content']
         
 class CommentForm(forms.ModelForm):
     class Meta:

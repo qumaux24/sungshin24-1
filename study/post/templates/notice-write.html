@@ -60,7 +60,7 @@
             <form action="submit-notice.php" method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="notice-name">제목</label>
-                    <input type="text" id="notice-name" name="notice-name" required>
+                    {{ noticeform.title }}
                 </div>
                 <div class="form-group">
                     <label></label>
@@ -71,7 +71,7 @@
                 </div>
                 <div class="form-group">
                     <label for="notice-text">내용</label>
-                    <textarea id="notice-text" name="notice-text" rows="10" required></textarea>
+                    {{ noticeform.content }}
                 </div>
                 <div class="form-group">
                     <button type="submit">공지 등록</button>

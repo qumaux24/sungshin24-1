@@ -1,0 +1,13 @@
+<html>
+<head>
+    <title>Update Post</title>
+</head>
+<body>
+    <h1>글 수정</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ userpostForm.as_p }}
+        <button type="submit">저장</button>
+    </form>
+</body>
+</html>

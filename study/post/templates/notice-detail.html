@@ -64,24 +64,27 @@
 
     <main>
         <section class="post-details">
-            <h1>공지 제목</h1>
-            <h3>작성자</h3>
-            <div class="likes">
+            <h1>공지 제목 : {{ noticepost.title }}</h1>
+            <h3>작성자 : {{ noticepost.writer }}</h3>
+            {% comment %} <div class="likes">
                 <button id="like-button">
                     <img src="like-icon.jpg" alt="Like">
                     <span class="likenum">00</span>
                 </button>
-            </div>
+            </div> {% endcomment %}
             <br>
 
             <div class="post-text">
                 <p>내용</p>
+                {{ noticepost.content }}
             </div>
             <br>
 
             <div class="button-container">
-                <button class="btn">수정하기</button>
-                <button class="btn">삭제하기</button>
+                {% if noticepost.writer == request.user %}
+                    <a href="{% url 'noticepost:noticepost_updateget' noticepost.id %}"><button class="btn">수정하기</button></a>
+                    <a href="/noticepost_deleteget/{{noticepost.id}}"><button class="btn">삭제하기</button></a>
+                {% endif %}
             </div>
 
         </section>
@@ -98,10 +101,10 @@
         <ul><!-- 댓글 쭉 보여줌 -->
             {% for comment in comments %}
             <li>
-                {{ comment.user }} - {{ comment.content }}<!-- '댓글 작성자 - 댓글 내용' 형식으로 댓글 나타냄 -->
+                {{ comment.writer }} - {{ comment.comment }}<!-- '댓글 작성자 - 댓글 내용' 형식으로 댓글 나타냄 -->
                 <!--댓글 삭제부분-->
-                {% if user == comment.user %}
-                <form action="{% url 'post:comments_delete' post.pk comment.pk %}" method="POST" class="d-inline">
+                {% if comment.writer == request.user %}
+                <form action="{% url 'noticepost:noticeComments_delete' noticepost.pk comment.pk %}" method="POST" class="d-inline">
                     <!-- 폼 건들지 말것. 클래스는 바꿔도 상관없음 -->
                     {% csrf_token %}
                     <input type="submit" value="DELETE"><!-- 댓글 삭제 버튼 -->
@@ -109,7 +112,7 @@
                 {% endif %}
             </li>
             {% empty %}
-            <p>댓글이 없어요..</p><!-- 댓글이 없을 때 나타나는 글 -->
+            <p>댓글이 없습니다.</p><!-- 댓글이 없을 때 나타나는 글 -->
             {% endfor %}
         </ul>
 
@@ -117,15 +120,14 @@
 
         <!--댓글 작성부분-->
         {% if request.user.is_authenticated %}
-        <form action="{% url 'post:comments_create' post.pk %}" method="POST">
+        <form action="{% url 'noticepost:noticeComments_create' noticepost.pk %}" method="POST">
             {% csrf_token %}
-            {{ comment_form.as_p }}<!-- 댓글 작성 창(p태그로 감싸고 css 입히면 스타일 변경 가능)-->
+            {{ commentForm.as_p }}<!-- 댓글 작성 창(p태그로 감싸고 css 입히면 스타일 변경 가능)-->
             <input type="submit" value="댓글 작성"><!-- 댓글 작성 버튼 -->
         </form>
         {% else %}
         <a href="{% url 'accounts:login' %}">[댓글을 작성하려면 로그인하세요.]</a><!-- 로그인 안하면 댓글작성기능 사용 불가 -->
         {% endif %}
-        {% endblock content %}
 
     </div>
 
