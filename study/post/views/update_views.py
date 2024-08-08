@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect, get_object_or_404
-from ..models import Post, Image
+from ..models import Post, Image, Category
 from ..forms import PostForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
@@ -9,10 +9,18 @@ from django.core.paginator import Paginator
 
 # 게시글 수정, 삭제
 @login_required(login_url='/accounts/login')
-def deleteget(request, post_id):
-    post=Post.objects.get(id=post_id)
+def deleteget(request, post_id, category_name):
+    post = get_object_or_404(Post, id=post_id)
     post.delete()
-    return redirect('post:list')
+    allowed_categories = ["koreapost", "chinapost", "japanpost"]
+
+    # 카테고리 이름이 허용된 목록에 있는 경우 해당 카테고리로 리디렉션
+    if category_name in allowed_categories:
+        return redirect('post:list', category_name=category_name)
+    
+    # 허용되지 않은 카테고리 이름인 경우 404 페이지 표시
+    return render(request, '404.html')
+
 
 def updateget(request, post_id):
     post=Post.objects.get(pk=post_id)
