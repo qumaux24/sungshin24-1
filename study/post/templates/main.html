@@ -44,11 +44,11 @@
             <div class="menu-icon">
                 <img src="{% static 'image/menu-icon.png' %}" alt="menu">
                 <div class="dropdown-menu">
-                    <a href="koreapost.html">한식</a>
-                    <a href="chinapost.html">중식</a>
-                    <a href="japanpost.html">일식</a>
-                    <a href="infopost.html">공지사항</a>
-                    <a onclick="checklogin()">레시피 등록</a>
+                    <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
+                    <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
+                    <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
+                    <a href="noticelist/">공지사항</a>
+                    <a href="{% url 'post:write' %}">레시피 등록</a>
                 </div>
             </div>
             
@@ -115,7 +115,7 @@
                         
                             <a href="{% url 'accounts:logout' %}"><button>로그아웃</button></a>
                             <div>
-                                <button onclick="location.href='recipeRegistration.html'">레시피 등록하기</button>
+                                <a href="{% url 'post:write' %}"><button onclick="location.href='recipeRegistration.html'">레시피 등록하기</button></a>
                             </div>
                         </div>
 

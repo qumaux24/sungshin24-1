@@ -1,8 +1,10 @@
 from django.shortcuts import render,redirect, get_object_or_404
-from ..models import Post, Image, Comment
+from ..models import Post, Image, Comment, Category
 from ..forms import PostForm, CommentForm
 from django.core.paginator import Paginator
 from django.views.decorators.http import require_POST
+from django.db.models import Count
+# from django.contrib.auth import get_user_model
 
 # Create your views here.
 
@@ -11,16 +13,24 @@ def main(request):
     return render(request, 'main.html')
 
 # 게시글 목록
-def list(request):
-    posts = Post.objects.all().order_by('-created_at')
-    request.session['previous_page']=request.get_full_path()
+def list(request, category_name):
+    request.session['previous_page'] = request.get_full_path()
+    category = get_object_or_404(Category, name=category_name)
+    posts = Post.objects.filter(category=category).annotate(comment_count=Count('comment')).order_by('-created_at').order_by('-created_at')
     page=request.GET.get('page', '1')
     paginator=Paginator(posts, 10)
     page_obj=paginator.get_page(page)
     context={
         'list': page_obj,
         }
-    return render(request, 'koreapost.html', context)
+    if category_name=="koreapost":
+        return render(request, 'koreapost.html', context)
+    elif category_name=="chinapost":
+        return render(request, 'chinapost.html', context)
+    elif category_name=="japanpost":
+        return render(request, 'japanpost.html', context)
+    else:
+        return render(request, '404.html')
 
 # 게시글 새로 작성하기
 def write(request):
@@ -29,12 +39,18 @@ def write(request):
         if form.is_valid():
             post = form.save(commit=False)
             post.writer=request.user
+            
+            if post.category is None:
+                # 카테고리가 없는 경우 기본값 설정 또는 오류 처리
+                return render(request, 'write.html', {'post_form': form, 'error': '카테고리를 선택하세요.'})
+            
             post.save()
             
             for img in request.FILES.getlist('image',None):
                 Image.objects.create(post=post, image=img)
                 
-            return redirect('post:list')
+            return redirect('post:list', category_name=post.category.name)
+        
     else:
         form=PostForm() #request는 현재 상황인데 없으니까 아예 새 포스트를 불러옴
         return render(request,'recipeRegistration.html', {'form':form})

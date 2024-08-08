@@ -42,11 +42,11 @@
         <div class="menu-icon">
             <img src="menu-icon.png" alt="menu">
             <div class="dropdown-menu">
-                <a href="koreapost.html">한식</a>
-                <a href="chinapost.html">중식</a>
-                <a href="japanpost.html">일식</a>
+                <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
+                <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
+                <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
                 <a href="infopost.html">공지사항</a>
-                <a onclick="checklogin()">레시피 등록</a>
+                <a href="{% url 'post:write' %}">레시피 등록</a>
             </div>
         </div>
 
@@ -57,80 +57,74 @@
         <table>
             <thead>
                 <tr>
-                    <th>No</th>
                     <th>제목</th>
                     <th>글쓴이</th>
-                    <th>작성시간</th>
+                    <th>작성 시간</th>
+                    <th>최종 수정</th>
                     <th>좋아요</th>
                     <th>댓글 수</th>
                 </tr>
             </thead>
             <tbody>
+                {% csrf_token %}
+                {% for userpost in userlist %}
                 <tr class ="fixed">
-                    <td>1</td>
-                    <td>게시글1</td>
-                    <td>A</td>
-                    <td>2024-08-06</td>
-                    <td>10</td>
-                    <td>3</td>
+                    <td><a href="{% url 'userpost:userShow' userpost.id %}">{{ userpost.title }}</a></td>
+                    <td>{{ userpost.writer }}</td>
+                    <td>{{ userpost.created_at }}</td>
+                    <td>
+                        {% if userpost.updated_at != userpost.created_at %}
+                            {{ userpost.updated_at }}
+                        {% else %}
+                            &nbsp;
+                        {% endif %}
+                    </td>
+                    <td>{% if user in userpost.like_users.all %}</td>
+                    <td>{{ comments|length }}</td>
                 </tr>
-                <tr>
-                    <td>2</td>
-                    <td>게시글2</td>
-                    <td>A</td>
-                    <td>2024-08-06</td>
-                    <td>10</td>
-                    <td>10</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>게시글3</td>
-                    <td>A</td>
-                    <td>2024-08-06</td>
-                    <td>10</td>
-                    <td>10</td>
-                </tr>
+                {% endfor %}
+            
                 <!-- 추가적인 레시피 항목들을 필요에 따라 추가할 수 있습니다 -->
             </tbody>
         </table>
     </div>
     <br>
     <div>
-        <!-- 페이징처리 시작 -->
         <ul class="pagination justify-content-center">
             <!-- 이전페이지 -->
-            {% if post_list.has_previous %}<!--이전페이지가 있을 때 이전 버튼 활성화-->
-            <li class="page-item">
-                <a class="page-link" href="?page={{ post_list.previous_page_number }}">이전</a>
-            </li>
-            {% else %}<!--이전페이지 없으면 이전 버튼 비활성화-->
-            <li class="page-item disabled">
-                <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
-            </li>
-            {% endif %}
-            <!-- 페이지리스트(페이지번호) -->
-            {% for page_number in post_list.paginator.page_range %}
-            {% if page_number >= post_list.number|add:-5 and page_number <= post_list.number|add:5 %} {% if
-                page_number==post_list.number %} <li class="page-item active" aria-current="page">
-                <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+            {% if userlist.has_previous %}
+                <li class="page-item">
+                    <a class="page-link" href="?page={{ userlist.previous_page_number }}">이전</a>
                 </li>
-                {% else %}
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+                </li>
+            {% endif %}
+            <!-- 페이지리스트 -->
+            {% for page_number in userlist.paginator.page_range %}
+            {% if page_number >= userlist.number|add:-5 and page_number <= userlist.number|add:5 %}
+            {% if page_number == userlist.number %}
+                <li class="page-item active" aria-current="page">{#구분을 위해  누른 번호가 파랑으로 보임#}
+                    <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                </li>
+            {% else %}
                 <li class="page-item">
                     <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
                 </li>
-                {% endif %}
-                {% endif %}
-                {% endfor %}
-                <!-- 다음페이지 -->
-                {% if post_list.has_next %}
+            {% endif %}
+            {% endif %}
+            {% endfor %}
+            <!-- 다음페이지 -->
+            {% if userlist.has_next %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ post_list.next_page_number }}">다음</a><!--다음페이지가 있을 때 다음 버튼 활성화-->
+                    <a class="page-link" href="?page={{ userlist.next_page_number }}">다음</a>
                 </li>
-                {% else %}
+            {% else %}
                 <li class="page-item disabled">
-                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a><!--다음페이지가 없을 때 다음 버튼 비활성화-->
+                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
                 </li>
-                {% endif %}
+            {% endif %}
         </ul>
         <!-- 페이징처리 끝 -->
     </div>
