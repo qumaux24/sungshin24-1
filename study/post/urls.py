@@ -16,7 +16,7 @@ urlpatterns = [
     path('write/', write, name='write'),
     path('show/<int:post_id>/', show, name='show'),
     path('show/<int:post_id>/updateget', updateget, name='updateget'),
-    path('deleteget/<int:post_id>/', deleteget, name='deleteget'),
+    path('deleteget/<int:post_id>/<str:category_name>/', deleteget, name='deleteget'),
     path('<int:pk>/comments/', comments_create, name='comments_create'),
     path('<int:pk>/comments/<int:comment_pk>/delete/', comments_delete, name='comments_delete'),
     path('<int:post_pk>/likes/', likes, name='likes'),
@@ -33,9 +33,6 @@ urlpatterns = [
     path('noticeShow/<int:noticepost_id>/noticepost_updateget', noticepost_updateget, name='noticepost_updateget'),
     path('noticepost_deleteget/<int:noticepost_id>/', noticepost_deleteget, name='noticepost_deleteget'),
     path('<str:category_name>/',list, name='list'),
-    # path('koreapost/', c_koreapost, name='c_koreapost'),
-    # path('chinapost/', c_chinapost, name='c_chinapost'),
-    # path('japanpost/', c_japanpost, name='c_japanpost'),
     ]
 
 urlpatterns += static(settings.MEDIA_URL,

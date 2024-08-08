@@ -94,7 +94,7 @@
                 <div class="recipe-info">
                     <p><strong>조리 시간:</strong> {{ post.cooktime }}분</p>
                     <p><strong>좋아요 수:</strong> {{ post.like_users.count }}</p>
-                    <p><strong>한식/중식/일식</strong></p>
+                    <p><strong>종류:</strong> {{ post.category }}</p>
                 </div>
                 <div class="recipe-ingredients">
                     <h2>재료</h2>
@@ -106,7 +106,7 @@
                 </div>
                 {% if post.writer == request.user %}
                     <a href="{% url 'post:updateget' post.id %}"><button>수정하기</button></a><br>
-                    <a href="/deleteget/{{post.id}}"><button>삭제하기</button></a><br>
+                    <a href="{% url 'post:deleteget' post.id post.category.name %}"><button>삭제하기</button></a><br>
                 {% endif %}
                 <button id="link" onclick="clip()">링크 복사</button>
             </section>
