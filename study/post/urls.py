@@ -8,6 +8,7 @@ from .views.userpost_views import userWrite, userShow, userlist, userlikes
 from .views.userpost_update_views import userpost_deleteget, userpost_updateget
 from .views.notice_views import noticeWrite, noticeShow, noticelist
 from .views.notice_update_views import noticepost_deleteget, noticepost_updateget
+from .views.page_connect import c_koreapost, c_chinapost, c_japanpost
 
 app_name="post"
 
@@ -33,6 +34,9 @@ urlpatterns = [
     path('noticeShow/<int:noticepost_id>', noticeShow, name='noticeShow'),
     path('noticeShow/<int:noticepost_id>/noticepost_updateget', noticepost_updateget, name='noticepost_updateget'),
     path('noticepost_deleteget/<int:noticepost_id>/', noticepost_deleteget, name='noticepost_deleteget'),
+    path('koreapost/', c_koreapost, name='c_koreapost'),
+    path('chinapost/', c_chinapost, name='c_chinapost'),
+    path('japanpost/', c_japanpost, name='c_japanpost'),
     ]
 
 urlpatterns += static(settings.MEDIA_URL,

@@ -44,9 +44,9 @@
         <div class="menu-icon">
             <img src="menu-icon.png" alt="menu">
             <div class="dropdown-menu">
-                <a href="koreapost.html">한식</a>
-                <a href="chinapost.html">중식</a>
-                <a href="japanpost.html">일식</a>
+                <a href="{% url 'post:c_koreapost' %}">한식</a>
+                <a href="{% url 'post:c_chinapost' %}">중식</a>
+                <a href="{% url 'post:c_japanpost' %}">일식</a>
                 <a href="infopost.html">공지사항</a>
                 <a onclick="checklogin()">레시피 등록</a>
             </div>
