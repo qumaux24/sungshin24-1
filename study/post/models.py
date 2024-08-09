@@ -67,3 +67,12 @@ class Comment(models.Model):
     
     def __str__(self):
         return self.comment
+    
+class Usercomment(models.Model):
+    userpost=models.ForeignKey(Userpost, on_delete=models.CASCADE)
+    writer=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    usercomment=models.TextField()
+    created_at=models.DateTimeField(auto_now_add=True)
+    
+    def __str__(self):
+        return self.usercomment

@@ -28,8 +28,8 @@
 
 <body>
     <header>
-        <div class="logo">
-            <span class="blue">냉</span>Jango()
+        <div class="logo"><a href="{% url 'post:main' %}">
+            <span class="blue">냉</span>Jango() </a>
         </div>
         <select id="search-type">
             <option value="all">전체</option>
@@ -37,8 +37,11 @@
             <option value="title">제목</option>
         </select>
         <div class="search-bar">
-            <input type="text" placeholder="search">
-            <button><img src="search-icon.png" alt="search"></button>
+            <form method="POST" action="{% url 'post:search' %}">
+                {% csrf_token %} 
+                    <input type="text" placeholder="search" name="searched">
+                    <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
+                </form>
         </div>
             
         <div class="menu-icon">
@@ -47,7 +50,7 @@
                 <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
                 <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
                 <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
-                <a href="infopost.html">공지사항</a>
+                <a href="notice.html">공지사항</a>
                 <a href="{% url 'post:write' %}">레시피 등록</a>
             </div>
         </div>
@@ -57,7 +60,7 @@
     <main>
         <section class="post-form">
             <h2>공지사항 등록</h2>
-            <form action="submit-notice.php" method="POST" enctype="multipart/form-data">
+            <form method="POST" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="notice-name">제목</label>
                     {{ noticeform.title }}

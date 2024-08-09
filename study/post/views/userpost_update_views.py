@@ -12,7 +12,7 @@ from django.core.paginator import Paginator
 def userpost_deleteget(request, userpost_id):
     userpost=Userpost.objects.get(id=userpost_id)
     userpost.delete()
-    return redirect('userpost:userlist')
+    return redirect('post:userlist')
 
 def userpost_updateget(request, userpost_id):
     userpost=Userpost.objects.get(pk=userpost_id)
@@ -22,7 +22,7 @@ def userpost_updateget(request, userpost_id):
         if userpostForm.is_valid():
             userpostForm.save()
             
-            return redirect('userpost:userShow', userpost_id)
+            return redirect('post:userShow', userpost_id)
     else:
         userpostForm=UserpostForm(instance=userpost)
         context={
