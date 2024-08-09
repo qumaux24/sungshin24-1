@@ -28,17 +28,19 @@
     <body>
         <header>
             <div class="logo"><a href="{% url 'post:main' %}">
-                <span class="blue">냉</span>Jango()
-            </div></a>
+                <span class="blue">냉</span>Jango() </a>
+            </div>
             <select id="search-type">
                 <option value="all">전체</option>
                 <option value="ingredient">재료</option>
                 <option value="title">제목</option>
             </select>
             <div class="search-bar">
-                
-                <input type="text" placeholder="search">
-                <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
+                <form method="POST" action="{% url 'post:search' %}">
+                {% csrf_token %} 
+                    <input type="text" placeholder="search" name="searched">
+                    <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
+                </form>
             </div>
                 
             <div class="menu-icon">
@@ -60,46 +62,40 @@
                     <h2>DAILY ♡</h2>
                     <div class="recipe-card">
                         
-                        <h3>{{ post1.title }}</h3>
+                        <a href="{% url 'post:show' post_id=post1.id %}"><h3>{{ post1.title }}</h3></a>
                         <div class="likes">
                             <img src="{% static 'image/like-icon.jpg' %}" alt="Like">
                             <span class="likenum">{{ post1.like_users.count }}</span>
                         </div>
                         <br>
-                        {% comment %} <img src="{% static 'image/recipe-image.png' %}" alt="Recipe Image"> {% endcomment %}
                         <img src="{% if image1 %}{{ image1.image.url }}{% else %}{% static 'image/recipe-image.png' %}{% endif %}" alt="Image">
                         <br>
 
-                        {% comment %} <a href="{% url 'post:show' post_id=post1.id %}"><button>레시피 이용하기</button></a> {% endcomment %}
                     </div>
 
                     <div class="recipe-card">
                         
-                        <h3>{{ post2.title }}</h3>
+                        <a href="{% url 'post:show' post_id=post2.id %}"><h3>{{ post2.title }}</h3></a>
                         <div class="likes">
                             <img src="{% static 'image/like-icon.jpg' %}" alt="Like">
                             <span class="likenum">{{ post2.like_users.count }}</span>
                         </div>
                         <br>
-                        {% comment %} <img src="{% static 'image/recipe-image.png' %}" alt="Recipe Image"> {% endcomment %}
                         <img src="{% if image2 %}{{ image2.image.url }}{% else %}{% static 'image/recipe-image.png' %}{% endif %}" alt="Image">
                         <br>
-                        {% comment %} <a href="{% url 'post:show' post_id=post2.id %}"><button>레시피 이용하기</button></a> {% endcomment %}
 
                     </div>
 
                     <div class="recipe-card">
-                        <h3>{{ post3.title }}</h3>                    
+                        <a href="{% url 'post:show' post_id=post3.id %}"><h3>{{ post3.title }}</h3></a>                    
                         <div class="likes">
                             
                             <img src="{% static 'image/like-icon.jpg' %}" alt="Like">
                             <span class="likenum">{{ post3.like_users.count }}</span>
                         </div>
                         <br>
-                        {% comment %} <img src="{% static 'image/recipe-image.png' %}" alt="Recipe Image"> {% endcomment %}
                         <img src="{% if image3 %}{{ image3.image.url }}{% else %}{% static 'image/recipe-image.png' %}{% endif %}" alt="Image">
                         <br>
-                        {% comment %} <a href="{% url 'post:show' post_id=post3.id %}"><button>레시피 이용하기</button></a> {% endcomment %}
 
                     </div>
 

@@ -1,7 +1,7 @@
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
-from .views.post_views import main, list, write, show, likes
+from .views.post_views import main, list, write, show, likes, search
 from .views.update_views import updateget, deleteget, image_delete
 from .views.comments_views import comments_create, comments_delete
 from .views.userpost_views import userWrite, userShow, userlist, userlikes
@@ -15,6 +15,7 @@ app_name="post"
 urlpatterns = [
     path('', main, name='main'),
     path('write/', write, name='write'),
+    path('search/', search, name='search'),
     path('show/<int:post_id>/', show, name='show'),
     path('show/<int:post_id>/updateget', updateget, name='updateget'),
     path('deleteget/<int:post_id>/<str:category_name>/', deleteget, name='deleteget'),

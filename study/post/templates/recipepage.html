@@ -43,8 +43,11 @@
                 <option value="title">제목</option>
             </select>
             <div class="search-bar">
-                <input type="text" placeholder="search">
-                <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
+                <form method="POST" action="{% url 'post:search' %}">
+                    {% csrf_token %} 
+                        <input type="text" placeholder="search" name="searched">
+                        <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
+                    </form>
             </div>
                 
             <div class="menu-icon">

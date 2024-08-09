@@ -3,7 +3,7 @@ from ..models import Post, Image, Comment, Category
 from ..forms import PostForm, CommentForm
 from django.core.paginator import Paginator
 from django.views.decorators.http import require_POST
-from django.db.models import Count
+from django.db.models import Count, Q
 from .daily_views import daily_posts_view
 # from django.contrib.auth import get_user_model
 
@@ -83,3 +83,25 @@ def likes(request, post_pk):
             post.like_users.add(request.user)
         return redirect('post:show', post_pk)
     return redirect('accounts/login')
+
+
+# 검색 기능
+def search(request):
+    if request.method == 'POST':
+        searched = request.POST['searched']
+        search_word = set(searched.replace(',', ' ').split())
+        
+        q_objects = Q()
+        for word in search_word:
+            if word:  # 빈 문자열 필터링
+                q_objects |= Q(title__icontains=word) | Q(ingredient__icontains=word)
+        
+        # 검색 수행
+        posts = Post.objects.filter(q_objects).distinct()
+        
+    context = {
+        'searched':searched,
+        'posts':posts
+    }    
+    
+    return render(request, 'searched.html', context)
