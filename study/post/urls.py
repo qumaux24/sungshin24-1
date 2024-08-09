@@ -8,6 +8,7 @@ from .views.userpost_views import userWrite, userShow, userlist, userlikes
 from .views.userpost_update_views import userpost_deleteget, userpost_updateget
 from .views.notice_views import noticeWrite, noticeShow, noticelist
 from .views.notice_update_views import noticepost_deleteget, noticepost_updateget
+from .views.daily_views import daily_posts_view
 
 app_name="post"
 
@@ -33,6 +34,7 @@ urlpatterns = [
     path('noticeShow/<int:noticepost_id>/noticepost_updateget', noticepost_updateget, name='noticepost_updateget'),
     path('noticepost_deleteget/<int:noticepost_id>/', noticepost_deleteget, name='noticepost_deleteget'),
     path('<str:category_name>/',list, name='list'),
+    path('daily_posts/', daily_posts_view, name='daily_posts'),
     ]
 
 urlpatterns += static(settings.MEDIA_URL,
