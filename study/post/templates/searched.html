@@ -23,8 +23,8 @@
 
     <body>
         <header>
-            <div class="logo">
-                <span class="blue">냉</span>Jango()
+            <div class="logo"><a href="{% url 'post:main' %}">
+                <span class="blue">냉</span>Jango() </a>
             </div>
             <select id="search-type">
                 <option value="all">전체</option>
@@ -32,8 +32,11 @@
                 <option value="title">제목</option>
             </select>
             <div class="search-bar">
-                <input type="text" placeholder="search">
-                <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
+                <form method="POST" action="{% url 'post:search' %}">
+                    {% csrf_token %} 
+                        <input type="text" placeholder="search" name="searched">
+                        <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
+                    </form>
             </div>
     
             <div class="menu-icon">
@@ -66,8 +69,9 @@
                         </tr>
                     </thead>
                     <tbody>
-    
-                        {% for post in post_list %}<!--작성되어 저장된 글 다 불러옴-->
+                    {% block content %}
+                        {% if searched %}     
+                        {% for post in posts %}<!--작성되어 저장된 글 다 불러옴-->
                         <tr>
                             <td>게시글 no.</td>
                             <!--글 제목 보여줌, 제목 누르면 글로 이동-->
@@ -80,11 +84,11 @@
                             <td>좋아요수 : {{post.like_users.all.count}}</td>
                             <!--댓글 수 보여줌, &nbsp 삭제 상관 없음-->
                             <td>댓글수 : {{ post.comment_count }}</td>
-    
-    
+                        {% endfor %}<!--for문 끝냄-->
                         </tr>
                     </tbody>
-                    {% endfor %}<!--for문 끝냄-->
+                        {% endif %}
+                    {% endblock content %}
                 </table>
             </div>
     

@@ -28,8 +28,8 @@
 
 <body>
     <header>
-        <div class="logo">
-            <span class="blue">냉</span>Jango()
+        <div class="logo"><a href="{% url 'post:main' %}">
+            <span class="blue">냉</span>Jango() </a>
         </div>
         <select id="search-type">
             <option value="all">전체</option>
@@ -37,8 +37,11 @@
             <option value="title">제목</option>
         </select>
         <div class="search-bar">
-            <input type="text" placeholder="search">
-            <button><img src="search-icon.png" alt="search"></button>
+            <form method="POST" action="{% url 'post:search' %}">
+                {% csrf_token %} 
+                    <input type="text" placeholder="search" name="searched">
+                    <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
+                </form>
         </div>
             
         <div class="menu-icon">
