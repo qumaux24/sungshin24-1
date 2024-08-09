@@ -1,11 +1,21 @@
 from django import forms
-from .models import Post, Comment
+from .models import Post, Comment, Userpost, Noticepost, Category
 
 class PostForm(forms.ModelForm):
-    #작성하려고 했을 때 새 폼을 주는 것
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), required=True, empty_label=None)
     class Meta:
         model=Post
-        fields=['title', 'cooktime', 'ingredient', 'cookmethod']
+        fields=['title', 'category', 'cooktime', 'ingredient', 'cookmethod']
+        
+class UserpostForm(forms.ModelForm):
+    class Meta:
+        model=Userpost
+        fields=['title','content']
+        
+class NoticepostForm(forms.ModelForm):
+    class Meta:
+        model=Noticepost
+        fields=['title', 'content']
         
 class CommentForm(forms.ModelForm):
     class Meta:

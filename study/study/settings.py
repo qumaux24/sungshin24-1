@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'post',
     'accounts',
-    'bootstrap4'
+    'bootstrap4',
+    # 'post.apps.PostConfig'
+    'django_apscheduler',
 ]
 
 MIDDLEWARE = [
