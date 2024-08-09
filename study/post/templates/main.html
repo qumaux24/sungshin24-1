@@ -62,39 +62,39 @@
                     <h2>DAILY ♡</h2>
                     <div class="recipe-card">
                         
-                        <a href="{% url 'post:show' post_id=post1.id %}"><h3>{{ post1.title }}</h3></a>
+                        <a href="{% url 'post:show' post_id=context_daily.post1.id %}"><h3>{{ context_daily.post1.title }}</h3></a>
                         <div class="likes">
                             <img src="{% static 'image/like-icon.jpg' %}" alt="Like">
-                            <span class="likenum">{{ post1.like_users.count }}</span>
+                            <span class="likenum">{{ context_daily.post1.like_users.count }}</span>
                         </div>
                         <br>
-                        <img src="{% if image1 %}{{ image1.image.url }}{% else %}{% static 'image/recipe-image.png' %}{% endif %}" alt="Image">
+                        <img src="{% if context_daily.image1 %}{{ context_daily.image1.image.url }}{% else %}{% static 'image/recipe-image.png' %}{% endif %}" alt="Image">
                         <br>
 
                     </div>
 
                     <div class="recipe-card">
                         
-                        <a href="{% url 'post:show' post_id=post2.id %}"><h3>{{ post2.title }}</h3></a>
+                        <a href="{% url 'post:show' post_id=context_daily.post2.id %}"><h3>{{ context_daily.post2.title }}</h3></a>
                         <div class="likes">
                             <img src="{% static 'image/like-icon.jpg' %}" alt="Like">
-                            <span class="likenum">{{ post2.like_users.count }}</span>
+                            <span class="likenum">{{ context_daily.post2.like_users.count }}</span>
                         </div>
                         <br>
-                        <img src="{% if image2 %}{{ image2.image.url }}{% else %}{% static 'image/recipe-image.png' %}{% endif %}" alt="Image">
+                        <img src="{% if context_daily.image2 %}{{ context_daily.image2.image.url }}{% else %}{% static 'image/recipe-image.png' %}{% endif %}" alt="Image">
                         <br>
 
                     </div>
 
                     <div class="recipe-card">
-                        <a href="{% url 'post:show' post_id=post3.id %}"><h3>{{ post3.title }}</h3></a>                    
+                        <a href="{% url 'post:show' post_id=context_daily.post3.id %}"><h3>{{ context_daily.post3.title }}</h3></a>                    
                         <div class="likes">
                             
                             <img src="{% static 'image/like-icon.jpg' %}" alt="Like">
-                            <span class="likenum">{{ post3.like_users.count }}</span>
+                            <span class="likenum">{{ context_daily.post3.like_users.count }}</span>
                         </div>
                         <br>
-                        <img src="{% if image3 %}{{ image3.image.url }}{% else %}{% static 'image/recipe-image.png' %}{% endif %}" alt="Image">
+                        <img src="{% if context_daily.image3 %}{{ context_daily.image3.image.url }}{% else %}{% static 'image/recipe-image.png' %}{% endif %}" alt="Image">
                         <br>
 
                     </div>
@@ -169,22 +169,25 @@
                 <div class="category">
                     <h3>HOT 한식 게시판</h3>
                     <ul>
-                        <li><a href="recipepage.html">레시피 1</a></li>
-                        <li><a href="recipepage.html">레시피 2</a></li>
+                        {% for post in korea_hot_list %}
+                        <li><a href="{% url 'post:show' post.id %}">{{post.title}}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <div class="category">
                     <h3>HOT 중식 게시판</h3>
                     <ul>
-                        <li><a href="recipepage.html">레시피 1</a></li>
-                        <li><a href="recipepage.html">레시피 2</a></li>
+                        {% for post in china_hot_list %}
+                        <li><a href="{% url 'post:show' post.id %}">{{post.title}}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <div class="category">
                     <h3>HOT 일식 게시판</h3>
                     <ul>
-                        <li><a href="recipepage.html">레시피 1</a></li>
-                        <li><a href="recipepage.html">레시피 2</a></li>
+                        {% for post in japan_hot_list %}
+                        <li><a href="{% url 'post:show' post.id %}">{{post.title}}</a></li>
+                        {% endfor %}
                     </ul>
                 </div>
             </section>
