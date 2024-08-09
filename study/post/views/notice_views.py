@@ -3,6 +3,7 @@ from ..models import Noticepost, Image, Comment
 from ..forms import NoticepostForm, CommentForm
 from django.core.paginator import Paginator
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required, user_passes_test
 
 # Create your views here.
 
@@ -19,6 +20,8 @@ def noticelist(request):
     return render(request, 'notice.html', context)
 
 # 공지사항 게시글 새로 작성하기
+@login_required
+@user_passes_test(lambda u: u.is_superuser)
 def noticeWrite(request):
     if request.method=='POST':
         noticeform=NoticepostForm(request.POST)
@@ -27,7 +30,7 @@ def noticeWrite(request):
             noticepost.writer=request.user
             noticepost.save()
                 
-            return redirect('noticepost:noticelist')
+            return redirect('post:noticelist')
     else:
         noticeform=NoticepostForm()
         return render(request,'notice-write.html', {'noticeform':noticeform})
@@ -35,11 +38,7 @@ def noticeWrite(request):
 # 공지사항 게시글 보여주기
 def noticeShow(request, noticepost_id):
     noticepost = get_object_or_404(Noticepost, pk =noticepost_id)
-    comments = noticepost.comment_set.all()  
-    commentForm = CommentForm() 
     context = {
         'noticepost': noticepost,
-        'comments': comments,
-        'commentForm': commentForm, 
     }
     return render(request, 'notice-detail.html', context)

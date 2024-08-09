@@ -12,7 +12,7 @@ from django.core.paginator import Paginator
 def noticepost_deleteget(request, noticepost_id):
     noticepost=Noticepost.objects.get(id=noticepost_id)
     noticepost.delete()
-    return redirect('noticepost:noticelist')
+    return redirect('post:noticelist')
 
 def noticepost_updateget(request, noticepost_id):
     noticepost=Noticepost.objects.get(pk=noticepost_id)
@@ -22,7 +22,7 @@ def noticepost_updateget(request, noticepost_id):
         if noticepostForm.is_valid():
             noticepostForm.save()
             
-            return redirect('noticepost:noticeShow', noticepost_id)
+            return redirect('post:noticeShow', noticepost_id)
     else:
         noticepostForm=NoticepostForm(instance=noticepost)
         context={
