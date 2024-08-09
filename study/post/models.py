@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.utils import timezone
 
 # Create your models here.
 class Category(models.Model):
@@ -9,6 +10,15 @@ class Category(models.Model):
     
     def __str__(self):
         return self.nickname
+
+class DailyNumbers(models.Model):
+    date = models.DateField(default=timezone.now)
+    daily1 = models.IntegerField()
+    daily2 = models.IntegerField()
+    daily3 = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.date}: {self.daily1}, {self.daily2}, {self.daily3}"
     
 class Post(models.Model):
     title = models.CharField(max_length=200)

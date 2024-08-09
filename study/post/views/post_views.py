@@ -4,13 +4,16 @@ from ..forms import PostForm, CommentForm
 from django.core.paginator import Paginator
 from django.views.decorators.http import require_POST
 from django.db.models import Count
+from .daily_views import daily_posts_view
 # from django.contrib.auth import get_user_model
 
 # Create your views here.
 
 # 메인페이지
 def main(request):
-    return render(request, 'main.html')
+    context = daily_posts_view(request)
+    print(context)
+    return render(request, 'main.html', context)
 
 # 게시글 목록
 def list(request, category_name):
