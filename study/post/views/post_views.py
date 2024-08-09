@@ -11,8 +11,17 @@ from .daily_views import daily_posts_view
 
 # 메인페이지
 def main(request):
-    context = daily_posts_view(request)
-    print(context)
+    context_daily = daily_posts_view(request)
+    korea_hot_list = sort_hot_korea(request)
+    china_hot_list = sort_hot_china(request)
+    japan_hot_list = sort_hot_japan(request)
+    context={
+        'context_daily' : context_daily,
+        'korea_hot_list' : korea_hot_list,
+        'china_hot_list' : china_hot_list,
+        'japan_hot_list' : japan_hot_list,
+        
+    }
     return render(request, 'main.html', context)
 
 # 게시글 목록
@@ -105,3 +114,61 @@ def search(request):
     }    
     
     return render(request, 'searched.html', context)
+
+# 한/중/일식 핫게시판
+def sort_hot_korea(request):
+    posts = Post.objects.filter(category_id=1).annotate(comment_count=Count('like_users')).order_by('-created_at')
+    # posts = Post.objects.all().annotate(comment_count=Count('like_users')).order_by('-created_at')
+    page = request.GET.get('page', '1')
+    post_likes = []
+    
+    for post in posts:
+        likes_count = post.like_users.all().count()
+        post_likes.append((post, likes_count, post.created_at))
+        
+    post_likes.sort(key=lambda x: (x[1], x[2]), reverse=True)
+    sorted_posts_like = [post for post, likes_count, created_at in post_likes]
+    
+    korea_hot_list = []
+    korea_hot_list.append(sorted_posts_like[0])
+    korea_hot_list.append(sorted_posts_like[1])
+
+    return korea_hot_list
+
+def sort_hot_china(request):
+    posts = Post.objects.filter(category_id=2).annotate(comment_count=Count('like_users')).order_by('-created_at')
+    # posts = Post.objects.all().annotate(comment_count=Count('like_users')).order_by('-created_at')
+    page = request.GET.get('page', '1')
+    post_likes = []
+    
+    for post in posts:
+        likes_count = post.like_users.all().count()
+        post_likes.append((post, likes_count, post.created_at))
+        
+    post_likes.sort(key=lambda x: (x[1], x[2]), reverse=True)
+    sorted_posts_like = [post for post, likes_count, created_at in post_likes]
+    
+    china_hot_list = []
+    china_hot_list.append(sorted_posts_like[0])
+    china_hot_list.append(sorted_posts_like[1])
+
+    return china_hot_list
+
+def sort_hot_japan(request):
+    posts = Post.objects.filter(category_id=3).annotate(comment_count=Count('like_users')).order_by('-created_at')
+    # posts = Post.objects.all().annotate(comment_count=Count('like_users')).order_by('-created_at')
+    page = request.GET.get('page', '1')
+    post_likes = []
+    
+    for post in posts:
+        likes_count = post.like_users.all().count()
+        post_likes.append((post, likes_count, post.created_at))
+        
+    post_likes.sort(key=lambda x: (x[1], x[2]), reverse=True)
+    sorted_posts_like = [post for post, likes_count, created_at in post_likes]
+    
+    japan_hot_list = []
+    japan_hot_list.append(sorted_posts_like[0])
+    japan_hot_list.append(sorted_posts_like[1])
+
+    return japan_hot_list
