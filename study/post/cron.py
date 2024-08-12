@@ -22,5 +22,5 @@ def start_scheduler():
     scheduler.start()
     print("Scheduler started!")
 
-def main():
+def initialize_scheduler():
     start_scheduler()
