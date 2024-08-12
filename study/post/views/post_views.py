@@ -28,7 +28,7 @@ def main(request):
 def list(request, category_name):
     request.session['previous_page'] = request.get_full_path()
     category = get_object_or_404(Category, name=category_name)
-    posts = Post.objects.filter(category=category).annotate(comment_count=Count('comment')).order_by('-created_at').order_by('-created_at')
+    posts = Post.objects.filter(category=category).annotate(comment_count=Count('comment')).order_by('-created_at')
     page=request.GET.get('page', '1')
     paginator=Paginator(posts, 10)
     page_obj=paginator.get_page(page)
