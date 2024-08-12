@@ -36,34 +36,38 @@
 
 <body>
     <header>
-        <div class="logo"><a href="{% url 'post:main' %}">
-            <span class="blue">냉</span>Jango() </a>
-        </div>
-        <select id="search-type">
-            <option value="all">전체</option>
-            <option value="ingredient">재료</option>
-            <option value="title">제목</option>
-        </select>
-        <div class="search-bar">
+            <div class="logo"><a href="{% url 'post:main' %}">
+                <span class="blue">냉</span>Jango() </a>
+            </div>
+            <select id="search-type">
+                <option value="all">전체</option>
+                <option value="ingredient">재료</option>
+                <option value="title">제목</option>
+            </select>
+
             <form method="POST" action="{% url 'post:search' %}">
-                {% csrf_token %} 
+            {% csrf_token %} 
+                <div class="search-bar">
                     <input type="text" placeholder="search" name="searched">
                     <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
-                </form>
-        </div>
+                </div>
+            </form>
 
-        <div class="menu-icon">
-            <img src="menu-icon.png" alt="menu">
-            <div class="dropdown-menu">
-                <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
-                <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
-                <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
-                <a href="infopost.html">공지사항</a>
-                <a href="{% url 'post:write' %}">레시피 등록</a>
+                
+            <div class="menu-icon">
+                <img src="{% static 'image/menu-icon.png' %}" alt="menu">
+                <div class="dropdown-menu">
+                    <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
+                    <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
+                    <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
+                    <a href="noticelist/">공지사항</a>
+                    <a>사용자 게시판</a>
+                    <a href="{% url 'post:write' %}">레시피 등록</a>
+                </div>
             </div>
-        </div>
+            
+        </header>
 
-    </header>
 
     <main>
         <section class="post-details">

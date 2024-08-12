@@ -73,6 +73,7 @@ a:hover {
 }
 
 .search-bar input {
+    width: 500px;
     padding: 5px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -170,14 +171,19 @@ a:hover {
 
 }
 
+#date {
+    font-size: 15px;
+    padding-bottom: 5px;
+}
+
 #like-button {
-    width: 100px;
-    padding: 3px;
-    background-color: #ffffff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-bottom: 10px;
+    display: flex;
+}
+
+.likes {
+    display: flex;
+    justify-content: center;
+
 }
 
 .likes img {
@@ -185,6 +191,17 @@ a:hover {
     width: 17px;
 
     padding-right: 10px;
+}
+
+.likes input {
+    padding: 3px 7px 3px 7px;
+    background-color: #333;
+    color: #fff;
+    font-size: 13px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
 }
 
 .likenum {
@@ -225,6 +242,29 @@ a:hover {
 .recipe-instructions p {
     font-size: 18px;
     margin: 5px 0;
+}
+
+.button-container {
+    height: 40px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.btn {
+    padding: 5px 20px 5px 20px;
+    margin: 0px 10px 10px 10px;
+    font-size: 15px;
+
+    color: #ffffff;
+    background-color: #858585;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #333;
 }
 
 /* 댓글 목록 스타일 */
@@ -370,23 +410,3 @@ table tr:hover {
     border-color: #007bff;
 }
 
-.button-container {
-    display: block;
-    gap: 20px;
-    /* 버튼 사이의 간격 조절 */
-}
-
-.btn {
-    padding: 5px 20px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #858585;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn:hover {
-    background-color: #333;
-}

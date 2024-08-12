@@ -35,20 +35,22 @@
     <body>
         <header>
             <div class="logo"><a href="{% url 'post:main' %}">
-                <span class="blue">냉</span>Jango()</a>
+                <span class="blue">냉</span>Jango() </a>
             </div>
             <select id="search-type">
                 <option value="all">전체</option>
                 <option value="ingredient">재료</option>
                 <option value="title">제목</option>
             </select>
-            <div class="search-bar">
-                <form method="POST" action="{% url 'post:search' %}">
-                    {% csrf_token %} 
-                        <input type="text" placeholder="search" name="searched">
-                        <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
-                    </form>
-            </div>
+
+            <form id="search" method="POST" action="{% url 'post:search' %}">
+            {% csrf_token %} 
+                <div class="search-bar">
+                    <input type="text" placeholder="search" name="searched">
+                    <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
+                </div>
+            </form>
+
                 
             <div class="menu-icon">
                 <img src="{% static 'image/menu-icon.png' %}" alt="menu">
@@ -56,12 +58,14 @@
                     <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
                     <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
                     <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
-                    <a href="infopost.html">공지사항</a>
+                    <a href="noticelist/">공지사항</a>
+                    <a>사용자 게시판</a>
                     <a href="{% url 'post:write' %}">레시피 등록</a>
                 </div>
             </div>
             
         </header>
+
 
     <br>
 
@@ -70,18 +74,22 @@
             <section class="recipe-details">
                 <h1>레시피 이름 : {{ post.title }}</h1>
                 <p>작성자 : {{ post.writer }}</p>
-                <p>작성 시간 : {{ post.created_at }}</p>
-                {% if post.updated_at != post.created_at %}
-                <p>최종 수정 : {{ post.updated_at }}</p>
-                {% endif %}
+                <div id="date">
+                    <p>작성 시간 : {{ post.created_at }}</p>
+                    {% if post.updated_at != post.created_at %}
+                    <p>최종 수정 : {{ post.updated_at }}</p>
+                    {% endif %}
+                </div>
+                
                 <div class="recipe-image">
                     {% for image in images %}
                         <p><img src="{{image.image.url}}" alt="Image"></p>
                     {%endfor%}
                 </div>
                 <div class="likes">
-                    <button id="like-button">
+                    <div id="like-button">
                         <img src="{% static 'image/like-icon.jpg' %}" alt="Like">
+                        <br>
                         <form action="{% url 'post:likes' post.pk %}" method='POST'>
                             {% csrf_token %}
                             {% if user in post.like_users.all %}
@@ -91,7 +99,7 @@
                             {% endif %}
                             
                         </form>
-                    </button>
+                    </div>
                 </div>
                 <br>
                 <div class="recipe-info">
@@ -107,10 +115,12 @@
                     <h2>만드는 방법</h2>
                     {{ post.cookmethod }}
                 </div>
-                {% if post.writer == request.user %}
-                    <a href="{% url 'post:updateget' post.id %}"><button>수정하기</button></a><br>
-                    <a href="{% url 'post:deleteget' post.id post.category.name %}"><button>삭제하기</button></a><br>
-                {% endif %}
+                <div class="button-container">
+                    {% if post.writer == request.user %}
+                        <a href="{% url 'post:updateget' post.id %}"><button class="btn">수정하기</button></a><br>
+                        <a href="{% url 'post:deleteget' post.id post.category.name %}"><button class="btn">삭제하기</button></a><br>
+                    {% endif %}
+                </div>
                 <button id="link" onclick="clip()">링크 복사</button>
             </section>
         </main>
