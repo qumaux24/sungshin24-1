@@ -64,6 +64,7 @@ a:hover {
 }
 
 .search-bar input {
+    width:590px;
     padding: 5px;
     font-size: 16px;
     border: 1px solid #ccc;

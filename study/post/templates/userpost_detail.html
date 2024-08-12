@@ -74,9 +74,9 @@
                 {% endif %}
                 
                 <div class="likes">
-                    <button id="like-button">
+                    <div id="like-button">
                         <img src="like-icon.jpg" alt="Like">
-                        <span class="likenum">{{ userpost.like_users.count }}</span>
+                        <br>
                         <form action="{% url 'userpost:userlikes' userpost.pk %}" method='POST'>
                             {% csrf_token %}
                             {% if user in userpost.like_users.all %}
@@ -84,7 +84,7 @@
                             {% else %}
                                 <input type="submit" value="좋아요">
                             {% endif %}
-                    </button>
+                        </div>
                 </div>
                 <br>
                 
@@ -94,10 +94,11 @@
                 <br>
                 <div class="button-container">
                     {% if userpost.writer == request.user %}
-                    <a href="{% url 'userpost:userpost_updateget' userpost.id %}"><button>수정하기</button></a><br>
-                    <a href="/userpost_deleteget/{{userpost.id}}"><button>삭제하기</button></a><br>
+                    <a href="{% url 'userpost:userpost_updateget' userpost.id %}"><button class="btn">수정하기</button></a><br>
+                    <a href="/userpost_deleteget/{{userpost.id}}"><button class="btn">삭제하기</button></a><br>
                 {% endif %}
                 </div>
+                <br>
                 
             </section>
         </main>
