@@ -1,31 +1,82 @@
+<!DOCTYPE html>
 <html>
-<head>
-    <title>Update Post</title>
-</head>
-<body>
-    <h1>글 수정</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ postForm.as_p }}
+    <head>
+        <title>Update Post</title>
+        {% load static %}
+            <link rel="stylesheet" href ="{%static 'css/styles-recipeRegistration.css' %}">
+        <script>
+        let isLoggedIn = false; 
+        function checklogin() {
+            if (!isLoggedIn) {
+                if (confirm("로그인이 필요합니다.")) {
+                    window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
+                }
+            }
+            else{
+                window.location.href="recipeRegistration.html";
+            }
+        };
+    </script>
+    </head>
+    <body>
+        <header>
+            <div class="logo"><a href="{% url 'post:main' %}">
+                <span class="blue">냉</span>Jango() </a>
+            </div>
+            <select id="search-type">
+                <option value="all">전체</option>
+                <option value="ingredient">재료</option>
+                <option value="title">제목</option>
+            </select>
 
-        <h2>이미지 추가</h2>
-        <input type="file" name="new_image" multiple accept="image/*" id="id_image">
-        <button type="submit">저장</button>
+            <form method="POST" action="{% url 'post:search' %}">
+            {% csrf_token %} 
+                <div class="search-bar">
+                    <input type="text" placeholder="search" name="searched">
+                    <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
+                </div>
+            </form>
 
-        <h2>기존 이미지</h2>
-        {% csrf_token %}
-            <ul>
-                {% for image in images %}
-                    <li>
-                        <img src="{{ image.image.url }}" alt="Image" style="max-width: 200px;">
-                        {% comment %} {{form.remove_image.label_tag}}{{form.remove_image}} {% endcomment %}
-                        <form action="{% url 'post:image_delete' post_id %}" method="POST" enctype="multipart/form-data">
-                            {% csrf_token %}
-                            <button type="submit" name="image_id" value="{{ image.id }}">삭제</button>
-                        </form>
-                    </li>
-                {% endfor %}
-            </ul>
-    </form>
-</body>
+                
+            <div class="menu-icon">
+                <img src="{% static 'image/menu-icon.png' %}" alt="menu">
+                <div class="dropdown-menu">
+                    <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
+                    <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
+                    <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
+                    <a href="noticelist/">공지사항</a>
+                    <a>사용자 게시판</a>
+                    <a href="{% url 'post:write' %}">레시피 등록</a>
+                </div>
+            </div>
+            
+        </header>
+        
+        <section class="recipe-form">
+            <h2>글 수정</h2>
+            <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ postForm.as_p }}
+
+                <h2>이미지 추가</h2>
+                <input type="file" name="new_image" multiple accept="image/*" id="id_image">
+                <button type="submit">저장</button>
+
+                <h2>기존 이미지</h2>
+                {% csrf_token %}
+                    <ul>
+                        {% for image in images %}
+                            <li>
+                                <img src="{{ image.image.url }}" alt="Image" style="max-width: 200px;">
+                                {% comment %} {{form.remove_image.label_tag}}{{form.remove_image}} {% endcomment %}
+                                <form action="{% url 'post:image_delete' post_id %}" method="POST" enctype="multipart/form-data">
+                                    {% csrf_token %}
+                                    <button type="submit" name="image_id" value="{{ image.id }}">삭제</button>
+                                </form>
+                            </li>
+                        {% endfor %}
+                    </ul>
+            </form>
+        </section>
+    </body>
 </html>

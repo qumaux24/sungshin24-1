@@ -1,110 +1,133 @@
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0 auto;
-            padding: 0;
-            text-align: center;
-            width: 1400px;
-            overflow-x: auto;
-        }
+/* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+    width: 960px;
+    overflow-x: auto;
+}
 
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: #fff;
-            border-bottom: 1px solid #ccc;
-        }
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+}
 
-        a {
-            text-decoration-line: none;
-            text-decoration-color: black;
-        }
+a {
+    text-decoration-line: none;
+    text-decoration-color: black;
+}
 
-        a:visited {
-            color: black;
-        }
-        a:hover {
-            color: blue;
-        }
+a:visited {
+    color: black;
+}
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
-        }
+a:hover {
+    color: blue;
+}
 
-        .logo .blue {
-            color: blue;
-        }
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-right: 20px;
+}
 
-        .search-bar {
-            display: flex;
-            align-items: center;
-            flex-grow: 1;
-            margin: 0 20px;
-        }
+.logo .blue {
+    color: blue;
+}
 
-        .search-bar input {
-            padding: 5px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            flex-grow: 1;
-        }
+#search-type {
+    margin-top: 6px;
+    margin-left: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    font-size: 14px;
+}
 
-        .search-bar button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            margin-left: 5px;
-        }
+#search-type option {
+    background-color: #fff;
+}
 
-        .search-bar button img {
-            margin-top: 3px;
-            width: 30px;
-            height: 30px;
-        }
 
-        .menu-icon {
-            position: relative;
-            display: inline-block;
-        }
+.search-bar {
+    padding-top: 6px;
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+    margin: 0 20px;
+}
 
-        .menu-icon img {
-            margin-top:3px;
-            width: 24px;
-            height: 24px;
-            cursor: pointer;
-        }
+.search-bar input {
+    width: 580px;
+    padding: 5px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    flex-grow: 1;
+}
 
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: 100%;
-            right: 0;
-            background-color: #fff;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-            z-index: 1;
-            min-width: 150px;
-        }
+.search-bar button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: 5px;
+}
 
-        .dropdown-menu a {
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            text-align: left;
-        }
+.search-bar button img {
+    margin-top: 3px;
+    width: 30px;
+    height: 30px;
+}
 
-        .dropdown-menu a:hover {
-            background-color: #f1f1f1;
-        }
+.menu-icon {
+    position: relative;
+    display: inline-block;
+}
 
-        .menu-icon:hover .dropdown-menu {
-            display: block;
-        }
+.menu-icon img {
+    margin-top: 10px;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    min-width: 150px;
+}
+
+.dropdown-menu a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f1f1f1;
+}
+
+.menu-icon:hover .dropdown-menu {
+    display: block;
+}
+
+
+/*--여기까지 헤더--*/
 
         input {
             display: flex;

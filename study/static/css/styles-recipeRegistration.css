@@ -4,6 +4,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0 auto;
     padding: 0;
+    align-items: center;
     text-align: center;
     width: 960px;
     overflow-x: auto;
@@ -62,8 +63,15 @@ a:hover {
     background-color: #fff;
 }
 
+header form {
+    align-items: center;
+    margin-top: 10px;
+    margin-bottom: 2px;
+}
+
 .search-bar {
-    padding-top: 6px;
+    margin-top: 6px;
+
     display: flex;
     align-items: center;
     flex-grow: 1;
@@ -71,6 +79,7 @@ a:hover {
 }
 
 .search-bar input {
+    width: 590px;
     padding: 5px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -131,6 +140,7 @@ a:hover {
 .menu-icon:hover .dropdown-menu {
     display: block;
 }
+
 
 /*--여기까지 헤더--*/
 
