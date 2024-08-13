@@ -101,13 +101,11 @@ def passkey(request, writer_id):
     user = User.objects.get(pk=writer_id)
     if request.user.pk == user.pk:
         inputpasskey=request.POST['inputpasskey']
-        print(inputpasskey)
         pass_key=Pass_keyword.objects.filter(user_id=user.id)
         pass_key_value = pass_key.first().pass_keyword if pass_key.exists() else None
-        print(pass_key)
         if inputpasskey==pass_key_value:
             user_detail=get_object_or_404(User_detail, user_id=writer_id)
-            return render(request, 'membership.html', {'user_detail': user_detail})
+            return render(request, 'user_detail_select.html', {'writer_id': writer_id} )
         return redirect('post:mypage', writer_id)
     return redirect('post:main')
 
@@ -116,6 +114,7 @@ def user_updated(request, writer_id):
     if request.method=="POST":
         user_update_form=UserdetailForm(request.POST, instance=user_detail)
         if user_update_form.is_valid():
+            print('유저디테일폼 유효함')
             # post.created_at=post.updated_at
             user_detail.user=request.user
             user_update_form.save()
@@ -124,11 +123,13 @@ def user_updated(request, writer_id):
         # return redirect('post:user_detail_show', writer_id=writer_id)
     else:
         user_update_form = UserdetailForm(instance=user_detail)
+
         context = {
             'user_update_form': user_update_form,
-            'user_detail' : user_detail
+            'user_detail' : user_detail,
+            'writer_id':writer_id
         }
-        return render(request,'user_updated.html',context)
+        return render(request,'membership.html',context)
 
 # def user_detail_show(request, writer_id):
 #     user_detail=get_object_or_404(User_detail, writer_id=writer_id)

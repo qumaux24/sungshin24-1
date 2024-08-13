@@ -45,10 +45,11 @@
             </div>
             
         </header>
-
         <div class="container">
             <h2>회원 정보</h2>
-            <form action="#">
+            <form method="POST" action="{% url 'post:user_updated' writer_id=writer_id  %}">
+                {% csrf_token %} 
+
                 <label for="username">사용자 이름</label>
                 <input type="text" id="username" name="username" placeholder="홍길동">
 
@@ -58,29 +59,23 @@
                 <label for="confirm_password">비밀번호 확인</label>
                 <input type="password" id="confirm_password" name="confirm_password" value="">
 
-                <div>
-                    <span>성별</span>
-                    <select name="gender">
-                        <option>여성</option>
-                        <option>남성</option>
-                    </select>
-                </div>
+                <label for="gender">성별</label>
+                <p id="gender">{{user_update_form.gender}}</p>
 
                 <br>
+                {% comment %} {{ user_update_form.as_p }} {% endcomment %}
+                <label for="residence">거주지</label>
 
-                <div>
-                    <span>거주지</span>
-                    <select name="residence">
-                        <option>자취</option>
-                        <option>기숙사</option>
-                        <option>본가</option>
-                    </select>
-                </div>
+                <p id="residence">{{user_update_form.residence}}</p>
                 <br>
                 <label for="age">나이</label>
-                <input type="age" id="age" name="age" value="">
+                {% comment %} <input type="age" id="age" name="age" value=""> {% endcomment %}
+                <p id="residence">{{user_update_form.age}}</p>
+
                 <label for="allergy">알러지</label>
-                <input type="allergy" id="allergy" name="allergy" value="">
+                {% comment %} <input type="allergy" id="allergy" name="allergy" value=""> {% endcomment %}
+                <p id="residence">{{user_update_form.allergy}}</p>
+
                 <br>
                 <button type="submit">저장</button>
             </form>

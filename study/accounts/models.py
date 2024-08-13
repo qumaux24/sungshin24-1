@@ -8,6 +8,18 @@ class User_detail(models.Model):
     user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     # user_id = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     age = models.IntegerField()
+    RESIDENCE_CHOICES = [
+        ('alone', '자취'), 
+        ('home', '본가'), 
+        ('dormitory', '기숙사'), 
+    ]
+    residence = models.CharField(max_length=10, default='alone', choices=RESIDENCE_CHOICES, verbose_name="거주지")
+    GENDER_CHOICES = [
+        ('female', '여자'),
+        ('male', '남자'),
+        ('ect', '기타')
+    ]
+    gender = models.CharField(max_length=6, default='ect', choices=GENDER_CHOICES, verbose_name='성별')
     allergy = models.TextField()
     
     def __str__(self):

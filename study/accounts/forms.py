@@ -5,7 +5,7 @@ class UserdetailForm(forms.ModelForm):
 
     class Meta:
         model = User_detail
-        fields = ['age','allergy']
+        fields = ['age','residence','gender','allergy']
     
 class PasskeywordForm(forms.ModelForm):
     

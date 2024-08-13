@@ -9,11 +9,13 @@ from .views.userpost_update_views import userpost_deleteget, userpost_updateget
 from .views.notice_views import noticeWrite, noticeShow, noticelist
 from .views.notice_update_views import noticepost_deleteget, noticepost_updateget
 from .views.daily_views import daily_posts_view
-from .views.mypage_views import mypage, mypage_select, passkey
+from .views.mypage_views import mypage, mypage_select, passkey, user_updated
 
 app_name="post"
 
 urlpatterns = [
+    #유저디테일
+    path('userupdate/<int:writer_id>/', user_updated, name='user_updated'),
     #레시피
     path('', main, name='main'),
     path('write/', write, name='write'),
@@ -51,6 +53,7 @@ urlpatterns = [
     path('daily_posts/', daily_posts_view, name='daily_posts'),
     #패스키
     path('passkey/<int:writer_id>/', passkey, name="passkey"),
+    
     ]
 
 urlpatterns += static(settings.MEDIA_URL,
