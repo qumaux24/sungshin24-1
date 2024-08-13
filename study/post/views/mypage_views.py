@@ -6,7 +6,7 @@ from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator
 from django.http import HttpResponse
 from django.contrib.auth import get_user_model
-from accounts.models import User_detail
+from accounts.models import User_detail, Pass_keyword
 from accounts.forms import UserdetailForm
 from django.db.models import Q, Count
 
@@ -97,24 +97,38 @@ def MY_mycomments(request, writer_id):
         mycomments = Post.objects.filter(comment__writer=user).distinct().annotate(comment_count=Count('comment')).order_by('-created_at')
     return mycomments
 
-# def user_updated(request, writer_id):
-#     user_detail = User_detail.objects.get(writer_id=writer_id)
-#     if request.method=="POST":
-#         user_update_form=UserdetailForm(request.POST, instance=user_detail)
-#         if user_update_form.is_valid():
-#             # post.created_at=post.updated_at
-#             user_detail.user=request.user
-#             user_update_form.save()
+def passkey(request, writer_id):
+    user = User.objects.get(pk=writer_id)
+    if request.user.pk == user.pk:
+        inputpasskey=request.POST['inputpasskey']
+        print(inputpasskey)
+        pass_key=Pass_keyword.objects.filter(user_id=user.id)
+        pass_key_value = pass_key.first().pass_keyword if pass_key.exists() else None
+        print(pass_key)
+        if inputpasskey==pass_key_value:
+            user_detail=get_object_or_404(User_detail, user_id=writer_id)
+            return render(request, 'membership.html', {'user_detail': user_detail})
+        return redirect('post:mypage', writer_id)
+    return redirect('post:main')
+
+def user_updated(request, writer_id):
+    user_detail = User_detail.objects.get(user_id=writer_id)
+    if request.method=="POST":
+        user_update_form=UserdetailForm(request.POST, instance=user_detail)
+        if user_update_form.is_valid():
+            # post.created_at=post.updated_at
+            user_detail.user=request.user
+            user_update_form.save()
             
-#         return redirect('post:user_detail_show',  writer_id=writer_id)
-#         # return redirect('post:user_detail_show', writer_id=writer_id)
-#     else:
-#         user_update_form = UserdetailForm(instance=user_detail)
-#         context = {
-#             'user_update_form': user_update_form,
-#             'user_detail' : user_detail
-#         }
-#         return render(request,'user_updated.html',context)
+        return redirect('post:user_detail_show',  writer_id=writer_id)
+        # return redirect('post:user_detail_show', writer_id=writer_id)
+    else:
+        user_update_form = UserdetailForm(instance=user_detail)
+        context = {
+            'user_update_form': user_update_form,
+            'user_detail' : user_detail
+        }
+        return render(request,'user_updated.html',context)
 
 # def user_detail_show(request, writer_id):
 #     user_detail=get_object_or_404(User_detail, writer_id=writer_id)

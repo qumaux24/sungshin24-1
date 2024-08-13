@@ -57,10 +57,13 @@
     <div id="content">
         {%if selected_page == "membership"%}
         <div class="passkey">
-            <label for="passkey">패스 키를 입력해주세요.</label>
-            <input type="text" id="passkey" name="passkey" value="">
-            <br>
-            <button type="submit">확인</button>
+            <form method="POST" action="{% url 'post:passkey' user.id%}">
+                {% csrf_token %}
+                <label for="passkey">패스 키를 입력해주세요.</label>
+                <input type="password" id="passkey" name="inputpasskey">
+                <br>
+                <button type="submit">확인</button>
+            </form>
         </div>
         {% else %}
         <div>
