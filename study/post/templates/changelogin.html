@@ -60,13 +60,15 @@
         <form method="POST" class="login-box">
             {% csrf_token %}
 
-            <input name="inputID" type="text" placeholder="아이디">
+            <input name="inputID2" type="text" placeholder="기존아이디">
             <br>
-            <input name="inputkeyword" type="password" placeholder="패스키">
+            <input name="inputkeyword2" type="password" placeholder="패스키">
             <br>
-            <input name="new_password1" type="password" placeholder="새 비밀번호">
+            <input name="newID" type="text" placeholder="새 아이디">
             <br>
-            <input name="new_password2" type="password" placeholder="새 비밀번호 확인">
+            <input name="new_password3" type="password" placeholder="새 비밀번호">
+            <br>
+            <input name="new_password4" type="password" placeholder="새 비밀번호 확인">
             <br>
             <button type="submit">비밀번호 변경</button>
 
