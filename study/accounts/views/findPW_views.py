@@ -8,41 +8,6 @@ from django.http import HttpResponseBadRequest, HttpResponse
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.hashers import make_password
 
-# Create your views here.
-
-#회원가입
-def signup(request):
-    if request.method=='POST':
-        if request.POST['password1']==request.POST['password2']:
-            user=User.objects.create_user(
-                username=request.POST['username'],
-                password=request.POST['password1'],
-            )
-            auth.login(request, user)
-            return redirect('accounts:passkey')
-        return render(request, 'signUp.html')
-    return render(request, 'signUp.html')
-
-def login(request):
-    if request.method=='POST':
-        username=request.POST['username']
-        password=request.POST['password']
-        user=authenticate(request, username=username, password=password)
-        if user is not None:
-            auth.login(request, user)
-            return redirect('post:main')
-        else:
-            return render(request, 'login.html', {'error': 'username or password'})
-    else:
-        return render(request, 'login.html')
-    
-def logout(request):
-    auth.logout(request)
-    return redirect('post:main')
-
-def return_main(request):
-    return redirect('post:main')
-
 def findPW(request):
     if request.method == 'POST':
         inputID = request.POST.get('inputID', '').strip()
@@ -57,12 +22,12 @@ def findPW(request):
                 user.save()
                 update_session_auth_hash(request, user)
             
-                return redirect('post:main')
+                return render(request, 'showPW.html')
             else:
                 return HttpResponse("비밀번호가 올바르지 않습니다.")
         else:
             return HttpResponse("비밀번호 힌트가 일치하지 않습니다.")
-        return redirect('accounts:findPW')
+        return redirect('login:findPW')
     else:
         
         return render(request, 'findPW.html')
