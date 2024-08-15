@@ -47,14 +47,16 @@
                     <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
                     <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
                     <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
-                    <a href="infopost.html">공지사항</a>
+                    <a href="notice.html">공지사항</a>
                     <a href="{% url 'post:write' %}">레시피 등록</a>
                 </div>
             </div>
     
         </header>
         <h1>공지사항</h1>
-       
+        {% if request.user.is_superuser %}
+            <a href="{% url 'post:noticeWrite' %}"><button>공지사항 등록</button></a>
+        {% endif %}
         <br>
         <div class="container">
             <table>
@@ -64,14 +66,13 @@
                         <th>글쓴이</th>
                         <th>작성 시간</th>
                         <th>최종 수정</th>
-                        <th>댓글 수</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% csrf_token %}
                     {% for noticepost in noticelist %}
                     <tr class ="fixed">
-                        <td><a href="{% url 'noticepost:noticeShow' noticepost.id %}">{{ noticepost.title }}</a></td>
+                        <td><a href="{% url 'post:noticeShow' noticepost.id %}">{{ noticepost.title }}</a></td>
                         <td>{{ noticepost.writer }}</td>
                         <td>{{ noticepost.created_at }}</td>
                         <td>
@@ -81,7 +82,6 @@
                             &nbsp;
                         {% endif %}
                         </td>
-                        <td>{{ comments|length }}</td>
                     </tr>
                     {% endfor %}
                 

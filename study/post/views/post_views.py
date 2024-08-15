@@ -5,6 +5,7 @@ from django.core.paginator import Paginator
 from django.views.decorators.http import require_POST
 from django.db.models import Count, Q
 from .daily_views import daily_posts_view
+# from .notice_views import sort_notice_fix, sort_notice
 # from django.contrib.auth import get_user_model
 
 # Create your views here.
@@ -15,12 +16,16 @@ def main(request):
     korea_hot_list = sort_hot_korea(request)
     china_hot_list = sort_hot_china(request)
     japan_hot_list = sort_hot_japan(request)
+    # fix_notice = sort_notice_fix(request)
+    # main_notice = sort_notice(request)
+
     context={
         'context_daily' : context_daily,
         'korea_hot_list' : korea_hot_list,
         'china_hot_list' : china_hot_list,
         'japan_hot_list' : japan_hot_list,
-        
+        # 'fix_notice': fix_notice,
+        # 'main_notice': main_notice,
     }
     return render(request, 'main.html', context)
 
@@ -72,7 +77,8 @@ def show(request, post_id):
     post = get_object_or_404(Post, pk =post_id)
     images=Image.objects.filter(post=post)
     comments = post.comment_set.all()  
-    commentForm = CommentForm() 
+    commentForm = CommentForm()
+     
     context = {
         'post': post,
         'images': images,
