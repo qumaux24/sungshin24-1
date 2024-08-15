@@ -185,6 +185,7 @@ a:hover {
 }
 
 /*제목과좋아요*/
+
 .likes {
     display: flex;
     height: 30px;
@@ -208,7 +209,6 @@ a:hover {
 }
 
 
-
 .recipe-card button {
     padding: 5px 10px;
     background-color: #7c7c7c;
@@ -222,11 +222,6 @@ a:hover {
     background-color: #535353;
 }
 
-.login-box {
-    width: 300px;
-    height: auto;
-    background-color: #ffffff;
-}
 
 .box1 {
     width: 260px;
@@ -243,6 +238,12 @@ a:hover {
     display: flex;
     flex-direction: column;
    
+}
+
+.login-box {
+    width: 300px;
+    height: auto;
+    background-color: #ffffff;
 }
 
 .box1 input {
@@ -280,21 +281,21 @@ a:hover {
 }
 
 .user-info-section{
-    height:656px;
+    width:auto;
+    height: 650px;
 }
 
 
 #info {
-    width:268px;
-    text-align: center;
     height:350px;
+    width:268px;
     margin-top: 13px;
     background-color: #ffffff;
     border: 2px solid #ccc;
     border-radius: 5px;
     padding:15px;
-    
     align-items:center;
+    text-align: center;
 }
 
 #info h3 {
@@ -326,6 +327,7 @@ a:hover {
     border: 2px solid #ccc;
     border-radius: 5px;
     padding: 15px;
+
 }
 
 #info2 h3 {
@@ -347,10 +349,6 @@ a:hover {
     border-top: none;
 }
 
-
-
-
-
 .category-top {
     display: flex;
     justify-content: space-between;
@@ -364,6 +362,7 @@ a:hover {
 }
 
 .category h3 {
+    text-align: center;
     margin-bottom: 10px;
     font-size: 20px;
 }
@@ -395,15 +394,14 @@ a:hover {
 }
 
 
-
-
-
 .recipe-form {
-    background-color: #fff;
+    background-color: #ffffff;
     padding: 20px;
+    text-align: justify;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 100%;
+
+    width: 100% auto;
     max-width: 600px;
 }
 
@@ -450,12 +448,14 @@ a:hover {
 
 
 .recipe-details {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 800px;
+    background-color: #fff;
+    padding: 20px;
+    
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    
 }
 
 .recipe-details h1 {
@@ -469,7 +469,7 @@ a:hover {
 }
 
 .recipe-image img {
-    max-width: 100%;
+    width:300px;
     border-radius: 5px;
 }
 
@@ -498,6 +498,7 @@ a:hover {
     list-style: disc inside;
     padding-left: 20px;
 }
+
 
 .recipe-ingredients ul li {
     font-size: 18px;
