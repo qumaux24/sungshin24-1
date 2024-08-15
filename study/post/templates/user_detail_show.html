@@ -1,0 +1,14 @@
+
+<h1>회원정보</h1>
+ID : {{user_detail.user}}<br><br>
+성별 : {{user_detail.get_gender_display}}<br><br>
+거주지 : {{user_detail.get_residence_display}}<br><br>
+나이 : {{user_detail.age}}<br><br>
+알레르기 정보: 
+<ul>
+{% for allergies in allergies %}
+    <li>{{ allergies }}</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'post:main' %}"><button>메인으로</button></a>

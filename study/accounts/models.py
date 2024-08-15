@@ -20,7 +20,7 @@ class User_detail(models.Model):
         ('ect', '기타')
     ]
     gender = models.CharField(max_length=6, default='ect', choices=GENDER_CHOICES, verbose_name='성별')
-    allergy = models.TextField()
+    allergies = models.TextField()
     
     def __str__(self):
         # return self.user

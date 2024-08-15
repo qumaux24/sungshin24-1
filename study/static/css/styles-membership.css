@@ -150,7 +150,7 @@ label {
     font-weight: bold;
 }
 
-input[type="text"], input[type="email"], input[type="password"], input[type="allergy"], input[type="age"] {
+input[type="text"], input[type="email"], input[type="password"], input[type="allergies"], input[type="age"] {
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
