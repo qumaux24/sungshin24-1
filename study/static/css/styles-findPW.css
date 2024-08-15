@@ -5,6 +5,7 @@ body {
     margin: 0 auto;
     padding: 0;
     text-align: center;
+    
     width: 960px;
     overflow-x: auto;
 }
@@ -129,6 +130,14 @@ a:hover {
 
 /*--여기까지 헤더--*/
 
+.center {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    padding-top: 10%;
+    margin: auto;
+}
+
 
 .login-box {
     width: 250px;
@@ -181,10 +190,3 @@ a:hover {
 }
 
 
-.center {
-    width: 100%;
-    align-items: center;
-    text-align: center;
-    padding-top: 10%;
-    margin: auto;
-}
