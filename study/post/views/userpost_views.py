@@ -4,6 +4,7 @@ from ..forms import UserpostForm, CommentForm, UsercommentForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.core.paginator import Paginator
+from django.db.models import Count, Q
 
 # Create your views here.
 
@@ -33,10 +34,11 @@ def userWrite(request):
         userform=UserpostForm()
         return render(request,'userpost_write.html', {'userform':userform})
     
+    
 # 사용자 게시글 보여주기
 def userShow(request, userpost_id):
     userpost = get_object_or_404(Userpost, pk =userpost_id)
-    usercomments = userpost.comment_set.all()  
+    usercomments = userpost.usercomment_set.all()  
     usercommentForm = UsercommentForm() 
     context = {
         'userpost': userpost,
@@ -56,3 +58,4 @@ def userlikes(request, userpost_pk):
             userpost.like_users.add(request.user)
         return redirect('post:userShow', userpost_pk)
     return redirect('accounts/login')
+

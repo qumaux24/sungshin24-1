@@ -101,33 +101,33 @@ def likes(request, post_pk):
 
 
 # 검색 기능
-def search(request):
-    if request.method == 'POST':
+# def search(request):
+#     if request.method == 'POST':
         
-        if request.method == 'POST':
-            search_select = request.POST.get('search_select')  # 폼에서 선택한 검색 조건을 가져옴
-            searched = request.POST.get('searched', '')
+#         if request.method == 'POST':
+#             search_select = request.POST.get('search_select')  # 폼에서 선택한 검색 조건을 가져옴
+#             searched = request.POST.get('searched', '')
         
-        intermediate_terms = searched.split()
+#         intermediate_terms = searched.split()
         
-        search_terms = []
-        for term in intermediate_terms:
-            search_terms.extend(term.split(','))
+#         search_terms = []
+#         for term in intermediate_terms:
+#             search_terms.extend(term.split(','))
 
-        search_terms = set(searched.replace(',', ' ').split())
+#         search_terms = set(searched.replace(',', ' ').split())
         
-        query = Q()
-        for term in search_terms:
-            if search_select == '제목':
-                query |= Q(title__icontains=term)
-            elif search_select == '재료':
-                query |= Q(ingredient__icontains=term)
-            else:
-                query |= Q(title__icontains=term) | Q(ingredient__icontains=term)
-        posts = Post.objects.filter(query)
-        return render(request, 'searched.html', {'searched': searched, 'posts': posts})
-    else:
-        return render(request, 'searched.html', {})
+#         query = Q()
+#         for term in search_terms:
+#             if search_select == '제목':
+#                 query |= Q(title__icontains=term)
+#             elif search_select == '재료':
+#                 query |= Q(ingredient__icontains=term)
+#             else:
+#                 query |= Q(title__icontains=term) | Q(ingredient__icontains=term)
+#         posts = Post.objects.filter(query)
+#         return render(request, 'searched.html', {'searched': searched, 'posts': posts})
+#     else:
+#         return render(request, 'searched.html', {})
 
 # 한/중/일식 핫게시판
 def sort_hot_korea(request):

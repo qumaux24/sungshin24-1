@@ -2,10 +2,10 @@
     <head>
         <title>게시글 페이지</title>
         {% load static %}
-        <link rel="stylesheet" href="{%static 'css/styles-post-detail.css' %}">
+        {% comment %} <link rel="stylesheet" href="{%static 'css/styles-post-detail.css' %}"> {% endcomment %}
         <!-- {% load static %}
         <link rel="stylesheet" href="styles-post-detail.css"> -->
-        <script>
+        {% comment %} <script>
             function clip() {
                 var url = '';
                 var textarea = document.createElement("textarea");
@@ -28,7 +28,7 @@
                 window.location.href="recipeRegistration.html";
             }
         };
-        </script>
+        </script> {% endcomment %}
         
 
     </head>
@@ -37,21 +37,22 @@
             <div class="logo"><a href="{% url 'post:main' %}">
                 <span class="blue">냉</span>Jango() </a>
             </div>
-            <select id="search-type">
-                <option value="all">전체</option>
-                <option value="ingredient">재료</option>
-                <option value="title">제목</option>
-            </select>
-            <div class="search-bar">
-                <form method="POST" action="{% url 'post:search' %}">
-                    {% csrf_token %} 
-                        <input type="text" placeholder="search" name="searched">
-                        <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
-                    </form>
-            </div>
+            <form method="POST" action="{% url 'post:user_search' user.id %}">
+                {% csrf_token %} 
+                    
+                <div class="search-bar">
+                    <select name="usersearch_select">
+                        <option value="전체">전체</option>
+                        <option value="제목">제목</option>
+                        <option value=-"내용">내용</option>
+                    </select>
+                    <input type="text" placeholder="search" name="usersearched">
+                    <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
+                </div>
+            </form>
                 
             <div class="menu-icon">
-                <img src="menu-icon.png" alt="menu">
+                <img src="{% static 'image/menu-icon.png' %}" alt="menu">
                 <div class="dropdown-menu">
                     <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
                     <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
@@ -74,9 +75,9 @@
                 {% endif %}
                 
                 <div class="likes">
-                    <button id="like-button">
-                        <img src="like-icon.jpg" alt="Like">
-                        <span class="likenum">{{ userpost.like_users.count }}</span>
+                    <div id="like-button">
+                        <img src="{% static 'image/like-icon.jpg' %}" alt="Like">
+                        <br>
                         <form action="{% url 'post:userlikes' userpost.pk %}" method='POST'>
                             {% csrf_token %}
                             {% if user in userpost.like_users.all %}
@@ -84,22 +85,29 @@
                             {% else %}
                                 <input type="submit" value="좋아요">
                             {% endif %}
-                    </button>
+                            
+                        </form>
+                    </div>
                 </div>
                 <br>
-                
+                <p><strong>좋아요 수:</strong> {{ userpost.like_users.count }}</p>
                 <div class="post-text">
                     <p>내용</p>
+                    {{ userpost.content }}
                 </div>
                 <br>
                 <div class="button-container">
                     {% if userpost.writer == request.user %}
-                    <a href="{% url 'post:userpost_updateget' userpost.id %}"><button>수정하기</button></a><br>
-                    <a href="/userpost_deleteget/{{userpost.id}}"><button>삭제하기</button></a><br>
-                {% endif %}
+                    <a href="{% url 'post:userpost_updateget' userpost.id %}"><button>수정하기</button></a>
+                    <br>
+                    <form action="{% url 'post:userpost_deleteget' userpost.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit">삭제하기</button>
+                    </form>
+                    {% endif %}
                 </div>
-                
             </section>
+            
         </main>
         
         
@@ -113,10 +121,10 @@
             <ul><!-- 댓글 쭉 보여줌 -->
                 {% for usercomment in usercomments %}
                 <li>
-                    {{ usercomment.writer }} - {{ usercomment.comment }}<!-- '댓글 작성자 - 댓글 내용' 형식으로 댓글 나타냄 -->
+                    {{ usercomment.writer }} - {{ usercomment.usercomment }}<!-- '댓글 작성자 - 댓글 내용' 형식으로 댓글 나타냄 -->
                     <!--댓글 삭제부분-->
                     {% if usercomment.writer == request.user %}
-                    <form action="{% url 'post:userComments_delete' userpost.pk comment.pk %}" method="POST" class="d-inline">
+                    <form action="{% url 'post:userComments_delete' userpost.pk usercomment.pk %}" method="POST" class="d-inline">
                         <!-- 폼 건들지 말것. 클래스는 바꿔도 상관없음 -->
                         {% csrf_token %}
                         <input type="submit" value="DELETE"><!-- 댓글 삭제 버튼 -->
@@ -132,9 +140,9 @@
             
             <!--댓글 작성부분-->
             {% if request.user.is_authenticated %}
-            <form action="{% url 'post:userComments_create' userpost.pk %}" method="POST">
+            <form action="{% url 'post:userComments_create' userpost.id %}" method="POST">
                 {% csrf_token %}
-                {{ commentForm.as_p }}<!-- 댓글 작성 창(p태그로 감싸고 css 입히면 스타일 변경 가능)-->
+                {{ usercommentForm.as_p }}<!-- 댓글 작성 창(p태그로 감싸고 css 입히면 스타일 변경 가능)-->
                 <input type="submit" value="댓글 작성"><!-- 댓글 작성 버튼 -->
             </form>
             {% else %}

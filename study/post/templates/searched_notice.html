@@ -33,7 +33,7 @@
             <option value="title">제목</option>
         </select>
 
-        <form method="POST" action="{% url 'post:search' %}">
+        <form method="POST" action="{% url 'post:search' user.id %}">
         {% csrf_token %} 
             <div class="search-bar">
                 <input type="text" placeholder="search" name="searched">

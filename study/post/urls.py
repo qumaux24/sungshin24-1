@@ -1,9 +1,10 @@
 from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
-from .views.post_views import main, list, write, show, likes, search
+from .views.post_views import main, list, write, show, likes
+from .views.search_views import search, user_search
 from .views.update_views import updateget, deleteget, image_delete
-from .views.comments_views import comments_create, comments_delete
+from .views.comments_views import comments_create, comments_delete, userComments_create, userComments_delete
 from .views.userpost_views import userWrite, userShow, userlist, userlikes
 from .views.userpost_update_views import userpost_deleteget, userpost_updateget
 from .views.notice_views import noticeWrite, noticeShow, noticelist
@@ -21,8 +22,7 @@ urlpatterns = [
     path('', main, name='main'),
     path('write/', write, name='write'),
     path('show/<int:post_id>/', show, name='show'),
-    #검색
-    path('search/', search, name='search'),
+    
     #마이페이지
     path('mypage/<int:writer_id>/', mypage, name='mypage'),
     path('mypage/<int:writer_id>/mypage_select', mypage_select, name="mypage_select"),
@@ -40,9 +40,13 @@ urlpatterns = [
     path('userlist/', userlist, name='userlist'),
     path('userWrite/', userWrite, name='userWrite'),
     path('userShow/<int:userpost_id>', userShow, name='userShow'),
-    path('userShow/<int:userpost_id>/userpost_updateget', userpost_updateget, name='userpost_updateget'),
-    path('userpost_deleteget/<int:userpost_id>/', userpost_deleteget, name='userpost_deleteget'),
+    # path('userShow/<int:userpost_id>/userpost_updateget', userpost_updateget, name='userpost_updateget'),
     path('<int:userpost_pk>/userlikes/', userlikes, name='userlikes'),
+    path('<int:pk>/usercomments/', userComments_create, name='userComments_create'),
+    path('<int:pk>/usercomments/<int:usercomment_pk>/delete/', userComments_delete, name='userComments_delete'),
+    path('userShow/<int:userpost_id>/userpost_updateget/', userpost_updateget, name='userpost_updateget'),
+    path('userpost/delete/<int:userpost_id>/', userpost_deleteget, name='userpost_deleteget'),
+    
     #공지사항게시판
     path('noticelist/', noticelist, name='noticelist'),
     path('noticeWrite/', noticeWrite, name='noticeWrite'),
@@ -55,6 +59,9 @@ urlpatterns = [
     path('daily_posts/', daily_posts_view, name='daily_posts'),
     #패스키
     path('passkey/<int:writer_id>/', passkey, name="passkey"),
+    #검색
+    path('search/<int:writer_id>/', search, name='search'),
+    path('usersearch/<int:writer_id>/', user_search, name='user_search'),
     ]
 
 urlpatterns += static(settings.MEDIA_URL,

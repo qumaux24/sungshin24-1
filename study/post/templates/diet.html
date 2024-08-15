@@ -26,18 +26,19 @@
         <div class="logo"><a href="{% url 'post:main' %}">
             <span class="blue">냉</span>Jango() </a>
         </div>
-        <select id="search-type">
-            <option value="all">전체</option>
-            <option value="ingredient">재료</option>
-            <option value="title">제목</option>
-        </select>
-        <div class="search-bar">
-            <form method="POST" action="{% url 'post:search' %}">
-                {% csrf_token %} 
+        <form method="POST" action="{% url 'post:search' user.id %}">
+            {% csrf_token %} 
+                
+                <div class="search-bar">
+                    <select name="search_select">
+                        <option value="전체">전체</option>
+                        <option value="제목">제목</option>
+                        <option value="재료">재료</option>
+                    </select>
                     <input type="text" placeholder="search" name="searched">
                     <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
-                </form>
-        </div>
+                </div>
+            </form>
             
         <div class="menu-icon">
             <img src="{% static 'image/menu-icon.png' %}" alt="menu">

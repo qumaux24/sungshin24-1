@@ -38,6 +38,7 @@ def userComments_create(request, pk):
         if usercommentForm.is_valid():
             usercomment=usercommentForm.save(commit=False)
             usercomment.post=userpost
+            usercomment.userpost_id=userpost.id
             usercomment.writer=request.user
             usercomment.save()
         return redirect('post:userShow', pk)
