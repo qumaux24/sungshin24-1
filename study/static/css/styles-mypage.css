@@ -1,10 +1,10 @@
 /* styles.css */
 body {
+    width: 960px;
     font-family: Arial, sans-serif;
     margin: 0 auto;
     padding: 0;
     text-align: center;
-    width: 960px;
     overflow-x: auto;
 }
 
@@ -128,10 +128,10 @@ a:hover {
 
 
 /*--여기까지 헤더--*/
-.dropdown-mypage {
-    position: absolute;
-    top: 120px;
-    left: 20px;
+
+
+#pageForm {
+    position:relative;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -151,6 +151,7 @@ a:hover {
 
 .dropdown-mypage input[type="radio"] {
     display: none;
+
 }
 
 .dropdown-mypage input[type="radio"]:checked + label {
