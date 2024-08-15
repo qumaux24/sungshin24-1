@@ -50,14 +50,14 @@
             <form method="POST" action="{% url 'post:user_updated' writer_id=writer_id  %}">
                 {% csrf_token %} 
 
-                <label for="username">사용자 이름</label>
+                {% comment %} <label for="username">사용자 이름</label>
                 <input type="text" id="username" name="username" placeholder="홍길동">
 
                 <label for="password">비밀번호</label>
                 <input type="password" id="password" name="password" value="">
 
                 <label for="confirm_password">비밀번호 확인</label>
-                <input type="password" id="confirm_password" name="confirm_password" value="">
+                <input type="password" id="confirm_password" name="confirm_password" value=""> {% endcomment %}
 
                 <label for="gender">성별</label>
                 <p id="gender">{{user_update_form.gender}}</p>

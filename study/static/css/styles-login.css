@@ -140,6 +140,7 @@ a:hover {
 
 .login-box {
     width: 250px;
+    height:auto;
     margin: auto;
     padding: 20px;
     border-radius: 5px;
@@ -190,6 +191,7 @@ a:hover {
 
 
 .center {
+    padding:5px;
     width: 100%;
     align-items: center;
     text-align: center;
