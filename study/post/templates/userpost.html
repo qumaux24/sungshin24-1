@@ -71,6 +71,7 @@
             </script>
             <thead>
                 <tr>
+                    <th>NO.</th>
                     <th>제목</th>
                     <th>글쓴이</th>
                     <th>작성 시간</th>
@@ -89,7 +90,7 @@
                     <td>{{ userpost.created_at }}</td>
                     <td>{{ userpost.updated_at }}</td>
                     <td>{{ userpost.like_users.all.count }}</td>
-                    <td>{{ userpost.comment_count }}</td>
+                    <td>{{ userpost.usercomment_count }}</td>
                 </tr>
                 {% endfor %}
             
