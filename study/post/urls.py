@@ -9,7 +9,7 @@ from .views.userpost_update_views import userpost_deleteget, userpost_updateget
 from .views.notice_views import noticeWrite, noticeShow, noticelist
 from .views.notice_update_views import noticepost_deleteget, noticepost_updateget
 from .views.daily_views import daily_posts_view
-from .views.mypage_views import mypage, mypage_select, passkey, user_updated, changelogin
+from .views.mypage_views import mypage, mypage_select, passkey, user_updated, changelogin, user_detail_show
 
 app_name="post"
 
@@ -26,6 +26,7 @@ urlpatterns = [
     #마이페이지
     path('mypage/<int:writer_id>/', mypage, name='mypage'),
     path('mypage/<int:writer_id>/mypage_select', mypage_select, name="mypage_select"),
+    path('mypage/user_detail_show/<int:writer_id>/', user_detail_show, name='user_detail_show'),
     #수정
     path('show/<int:post_id>/updateget', updateget, name='updateget'),
     path('deleteget/<int:post_id>/<str:category_name>/', deleteget, name='deleteget'),

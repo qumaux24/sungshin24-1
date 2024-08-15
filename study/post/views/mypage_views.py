@@ -164,12 +164,18 @@ def changelogin(request):
         return render(request, 'changelogin.html')
 
 
-# def user_detail_show(request, writer_id):
-#     user_detail=get_object_or_404(User_detail, writer_id=writer_id)
-#     allergies=set(user_detail.allergy.replace(',',' ').split())
-#     allergies=list(allergies)
-#     context = {
-#         'user_detail': user_detail,
-#         'allergies' : allergies
-#     }
-#     return render(request, 'user_detail2.html', context)
+def user_detail_show(request, writer_id):
+    user_detail=get_object_or_404(User_detail, user_id=writer_id)
+    gender = user_detail.gender
+    age = user_detail.age
+    residence = user_detail.residence
+    allergies=set(user_detail.allergies.replace(',',' ').split())
+    allergies=list(allergies)
+    context = {
+        'user_detail': user_detail,
+        'allergies' : allergies,
+        'gender' : gender,
+        'age' : age,
+        'residence' : residence,
+    }
+    return render(request, 'user_detail_show.html', context)
