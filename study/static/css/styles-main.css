@@ -41,8 +41,7 @@ a:hover {
 }
 
 #search-type {
-    margin-top: 6px;
-    margin-left: 10px;
+    margin-right: 5px;
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;

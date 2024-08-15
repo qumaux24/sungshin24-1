@@ -40,262 +40,273 @@
             </div>
             
         </header>
-
-    <h1>&nbsp;&nbsp;MYPAGE</h1>
-    <form id="pageForm" method="POST" action="{% url 'post:mypage_select' user.id %}">
-        {% csrf_token %}
-        <div class="dropdown-mypage">
-            <input type="radio" id="my" name="page" value="My">
-            <label for="my">My</label>
-            <input type="radio" id="membership" name="page" value="membership">
-            <label for="membership">회원정보수정</label>
-        </div>
-    </form>
-    <script>
-        document.querySelectorAll('input[name="page"]').forEach(radio => {
-            radio.addEventListener('change', function() {
-                console.log('Radio button changed');
-                document.getElementById('pageForm').submit();
-            });
-        });
-    </script>
-    <div id="content">
-        {%if selected_page == "membership"%}
-        <div class="passkey">
-            <form method="POST" action="{% url 'post:passkey' user.id%}">
+    <br>
+    <h1 id="title" >&nbsp;&nbsp;MYPAGE</h1>
+    <section class="containers">
+        <aside>
+            
+            <form id="pageForm" method="POST" action="{% url 'post:mypage_select' user.id %}">
                 {% csrf_token %}
-                <label for="passkey">패스 키를 입력해주세요.</label>
-                <input type="password" id="passkey" name="inputpasskey">
-                <br>
-                <button type="submit">확인</button>
+                <div class="dropdown-mypage">
+                    <input type="radio" id="my" name="page" value="My">
+                    <label for="my">My</label>
+                    <input type="radio" id="membership" name="page" value="membership">
+                    <label for="membership">회원정보수정</label>
+                </div>
             </form>
-        </div>
-        {% else %}
-        <div>
-            <h1>내가 작성한 글</h1>
-            <table>
-                <script>
-                    document.addEventListener('DOMContentLoaded', function () {
-                        var rows = document.querySelectorAll('tr[data-href]');
-                        rows.forEach(function (row) {
-                            row.addEventListener('click', function () {
-                                window.location.href = this.dataset.href;
+        </aside>
+        <br>
+        <script>
+            document.querySelectorAll('input[name="page"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    console.log('Radio button changed');
+                    document.getElementById('pageForm').submit();
+                });
+            });
+        </script>
+        <section id="content">
+            {%if selected_page == "membership"%}
+            <div class="passkey">
+                <form method="POST" action="{% url 'post:passkey' user.id%}">
+                    {% csrf_token %}
+                    <label for="passkey">패스 키를 입력해주세요.</label>
+                    <input type="password" id="passkey" name="inputpasskey">
+                    <br>
+                    <button type="submit">확인</button>
+                </form>
+            </div>
+            {% else %}
+            <div class="post-table">
+                <h1>내가 작성한 글</h1>
+                <table>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            var rows = document.querySelectorAll('tr[data-href]');
+                            rows.forEach(function (row) {
+                                row.addEventListener('click', function () {
+                                    window.location.href = this.dataset.href;
+                                });
                             });
                         });
-                    });
-                </script>
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>제목</th>
-                        <th>작성시간</th>
-                        <th>좋아요</th>
-                        <th>댓글 수</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for post in myposts %}
-                    <tr class="fixed" data-href="{% url 'post:show' post.id %}">                            
-                        <td>{{ forloop.counter }}</td>
-                        <td>{{ post.title }}</td>
-                        <td>{{ post.created_at }}</td>
-                        <td>{{ post.like_users.all.count }}</td>
-                        <td>{{ post.comment_count }}</td>
-                    </tr>
+                    </script>
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>제목</th>
+                            <th>작성시간</th>
+                            <th>좋아요</th>
+                            <th>댓글 수</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for post in myposts %}
+                        <tr class="fixed" data-href="{% url 'post:show' post.id %}">                            
+                            <td>{{ forloop.counter }}</td>
+                            <td>{{ post.title }}</td>
+                            <td>{{ post.created_at }}</td>
+                            <td>{{ post.like_users.all.count }}</td>
+                            <td>{{ post.comment_count }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+                <!-- 페이징처리 시작 -->
+                <ul class="pagination justify-content-center">
+                    <!-- 이전페이지 -->
+                    {% if myposts.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ myposts.previous_page_number }}">이전</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+                        </li>
+                    {% endif %}
+                    <!-- 페이지리스트 -->
+                    {% for page_number in myposts.paginator.page_range %}
+                    {% if page_number >= myposts.number|add:-5 and page_number <= myposts.number|add:5 %}
+                    {% if page_number == myposts.number %}
+                        <li class="page-item active" aria-current="page">{#구분을 위해  누른 번호가 파랑으로 보임#}
+                            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                        </li>
+                    {% endif %}
+                    {% endif %}
                     {% endfor %}
-                </tbody>
-            </table>
-
-            <!-- 페이징처리 시작 -->
-            <ul class="pagination justify-content-center">
-                <!-- 이전페이지 -->
-                {% if myposts.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ myposts.previous_page_number }}">이전</a>
-                    </li>
-                {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
-                    </li>
-                {% endif %}
-                <!-- 페이지리스트 -->
-                {% for page_number in myposts.paginator.page_range %}
-                {% if page_number >= myposts.number|add:-5 and page_number <= myposts.number|add:5 %}
-                {% if page_number == myposts.number %}
-                    <li class="page-item active" aria-current="page">{#구분을 위해  누른 번호가 파랑으로 보임#}
-                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-                    </li>
-                {% else %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-                    </li>
-                {% endif %}
-                {% endif %}
-                {% endfor %}
-                <!-- 다음페이지 -->
-                {% if myposts.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ myposts.next_page_number }}">다음</a>
-                    </li>
-                {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
-                    </li>
-                {% endif %}
-            </ul>
-            <!-- 페이징처리 끝 -->
-
-                <h1>내가 좋아요한 글</h1>
-                <table>
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-                            var rows = document.querySelectorAll('tr[data-href]');
-                            rows.forEach(function (row) {
-                                row.addEventListener('click', function () {
-                                    window.location.href = this.dataset.href;
+                    <!-- 다음페이지 -->
+                    {% if myposts.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ myposts.next_page_number }}">다음</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <!-- 페이징처리 끝 -->
+                <hr>
+                <br>
+                <div class="post-table">
+                    <h1>내가 좋아요한 글</h1>
+                    <table>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                var rows = document.querySelectorAll('tr[data-href]');
+                                rows.forEach(function (row) {
+                                    row.addEventListener('click', function () {
+                                        window.location.href = this.dataset.href;
+                                    });
                                 });
                             });
-                        });
-                    </script>
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>제목</th>
-                            <th>작성시간</th>
-                            <th>작성자</th>
-                            <th>좋아요</th>
-                            <th>댓글 수</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for post in mylikes %}
-                        <tr class="fixed" data-href="{% url 'post:show' post.id %}">                            
-                            <td>{{ forloop.counter }}</td>
-                            <td>{{ post.title }}</td>
-                            <td>{{ post.created_at }}</td>
-                            <td>{{ post.writer }}</td>
-                            <td>{{ post.like_users.all.count }}</td>
-                            <td>{{ post.comment_count }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            
-            <!-- 페이징처리 시작 -->
-            <ul class="pagination justify-content-center">
-                <!-- 이전페이지 -->
-                {% if mylikes.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ mylikes.previous_page_number }}">이전</a>
-                    </li>
-                {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
-                    </li>
-                {% endif %}
-                <!-- 페이지리스트 -->
-                {% for page_number in mylikes.paginator.page_range %}
-                {% if page_number >= mylikes.number|add:-5 and page_number <= mylikes.number|add:5 %}
-                {% if page_number == mylikes.number %}
-                    <li class="page-item active" aria-current="page">{#구분을 위해  누른 번호가 파랑으로 보임#}
-                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-                    </li>
-                {% else %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-                    </li>
-                {% endif %}
-                {% endif %}
-                {% endfor %}
-                <!-- 다음페이지 -->
-                {% if mylikes.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ mylikes.next_page_number }}">다음</a>
-                    </li>
-                {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
-                    </li>
-                {% endif %}
-            </ul>
-            <!-- 페이징처리 끝 -->
-
-                <h1>내가 댓글 단 글</h1>
-                <table>
-                    <script>
-                        document.addEventListener('DOMContentLoaded', function () {
-                            var rows = document.querySelectorAll('tr[data-href]');
-                            rows.forEach(function (row) {
-                                row.addEventListener('click', function () {
-                                    window.location.href = this.dataset.href;
+                        </script>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>제목</th>
+                                <th>작성시간</th>
+                                <th>작성자</th>
+                                <th>좋아요</th>
+                                <th>댓글 수</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for post in mylikes %}
+                            <tr class="fixed" data-href="{% url 'post:show' post.id %}">                            
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ post.title }}</td>
+                                <td>{{ post.created_at }}</td>
+                                <td>{{ post.writer }}</td>
+                                <td>{{ post.like_users.all.count }}</td>
+                                <td>{{ post.comment_count }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 페이징처리 시작 -->
+                <ul class="pagination justify-content-center">
+                    <!-- 이전페이지 -->
+                    {% if mylikes.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ mylikes.previous_page_number }}">이전</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+                        </li>
+                    {% endif %}
+                    <!-- 페이지리스트 -->
+                    {% for page_number in mylikes.paginator.page_range %}
+                    {% if page_number >= mylikes.number|add:-5 and page_number <= mylikes.number|add:5 %}
+                    {% if page_number == mylikes.number %}
+                        <li class="page-item active" aria-current="page">{#구분을 위해  누른 번호가 파랑으로 보임#}
+                            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                        </li>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                    <!-- 다음페이지 -->
+                    {% if mylikes.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ mylikes.next_page_number }}">다음</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <!-- 페이징처리 끝 -->
+                <hr>
+                <br>
+                <div class="post-table">
+                    <h1>내가 댓글 단 글</h1>
+                    <table>
+                        <script>
+                            document.addEventListener('DOMContentLoaded', function () {
+                                var rows = document.querySelectorAll('tr[data-href]');
+                                rows.forEach(function (row) {
+                                    row.addEventListener('click', function () {
+                                        window.location.href = this.dataset.href;
+                                    });
                                 });
                             });
-                        });
-                    </script>
-                    <thead>
-                        <tr>
-                            <th>No</th>
-                            <th>제목</th>
-                            <th>작성시간</th>
-                            <th>작성자</th>
-                            <th>좋아요</th>
-                            <th>댓글 수</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for post in mycomments %}
-                        <tr class="fixed" data-href="{% url 'post:show' post.id %}">                            
-                            <td>{{ forloop.counter }}</td>
-                            <td>{{ post.title }}</td>
-                            <td>{{ post.created_at }}</td>
-                            <td>{{ post.writer }}</td>
-                            <td>{{ post.like_users.all.count }}</td>
-                            <td>{{ post.comment_count }}</td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            
-            <!-- 페이징처리 시작 -->
-            <ul class="pagination justify-content-center">
-                <!-- 이전페이지 -->
-                {% if mycomments.has_previous %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ mycomments.previous_page_number }}">이전</a>
-                    </li>
-                {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
-                    </li>
-                {% endif %}
-                <!-- 페이지리스트 -->
-                {% for page_number in mycomments.paginator.page_range %}
-                {% if page_number >= mycomments.number|add:-5 and page_number <= mycomments.number|add:5 %}
-                {% if page_number == mycomments.number %}
-                    <li class="page-item active" aria-current="page">{#구분을 위해  누른 번호가 파랑으로 보임#}
-                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-                    </li>
-                {% else %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-                    </li>
-                {% endif %}
-                {% endif %}
-                {% endfor %}
-                <!-- 다음페이지 -->
-                {% if mycomments.has_next %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ mycomments.next_page_number }}">다음</a>
-                    </li>
-                {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
-                    </li>
-                {% endif %}
-            </ul>
-        <!-- 페이징처리 끝 -->
-        </div>
-        {%endif%}
-    </div>
+                        </script>
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>제목</th>
+                                <th>작성시간</th>
+                                <th>작성자</th>
+                                <th>좋아요</th>
+                                <th>댓글 수</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for post in mycomments %}
+                            <tr class="fixed" data-href="{% url 'post:show' post.id %}">                            
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ post.title }}</td>
+                                <td>{{ post.created_at }}</td>
+                                <td>{{ post.writer }}</td>
+                                <td>{{ post.like_users.all.count }}</td>
+                                <td>{{ post.comment_count }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <!-- 페이징처리 시작 -->
+                <ul class="pagination justify-content-center">
+                    <!-- 이전페이지 -->
+                    {% if mycomments.has_previous %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ mycomments.previous_page_number }}">이전</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
+                        </li>
+                    {% endif %}
+                    <!-- 페이지리스트 -->
+                    {% for page_number in mycomments.paginator.page_range %}
+                    {% if page_number >= mycomments.number|add:-5 and page_number <= mycomments.number|add:5 %}
+                    {% if page_number == mycomments.number %}
+                        <li class="page-item active" aria-current="page">{#구분을 위해  누른 번호가 파랑으로 보임#}
+                            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
+                        </li>
+                    {% endif %}
+                    {% endif %}
+                    {% endfor %}
+                    <!-- 다음페이지 -->
+                    {% if mycomments.has_next %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ mycomments.next_page_number }}">다음</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled">
+                            <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                        </li>
+                    {% endif %}
+                </ul>
+            <!-- 페이징처리 끝 -->
+            </div>
+            {%endif%}
+        </section>
+    </section>
 </body>
 </html>

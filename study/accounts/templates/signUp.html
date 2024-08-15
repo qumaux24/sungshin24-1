@@ -25,8 +25,8 @@
         {% load bootstrap4 %}
         {% block content %}
         <header>
-            <div class="logo">
-                <span class="blue">냉</span>Jango()
+            <div class="logo"><a href="{% url 'post:main' %}">
+                <span class="blue">냉</span>Jango() </a>
             </div>
             <select id="search-type">
                 <option value="all">전체</option>
