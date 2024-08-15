@@ -1,31 +1,44 @@
 <!DOCTYPE html>
 <html lang="ko">
     <head>
-        <title>회원정보수정</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>냉jango()</title>
         {% load static %}
         <link rel="stylesheet" href ="{%static 'css/styles-membership.css' %}">
+
         <script>
-            function handleSubmit(event) {
-                event.preventDefault();
-                alert('회원정보가 성공적으로 변경되었습니다!');
-                window.location.href = 'main.html';
-            }
+            let isLoggedIn = false; 
+            function checklogin() {
+                if (!isLoggedIn) {
+                    if (confirm("로그인이 필요합니다.")) {
+                        window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
+                    }
+                }
+                else{
+                    window.location.href="recipeRegistration.html";
+                }
+            };
         </script>
+        
+        
     </head>
+
     <body>
         <header>
             <div class="logo"><a href="{% url 'post:main' %}">
                 <span class="blue">냉</span>Jango() </a>
             </div>
-            <select id="search-type">
-                <option value="all">전체</option>
-                <option value="ingredient">재료</option>
-                <option value="title">제목</option>
-            </select>
 
             <form method="POST" action="{% url 'post:search' %}">
             {% csrf_token %} 
+                
                 <div class="search-bar">
+                    <select id="search-type" name="search_select">
+                        <option value="전체">전체</option>
+                        <option value="제목">제목</option>
+                        <option value="재료">재료</option>
+                    </select>
                     <input type="text" placeholder="search" name="searched">
                     <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
                 </div>
@@ -45,7 +58,10 @@
             </div>
             
         </header>
-        <div class="container">
+
+        <br>
+
+        <div class="container1">
             <h2>회원 정보</h2>
             <form method="POST" action="{% url 'post:user_updated' writer_id=writer_id  %}">
                 {% csrf_token %} 
