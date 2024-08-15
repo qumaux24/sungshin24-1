@@ -26,11 +26,12 @@
             <div class="logo"><a href="{% url 'post:main' %}">
                 <span class="blue">냉</span>Jango() </a>
             </div>
+            {% if user.is_authenticated %}
             <form method="POST" action="{% url 'post:search' user.id %}">
-            {% csrf_token %} 
-                
+                {% csrf_token %} 
+                    
                 <div class="search-bar">
-                    <select name="search_select">
+                    <select id="search-type" name="search_select">
                         <option value="전체">전체</option>
                         <option value="제목">제목</option>
                         <option value="재료">재료</option>
@@ -39,6 +40,22 @@
                     <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
                 </div>
             </form>
+    
+            {% else %}
+            <form method="POST" action="{% url 'post:outsearch'%}">
+            {% csrf_token %} 
+                
+                <div class="search-bar">
+                    <select id="search-type" name="search_select">
+                        <option value="전체">전체</option>
+                        <option value="제목">제목</option>
+                        <option value="재료">재료</option>
+                    </select>
+                    <input type="text" placeholder="search" name="searched">
+                    <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
+                </div>
+            </form>
+            {%endif%}
 
                 
             <div class="menu-icon">
@@ -80,7 +97,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for post in list %}
+                    {% for post in post_list %}
                     {% comment %} <a href="{% url 'post:show' post.id %}"> {% endcomment %}
                     <tr class="fixed" data-href="{% url 'post:show' post.id %}">                            
                         <td>{{ forloop.counter }}</td>
@@ -99,45 +116,43 @@
     
         <!--페이징부분-->
         <!--클래스 바꿔도 됨. 단, 클래스 바꾸면 css도 바꿔야함-->
-        <div>
-            <!-- 페이징처리 시작 -->
-            <ul class="pagination justify-content-center">
-                <!-- 이전페이지 -->
-                {% if post_list.has_previous %}<!--이전페이지가 있을 때 이전 버튼 활성화-->
+        <ul class="pagination justify-content-center">
+            {% if post_list.has_previous %}
                 <li class="page-item">
-                    <a class="page-link" href="?page={{ post_list.previous_page_number }}">이전</a>
+                    <a class="page-link" href="?searched={{ searched }}&search_select={{ search_select }}&page={{ post_list.previous_page_number }}">이전</a>
                 </li>
-                {% else %}<!--이전페이지 없으면 이전 버튼 비활성화-->
+            {% else %}
                 <li class="page-item disabled">
                     <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
                 </li>
+            {% endif %}
+        
+            {% for page_number in post_list.paginator.page_range %}
+                {% if page_number >= post_list.number|add:-5 and page_number <= post_list.number|add:5 %}
+                    {% if page_number == post_list.number %}
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="?searched={{ searched }}&search_select={{ search_select }}&page={{ page_number }}">{{ page_number }}</a>
+                        </li>
+                    {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?searched={{ searched }}&search_select={{ search_select }}&page={{ page_number }}">{{ page_number }}</a>
+                        </li>
+                    {% endif %}
                 {% endif %}
-                <!-- 페이지리스트(페이지번호) -->
-                {% for page_number in post_list.paginator.page_range %}
-                {% if page_number >= post_list.number|add:-5 and page_number <= post_list.number|add:5 %} {% if
-                    page_number==post_list.number %} <li class="page-item active" aria-current="page">
-                    <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-                    </li>
-                    {% else %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-                    </li>
-                    {% endif %}
-    
-                    {% endfor %}
-                    <!-- 다음페이지 -->
-                    {% if post_list.has_next %}
-                    <li class="page-item">
-                        <a class="page-link"
-                            href="?page={{ post_list.next_page_number }}">다음</a><!--다음페이지가 있을 때 다음 버튼 활성화-->
-                    </li>
-                    {% else %}
-                    <li class="page-item disabled">
-                        <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a><!--다음페이지가 없을 때 다음 버튼 비활성화-->
-                    </li>
-                    {% endif %}
-            </ul>
-            <!-- 페이징처리 끝 -->
+            {% endfor %}
+        
+            {% if post_list.has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="?searched={{ searched }}&search_select={{ search_select }}&page={{ post_list.next_page_number }}">다음</a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
+                </li>
+            {% endif %}
+        </ul>
+        
+        
     </body>
     
     </html>

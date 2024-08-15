@@ -21,34 +21,52 @@ def deleteget(request, post_id, category_name):
     # 허용되지 않은 카테고리 이름인 경우 404 페이지 표시
     return render(request, '404.html')
 
-
 def updateget(request, post_id):
-    post=Post.objects.get(pk=post_id)
-    images=Image.objects.filter(post=post)
-    if request.method=='POST':
-        postForm=PostForm(request.POST, request.FILES.getlist('image'), instance=post)
-        
-        if postForm.is_valid():
-            postForm.save()
-            for img in request.FILES.getlist('new_image',None):
-                Image.objects.create(post=post, image=img)
-            #수정을 했을 경우에만 작성시간 밑에 수정시간이 뜨게
-            return redirect('post:show', post_id)
-    else:
-        postForm=PostForm(instance=post)
-        context={
-            'postForm':postForm,
-            'post_id':post_id,
-            'images':images,
-        }
-        return render(request, 'updated.html', context)                
+    post = get_object_or_404(Post, pk=post_id)
+    images = Image.objects.filter(post=post)  # 포스트와 연결된 이미지 가져오기
 
-# 이미지 삭제
+    if request.method == 'POST':
+        postForm = PostForm(request.POST, request.FILES, instance=post)  # request.FILES로 파일 처리
+
+        if postForm.is_valid():
+            post = postForm.save()  # 포스트 저장
+
+            # 새로 추가된 이미지 처리
+            new_images = request.FILES.getlist('new_image', [])
+            if new_images:
+                for img in new_images:
+                    Image.objects.create(post=post, image=img)
+            else:
+                if not images.exists():
+                    error_message = '이미지 하나 이상을 추가해야 합니다.'
+                    return render(request, 'updated.html', {
+                        'postForm': postForm,
+                        'post_id': post_id,
+                        'images': images,
+                        'error_message': error_message,
+                    })
+
+
+            return redirect('post:show', post_id=post_id)
+
+    else:
+        postForm = PostForm(instance=post)
+    
+    context = {
+        'postForm': postForm,
+        'post_id': post_id,
+        'images': images,
+    }
+    return render(request, 'updated.html', context)        
+
+
 def image_delete(request, post_id):
-    if request.user.is_authenticated:
-        post=get_object_or_404(Post, pk=post_id)
-        image_id=request.POST.get('image_id')
-        image=get_object_or_404(Image, id=image_id, post=post)
-        if request.user == post.writer:
-            image.delete()
-    return redirect('post:show', post_id=post_id)
+    if request.method == 'POST':
+        image_id = request.POST.get('image_id')
+        image = get_object_or_404(Image, id=image_id, post_id=post_id)
+        image.delete()
+
+        # 삭제 후 포스트의 이미지 수 확인
+        post = get_object_or_404(Post, id=post_id)
+        
+    return redirect('post:updateget', post_id=post_id)

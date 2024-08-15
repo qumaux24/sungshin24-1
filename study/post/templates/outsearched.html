@@ -1,26 +1,24 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
     <head>
-        <title>일식 게시판</title>
+        <title>검색 결과</title>
         {% load static %}
-        <link rel="stylesheet" href="{%static 'css/styles-japanpost.css' %}">
-        <!-- {% load static %}
-        <link rel="stylesheet" href="styles-japanpost.css"> -->
+        <link rel="stylesheet" href="{%static 'css/styles-searched.css' %}">
         <script>
-        let isLoggedIn = false; 
-        function checklogin() {
-            if (!isLoggedIn) {
-                if (confirm("로그인이 필요합니다.")) {
-                    window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
+            let isLoggedIn = false; 
+            function checklogin() {
+                if (!isLoggedIn) {
+                    if (confirm("로그인이 필요합니다.")) {
+                        window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
+                    }
                 }
-            }
-            else{
-                window.location.href="recipeRegistration.html";
-            }
-        };
-    </script>
-    
-       
+                else{
+                    window.location.href="recipeRegistration.hrml";
+                }
+            };
+        </script>
+        
+        
     </head>
 
     <body>
@@ -28,27 +26,11 @@
             <div class="logo"><a href="{% url 'post:main' %}">
                 <span class="blue">냉</span>Jango() </a>
             </div>
-            {% if user.is_authenticated %}
-            <form method="POST" action="{% url 'post:search' user.id %}">
-                {% csrf_token %} 
-                    
-                <div class="search-bar">
-                    <select id="search-type" name="search_select">
-                        <option value="전체">전체</option>
-                        <option value="제목">제목</option>
-                        <option value="재료">재료</option>
-                    </select>
-                    <input type="text" placeholder="search" name="searched">
-                    <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
-                </div>
-            </form>
-    
-            {% else %}
-            <form method="POST" action="{% url 'post:outsearch'%}">
+            <form method="POST" action="{% url 'post:outsearch' %}">
             {% csrf_token %} 
                 
                 <div class="search-bar">
-                    <select id="search-type" name="search_select">
+                    <select name="search_select">
                         <option value="전체">전체</option>
                         <option value="제목">제목</option>
                         <option value="재료">재료</option>
@@ -57,7 +39,6 @@
                     <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
                 </div>
             </form>
-            {%endif%}
 
                 
             <div class="menu-icon">
@@ -73,9 +54,9 @@
             </div>
             
         </header>
-        
-        <h1>일식 게시판</h1>
-        <br>
+        <!-- 글 목록 뜨는 부분 -->
+        <!--  -->
+        <h1>게시글 목록</h1>
         <div class="container">
             <table>
                 <script>
@@ -151,9 +132,8 @@
                 </li>
             {% endif %}
         </ul>
-            <!-- 페이징처리 끝 -->
-        <a href="{% url 'post:write' %}">글 작성</a>
-        </div>
-    </body>
         
+
+    <a href="{% url 'post:write' %}">글 작성</a>
+    </body>
 </html>
