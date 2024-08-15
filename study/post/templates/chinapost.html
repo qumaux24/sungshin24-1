@@ -54,8 +54,10 @@
         </div>
         
     </header>
-
+    <br>
         <h1>중식 게시판</h1>
+        
+        <a href="{% url 'post:write' %}"><button class="btn">글 작성</button></a>
         <br>
         <div class="container">
             <table>
@@ -133,7 +135,7 @@
             {% endif %}
         </ul>
             <!-- 페이징처리 끝 -->
-        <a href="{% url 'post:write' %}">글 작성</a>
+        
        
     </body>
 </html>
