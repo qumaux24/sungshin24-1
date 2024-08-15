@@ -8,14 +8,14 @@ from django.core.paginator import Paginator
 # Create your views here.
 
 # 사용자 게시글 수정, 삭제
-@login_required(login_url='/accounts/login')
+# @login_required(login_url='/accounts/login')
 def userpost_deleteget(request, userpost_id):
     userpost=Userpost.objects.get(id=userpost_id)
     userpost.delete()
     return redirect('post:userlist')
 
 def userpost_updateget(request, userpost_id):
-    userpost=Userpost.objects.get(pk=userpost_id)
+    userpost=Userpost.objects.get(id=userpost_id)
     if request.method=='POST':
         userpostForm=UserpostForm(request.POST, instance=userpost)
         
