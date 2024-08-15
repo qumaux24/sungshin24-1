@@ -125,15 +125,16 @@
 
                         <div id="info2">
                             <h3>공지사항</h3>
-                            
-                            <ul>
-                                <li><a href="infopost.html">공지사항 1</a></li>
-                                <li><a href="infopost.html">공지사항 2</a></li>
-                                <li><a href="infopost.html">공지사항 3</a></li>
-                                <li><a href="infopost.html">공지사항 4</a></li>
-
-                            </ul>
-                        </div>
+                                <ul>
+                                    {% comment %} {% for post in fix_notice %}
+                                    <li><a href="{% url 'post:noticeShow' post_id %}">{{post.title}}</a></li>
+                                    {% endfor %}
+    
+                                    {% for post in main_notice %}
+                                    <li><a href="{% url 'post:noticeShow' post_id %}">{{post.title}}</a></li>
+                                    {% endfor %} {% endcomment %}
+                                </ul>
+                            </div>
                     </div>
 
                     <!--로그인전-->
@@ -152,13 +153,16 @@
                         </div>
                         <div id="info">
                             <h3>공지사항</h3>
-                            
+{% comment %}                             
                             <ul>
-                                <li><a href="infopost.html">공지사항 1</a></li>
-                                <li><a href="infopost.html">공지사항 2</a></li>
-                                <li><a href="infopost.html">공지사항 3</a></li>
-                                <li><a href="infopost.html">공지사항 4</a></li>
-                            </ul>
+                                {% for post in post_notice %}
+                                <li><a href="{% url 'post:noticeShow' post.id %}">{{post.title}}</a></li>
+                                {% endfor %}
+
+                                {% for post in main_notice %}
+                                <li><a href="{% url 'post:noticeShow' post.id %}">{{post.title}}</a></li>
+                                {% endfor %}
+                            </ul> {% endcomment %}
                         </div>
                         
                     </div>                     

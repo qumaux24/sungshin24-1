@@ -48,7 +48,7 @@
                 <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
                 <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
                 <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
-                <a href="infopost.html">공지사항</a>
+                <a href="notice.html">공지사항</a>
                 <a href="{% url 'post:write' %}">레시피 등록</a>
             </div>
         </div>
@@ -72,7 +72,7 @@
                 {% csrf_token %}
                 {% for userpost in userlist %}
                 <tr class ="fixed">
-                    <td><a href="{% url 'userpost:userShow' userpost.id %}">{{ userpost.title }}</a></td>
+                    <td><a href="{% url 'post:userShow' userpost.id %}">{{ userpost.title }}</a></td>
                     <td>{{ userpost.writer }}</td>
                     <td>{{ userpost.created_at }}</td>
                     <td>
@@ -83,7 +83,7 @@
                         {% endif %}
                     </td>
                     <td>{% if user in userpost.like_users.all %}</td>
-                    <td>{{ comments|length }}</td>
+                    <td>{{ usercomments|length }}</td>
                 </tr>
                 {% endfor %}
             

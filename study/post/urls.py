@@ -45,7 +45,7 @@ urlpatterns = [
     #공지사항게시판
     path('noticelist/', noticelist, name='noticelist'),
     path('noticeWrite/', noticeWrite, name='noticeWrite'),
-    path('noticeShow/<int:noticepost_id>', noticeShow, name='noticeShow'),
+    path('noticeShow/<int:post_id>', noticeShow, name='noticeShow'),
     path('noticeShow/<int:noticepost_id>/noticepost_updateget', noticepost_updateget, name='noticepost_updateget'),
     path('noticepost_deleteget/<int:noticepost_id>/', noticepost_deleteget, name='noticepost_deleteget'),
     #목록
@@ -54,7 +54,6 @@ urlpatterns = [
     path('daily_posts/', daily_posts_view, name='daily_posts'),
     #패스키
     path('passkey/<int:writer_id>/', passkey, name="passkey"),
-    
     ]
 
 urlpatterns += static(settings.MEDIA_URL,

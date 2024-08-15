@@ -1,5 +1,5 @@
 from django import forms
-from .models import Post, Comment, Userpost, Noticepost, Category
+from .models import Post, Comment, Userpost, Noticepost, Category, Usercomment
 
 class PostForm(forms.ModelForm):
     category = forms.ModelChoiceField(queryset=Category.objects.all(), required=True, empty_label=None)
@@ -21,3 +21,8 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model=Comment
         fields=['comment']
+        
+class UsercommentForm(forms.ModelForm):
+    class Meta:
+        model=Usercomment
+        fields=['usercomment']
