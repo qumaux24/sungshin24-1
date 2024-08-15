@@ -10,7 +10,7 @@ from django.db.models import Count, Q
 
 # 사용자 게시글 목록
 def userlist(request):
-    userposts = Userpost.objects.all().order_by('-created_at')
+    userposts = Userpost.objects.all().order_by('-created_at').annotate(usercomment_count=Count('usercomment'))
     request.session['previous_page']=request.get_full_path()
     page=request.GET.get('page', '1')
     paginator=Paginator(userposts, 10)

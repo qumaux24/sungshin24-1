@@ -31,7 +31,7 @@
             <span class="blue">냉</span>Jango() </a>
         </div>
 
-        <form method="POST" action="{% url 'post:search' %}">
+        <form method="POST" action="{% url 'post:search' user.id %}">
         {% csrf_token %} 
             
             <div class="search-bar">
@@ -65,25 +65,26 @@
     <section class="containers">
         <div class="info-box">
             <div class="info">
-                <h3>ID: 아이디</h3>
+                <h3>ID: {{user_detail.user}}</h3>
             </div>
-                <a href="{% url 'post:changelogin'%}"><button id="button">수정</button></a>        
+                <a href="{% url 'post:changelogin'%}"><button id="button">ID/PW 수정</button></a>        
         </div>
         
         <div class="details-box">
             <div class="info">
-                <p>성별: </p>
-                <p>나이: </p>
-                <p>거주지: </p>
+                <p>성별: {{user_detail.get_gender_display}}</p>
+                <p>나이: {{user_detail.age}}</p>
+                <p>거주지: {{user_detail.get_residence_display}}</p>
                 <p>알러지: 
                     <ul>
-                        <li>1</li>
-                        <li>2</li>
-                    </ul>
+                        {% for allergies in allergies %}
+                            <li>{{ allergies }}</li>
+                        {% endfor %}
+                        </ul>
                 </p>
             </div>
             <!--연결:membership.html-->
-            <a href="{% url 'post:user_updated' writer_id%}"><button id="button">수정</button></a>
+            <a href="{% url 'post:user_updated' writer_id%}"><button id="button">세부사항 수정</button></a>
         </div>
     </section>
 </body>

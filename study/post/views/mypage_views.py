@@ -111,7 +111,20 @@ def passkey(request, writer_id):
         pass_key_value = pass_key.first().pass_keyword if pass_key.exists() else None
         if inputpasskey==pass_key_value:
             user_detail=get_object_or_404(User_detail, user_id=writer_id)
-            return render(request, 'user_detail_select.html', {'writer_id': writer_id} )
+            gender = user_detail.gender
+            age = user_detail.age
+            residence = user_detail.residence
+            allergies=set(user_detail.allergies.replace(',',' ').split())
+            allergies=list(allergies)
+            context = {
+                'user_detail': user_detail,
+                'allergies' : allergies,
+                'gender' : gender,
+                'age' : age,
+                'residence' : residence,
+                'writer_id': writer_id,
+            }
+            return render(request, 'user_detail_select.html', context )
         return redirect('post:mypage', writer_id)
     return redirect('post:main')
 
@@ -177,5 +190,6 @@ def user_detail_show(request, writer_id):
         'gender' : gender,
         'age' : age,
         'residence' : residence,
+        'writer_id': writer_id,
     }
-    return render(request, 'user_detail_show.html', context)
+    return render(request, 'user_detail_select.html', context)
