@@ -41,8 +41,7 @@ a:hover {
 }
 
 #search-type {
-    margin-top: 6px;
-    margin-left: 10px;
+    margin-right: 5px;
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -64,7 +63,7 @@ a:hover {
 }
 
 .search-bar input {
-    width: 590px;
+    width:590px;
     padding: 5px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -127,7 +126,6 @@ a:hover {
 }
 
 
-/*--여기까지 헤더--*/
 /*--여기까지 헤더--*/
 
 .daily-and-login {
@@ -375,8 +373,8 @@ a:hover {
 }
 
 .category li {
-    padding: 5px 0px 10px 0px;
-    margin-bottom: 10px;
+    padding: 5px 0;
+
     border-top: 1px solid #ccc;
 }
 
