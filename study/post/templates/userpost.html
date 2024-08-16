@@ -55,7 +55,10 @@
         </div>
 
     </header>
+    <br>
     <h1>사용자 게시판</h1>
+    <a href="{% url 'post:write' %}"><button class="btn">글 작성</button></a>
+
     <br>
     <div class="container">
         <table>
@@ -138,7 +141,7 @@
         </ul>
         <!-- 페이징처리 끝 -->
     </div>
-    <a href="{% url 'post:userWrite'%}"><button>글 작성</button></a>
+    
 </body>
 
 </html>

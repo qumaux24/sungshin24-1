@@ -209,7 +209,7 @@ a:hover {
 .form-group input,
 .form-group textarea,
 .form-group button {
-    width: 100%;
+    width: 550px;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
