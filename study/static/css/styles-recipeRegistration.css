@@ -239,3 +239,7 @@ header form {
 .form-group button:hover {
     background-color: #353535;
 }
+
+#updatepost1{
+    margin-left:160px;
+}
