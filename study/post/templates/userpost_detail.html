@@ -18,16 +18,14 @@
                 alert("링크가 복사되었습니다. 필요하신 곳에 붙여넣기 하세요!")
             };
             let isLoggedIn = false; 
-        function checklogin() {
-            if (!isLoggedIn) {
-                if (confirm("로그인이 필요합니다.")) {
-                    window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
+        let isLoggedIn = false; 
+            function checklogin() {
+                if (!isLoggedIn) {
+                    if (confirm("로그인이 필요합니다.")) {
+                        
+                    }
                 }
-            }
-            else{
-                window.location.href="recipeRegistration.html";
-            }
-        };
+            };
         </script> 
         
 
