@@ -2,7 +2,7 @@ from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
 from .views.post_views import main, list, write, show, likes
-from .views.search_views import search, user_search, outsearch, notice_search, notice_outsearch
+from .views.search_views import search, user_search, outsearch, notice_search, notice_outsearch, Catesearch
 from .views.update_views import updateget, deleteget, image_delete
 from .views.comments_views import comments_create, comments_delete, userComments_create, userComments_delete
 from .views.userpost_views import userWrite, userShow, userlist, userlikes
@@ -64,7 +64,7 @@ urlpatterns = [
     #검색
     path('search/<int:writer_id>/', search, name='search'),
     path('noticesearch/<int:writer_id>/', notice_search, name='notice_search'),
-    
+    path('catesearch/<int:writer_id>/<str:category_name>/', Catesearch, name="catesearch"),
     path('usersearch/<int:writer_id>/', user_search, name='user_search'),
     ]
 
