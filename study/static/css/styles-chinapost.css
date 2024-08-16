@@ -4,6 +4,8 @@ body {
     margin: 0 auto;
     padding: 0;
     text-align: center;
+    align-items:center;
+    
     width: 960px;
     overflow-x: auto;
 }
@@ -41,8 +43,8 @@ a:hover {
 }
 
 #search-type {
-    margin-top: 6px;
-    margin-left: 10px;
+    margin-top: 3px;
+    margin-right: 3px;
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -60,7 +62,7 @@ a:hover {
     display: flex;
     align-items: center;
     flex-grow: 1;
-    margin: 0 20px;
+    margin: 0px;
 }
 
 .search-bar input {
@@ -225,6 +227,6 @@ tr:hover {
     cursor: pointer;
 }
 
-button:hover {
+.btn:hover {
     background-color: #353535;
 }
