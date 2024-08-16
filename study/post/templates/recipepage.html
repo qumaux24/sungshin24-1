@@ -94,7 +94,7 @@
        
         <main>
             <section class="recipe-details">
-                <h1>레시피 이름 : {{ post.title }}</h1>
+                <h1>{{ post.title }}</h1>
                 <p>작성자 : {{ post.writer }}</p>
                 <div id="date">
                     <p>작성 시간 : {{ post.created_at }}</p>
@@ -143,7 +143,6 @@
                         <a href="{% url 'post:deleteget' post.id post.category.name %}"><button class="btn">삭제하기</button></a><br>
                     {% endif %}
                 </div>
-                <button id="link" onclick="clip()">링크 복사</button>
             </section>
         </main>
         

@@ -76,6 +76,7 @@
             </div>
 
         </header>
+        
         <h1>공지사항</h1>
         {% if request.user.is_superuser %}
             <a href="{% url 'post:noticeWrite' %}"><button>공지사항 등록</button></a>

@@ -83,7 +83,9 @@
         <main>
             <section class="daily-and-login">
                 <section class="daily-recipe">
+                    <br>
                     <h2>DAILY ♡</h2>
+                    <br>
                     <div class="recipe-card">
                         
                         <a href="{% url 'post:show' post_id=context_daily.post1.id %}"><h3>{{ context_daily.post1.title }}</h3></a>
@@ -109,7 +111,7 @@
                         <br>
 
                     </div>
-
+                    <br>
                     <div class="recipe-card">
                         <a href="{% url 'post:show' post_id=context_daily.post3.id %}"><h3>{{ context_daily.post3.title }}</h3></a>                    
                         <div class="likes">
