@@ -2,6 +2,7 @@
 <html lang="ko">
     <head>
         <title>공지사항 게시판</title>
+        
         {% load static %}
         <link rel="stylesheet" href="{%static 'css/styles-post.css' %}">
         
@@ -18,7 +19,7 @@
     
     
     </head>
-    
+
     <body>
         <header>
             <div class="logo"><a href="{% url 'post:main' %}">
@@ -63,7 +64,7 @@
                     
                 </div>
             </div>
-    
+
         </header>
         <h1>공지사항</h1>
         {% if request.user.is_superuser %}
