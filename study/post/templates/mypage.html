@@ -52,7 +52,7 @@
                     <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
                     <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
                     <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
-                    <a href="noticelist/">공지사항</a>
+                    <a href="{% url 'post:noticelist' %}">공지사항</a>
                     {% if user.is_authenticated %}
                     <a href="{% url 'post:userlist' %}">사용자 게시판</a>
                     <a href="{% url 'post:write' %}">레시피 등록</a>
@@ -63,6 +63,7 @@
                     {% endif %}
                     
                 </div>
+            </div>
             
         </header>
     <br>
@@ -139,12 +140,11 @@
                 </table>
             </div>
 
-                <!-- 페이징처리 시작 -->
-            <ul class="pagination justify-content-center">
+            {% comment %} <ul class="pagination justify-content-center">
                 <!-- 이전페이지 -->
                 {% if myposts.has_previous %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ myposts.previous_page_number }}">이전</a>
+                        <a class="page-link" href="?page1={{ myposts.previous_page_number }}&like_page={{ request.GET.page2 }}&comment_page={{ request.GET.page3 }}">이전</a>
                     </li>
                 {% else %}
                     <li class="page-item disabled">
@@ -153,30 +153,29 @@
                 {% endif %}
                 <!-- 페이지리스트 -->
                 {% for page_number in myposts.paginator.page_range %}
-                {% if page_number >= myposts.number|add:-5 and page_number <= myposts.number|add:5 %}
-                {% if page_number == myposts.number %}
-                    <li class="page-item active" aria-current="page">{#구분을 위해  누른 번호가 파랑으로 보임#}
-                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-                    </li>
-                {% else %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-                    </li>
-                {% endif %}
-                {% endif %}
+                    {% if page_number >= myposts.number|add:-5 and page_number <= myposts.number|add:5 %}
+                        {% if page_number == myposts.number %}
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link" href="?page1={{ page_number }}&page2={{ request.GET.page2 }}&page3={{ request.GET.page3 }}">{{ page_number }}</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="?page1={{ page_number }}&page2={{ request.GET.page2 }}&comment_page={{ request.GET.page3 }}">{{ page_number }}</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
                 {% endfor %}
                 <!-- 다음페이지 -->
                 {% if myposts.has_next %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ myposts.next_page_number }}">다음</a>
+                        <a class="page-link" href="?page1={{ myposts.next_page_number }}&page2={{ request.GET.page2 }}&page3={{ request.GET.page3 }}">다음</a>
                     </li>
                 {% else %}
                     <li class="page-item disabled">
                         <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
                     </li>
                 {% endif %}
-            </ul>
-            <!-- 페이징처리 끝 -->
+            </ul> {% endcomment %}
             <hr>
             <br>
             <div class="post-table">
@@ -217,11 +216,11 @@
                 </table>
             </div>
                 <!-- 페이징처리 시작 -->
-            <ul class="pagination justify-content-center">
+            {% comment %} <ul class="pagination justify-content-center">
                 <!-- 이전페이지 -->
                 {% if mylikes.has_previous %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ mylikes.previous_page_number }}">이전</a>
+                        <a class="page-link" href="?post_page={{ request.GET.post_page }}&like_page={{ mylikes.previous_page_number }}&comment_page={{ request.GET.comment_page }}">이전</a>
                     </li>
                 {% else %}
                     <li class="page-item disabled">
@@ -230,29 +229,29 @@
                 {% endif %}
                 <!-- 페이지리스트 -->
                 {% for page_number in mylikes.paginator.page_range %}
-                {% if page_number >= mylikes.number|add:-5 and page_number <= mylikes.number|add:5 %}
-                {% if page_number == mylikes.number %}
-                    <li class="page-item active" aria-current="page">{#구분을 위해  누른 번호가 파랑으로 보임#}
-                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-                    </li>
-                {% else %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-                    </li>
-                {% endif %}
-                {% endif %}
+                    {% if page_number >= mylikes.number|add:-5 and page_number <= mylikes.number|add:5 %}
+                        {% if page_number == mylikes.number %}
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link" href="?post_page={{ request.GET.post_page }}&like_page={{ page_number }}&comment_page={{ request.GET.comment_page }}">{{ page_number }}</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="?post_page={{ request.GET.post_page }}&like_page={{ page_number }}&comment_page={{ request.GET.comment_page }}">{{ page_number }}</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
                 {% endfor %}
                 <!-- 다음페이지 -->
                 {% if mylikes.has_next %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ mylikes.next_page_number }}">다음</a>
+                        <a class="page-link" href="?post_page={{ request.GET.post_page }}&like_page={{ mylikes.next_page_number }}&comment_page={{ request.GET.comment_page }}">다음</a>
                     </li>
                 {% else %}
                     <li class="page-item disabled">
                         <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
                     </li>
                 {% endif %}
-            </ul>
+            </ul> {% endcomment %}
             <!-- 페이징처리 끝 -->
             <hr>
             <br>
@@ -294,11 +293,11 @@
                 </table>
             </div>
                 <!-- 페이징처리 시작 -->
-            <ul class="pagination justify-content-center">
+            {% comment %} <ul class="pagination justify-content-center">
                 <!-- 이전페이지 -->
                 {% if mycomments.has_previous %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ mycomments.previous_page_number }}">이전</a>
+                        <a class="page-link" href="?post_page={{ request.GET.post_page }}&like_page={{ request.GET.like_page }}&comment_page={{ mycomments.previous_page_number }}">이전</a>
                     </li>
                 {% else %}
                     <li class="page-item disabled">
@@ -307,29 +306,29 @@
                 {% endif %}
                 <!-- 페이지리스트 -->
                 {% for page_number in mycomments.paginator.page_range %}
-                {% if page_number >= mycomments.number|add:-5 and page_number <= mycomments.number|add:5 %}
-                {% if page_number == mycomments.number %}
-                    <li class="page-item active" aria-current="page">{#구분을 위해  누른 번호가 파랑으로 보임#}
-                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-                    </li>
-                {% else %}
-                    <li class="page-item">
-                        <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-                    </li>
-                {% endif %}
-                {% endif %}
+                    {% if page_number >= mycomments.number|add:-5 and page_number <= mycomments.number|add:5 %}
+                        {% if page_number == mycomments.number %}
+                            <li class="page-item active" aria-current="page">
+                                <a class="page-link" href="?post_page={{ request.GET.post_page }}&like_page={{ request.GET.like_page }}&comment_page={{ page_number }}">{{ page_number }}</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item">
+                                <a class="page-link" href="?post_page={{ request.GET.post_page }}&like_page={{ request.GET.like_page }}&comment_page={{ page_number }}">{{ page_number }}</a>
+                            </li>
+                        {% endif %}
+                    {% endif %}
                 {% endfor %}
                 <!-- 다음페이지 -->
                 {% if mycomments.has_next %}
                     <li class="page-item">
-                        <a class="page-link" href="?page={{ mycomments.next_page_number }}">다음</a>
+                        <a class="page-link" href="?post_page={{ request.GET.post_page }}&like_page={{ request.GET.like_page }}&comment_page={{ mycomments.next_page_number }}">다음</a>
                     </li>
                 {% else %}
                     <li class="page-item disabled">
                         <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
                     </li>
                 {% endif %}
-            </ul>
+            </ul> {% endcomment %}
             <!-- 페이징처리 끝 -->
             
             {%endif%}

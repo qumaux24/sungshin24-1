@@ -22,18 +22,6 @@ def mypage(request, writer_id):
         mylikes=MY_mylikes(request, writer_id)
         mycomments=MY_mycomments(request, writer_id)
         
-        page=request.GET.get('page', '1')
-        paginator=Paginator(myposts, 5)
-        myposts=paginator.get_page(page)
-            
-        page=request.GET.get('page', '1')
-        paginator=Paginator(mylikes, 5)
-        mylikes=paginator.get_page(page)
-        
-        page=request.GET.get('page', '1')
-        paginator=Paginator(mycomments, 5)
-        mycomments=paginator.get_page(page)
-
         context={
                 'myposts' : myposts,
                 'mylikes' : mylikes,
@@ -53,17 +41,6 @@ def mypage_select(request, writer_id):
             mylikes=MY_mylikes(request, writer_id)
             mycomments=MY_mycomments(request, writer_id)
             
-            page=request.GET.get('page', '1')
-            paginator=Paginator(myposts, 5)
-            myposts=paginator.get_page(page)
-            
-            page=request.GET.get('page', '1')
-            paginator=Paginator(mylikes, 5)
-            mylikes=paginator.get_page(page)
-            
-            page=request.GET.get('page', '1')
-            paginator=Paginator(mycomments, 5)
-            mycomments=paginator.get_page(page)
             
             context={
                 'selected_page' : selected_page,
@@ -82,6 +59,8 @@ def mypage_select(request, writer_id):
         return render(request, 'mypage.html')
     else:
         return redirect('accounts:login')
+
+    
 
 User = get_user_model()
 
