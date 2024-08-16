@@ -3,7 +3,7 @@
     <head>
         <title>회원가입</title>
         {% load static %}
-        <link rel="stylesheet" href="{%static 'css/styles-findPW.css' %}">
+        <link rel="stylesheet" href="{%static 'css/styles-accInfo.css' %}">
         
     <script>
             let isLoggedIn = false; 
@@ -55,7 +55,7 @@
         <br>
         
         <br>
-        <form method="POST" id="signUp-pt-2" class="login-box">
+        <form method="POST" class="login-box" id="signUp-pt-2" >
             {% csrf_token %}
             <br>
             <div class="form-group">
@@ -74,10 +74,10 @@
             </div>
             <br>
             {% comment %} <input id="allergies"  type="password" placeholder="알레르기"> {% endcomment %}
-            <div class="form-group">
             
-                알레르기 : <p id="allergies">{{user_details.allergies}}</p>
-            </div>
+            
+            알레르기 : <p id="allergies">{{user_details.allergies}}</p>
+            
             <br>
             
             
