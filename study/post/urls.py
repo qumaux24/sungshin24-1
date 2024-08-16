@@ -23,6 +23,7 @@ urlpatterns = [
     path('write/', write, name='write'),
     path('show/<int:post_id>/', show, name='show'),
     path('outsearch/', outsearch, name='outsearch'),
+    path('noticeoutsearch/', notice_outsearch, name='notice_outsearch'),
     
     #마이페이지
     path('mypage/<int:writer_id>/', mypage, name='mypage'),
@@ -63,7 +64,7 @@ urlpatterns = [
     #검색
     path('search/<int:writer_id>/', search, name='search'),
     path('noticesearch/<int:writer_id>/', notice_search, name='notice_search'),
-    path('noticeoutsearch/<int:writer_id>/', notice_outsearch, name='notice_outsearch'),
+    
     path('usersearch/<int:writer_id>/', user_search, name='user_search'),
     ]
 

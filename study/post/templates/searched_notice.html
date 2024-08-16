@@ -6,15 +6,12 @@
     {% load static %}
     <link rel="stylesheet" href="{%static 'css/styles-searched.css' %}">
     <script>
-        let isLoggedIn = false;
+        let isLoggedIn = false; 
         function checklogin() {
             if (!isLoggedIn) {
                 if (confirm("로그인이 필요합니다.")) {
-                    window.location.href = "{% url 'accounts:login'%}"; // 로그인 페이지로 이동합니다.
+                    
                 }
-            }
-            else {
-                window.location.href = "recipeRegistration.hrml";
             }
         };
     </script>
@@ -28,21 +25,21 @@
             <span class="blue">냉</span>Jango() </a>
         </div>
         {% if user.is_authenticated %}
-            <form method="POST" action="{% url 'post:search' user.id %}">
+            <form method="POST" action="{% url 'post:notice_search' user.id %}">
                 {% csrf_token %} 
                     
                 <div class="search-bar">                    
-                    <input type="text" placeholder="search" name="searched">
+                    <input type="text" placeholder="search" name="noticesearched">
                     <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
                 </div>
             </form>
     
             {% else %}
-            <form method="POST" action="{% url 'post:outsearch'%}">
+            <form method="POST" action="{% url 'post:notice_outsearch'%}">
             {% csrf_token %} 
                 
                 <div class="search-bar">
-                    <input type="text" placeholder="search" name="searched">
+                    <input type="text" placeholder="search" name="noticesearched">
                     <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
                 </div>
             </form>
@@ -100,7 +97,7 @@
                 <tbody>
                     {% for post in post_list %}
                     {% comment %} <a href="{% url 'post:show' post.id %}"> {% endcomment %}
-                    <tr class="fixed" data-href="{% url 'post:userShow' post.id %}">                            
+                    <tr class="fixed" data-href="{% url 'post:noticeShow' post.id %}">                            
                         <td>{{ forloop.counter }}</td>
                         <td>{{ post.title }}</td>
                         <td>{{ post.writer }}</td>

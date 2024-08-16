@@ -6,27 +6,46 @@ from django.views.decorators.http import require_POST
 from django.db.models import Count, Q
 from .daily_views import daily_posts_view
 from .notice_views import sort_notice_fix, sort_notice
+from accounts.views.userdetail_views import User_detail
 # from django.contrib.auth import get_user_model
 
 # Create your views here.
 
 # 메인페이지
 def main(request):
+    if request.user.is_authenticated:
+        user = request.user
+        user_id = user.id
+        user_detail=get_object_or_404(User_detail, user_id=user_id)
+        gender = user_detail.gender
+        post_count = Post.objects.filter(writer=user).count()
     context_daily = daily_posts_view(request)
     korea_hot_list = sort_hot_korea(request)
     china_hot_list = sort_hot_china(request)
     japan_hot_list = sort_hot_japan(request)
     fix_notice = sort_notice_fix(request)
     main_notice = sort_notice(request)
-
-    context={
-        'context_daily' : context_daily,
-        'korea_hot_list' : korea_hot_list,
-        'china_hot_list' : china_hot_list,
-        'japan_hot_list' : japan_hot_list,
-        'fix_notice': fix_notice,
-        'main_notice': main_notice,
-    }
+    if request.user.is_authenticated:
+        context={
+            'post_count':post_count,
+            'user_detail':user_detail,
+            'gender' : gender,
+            'context_daily' : context_daily,
+            'korea_hot_list' : korea_hot_list,
+            'china_hot_list' : china_hot_list,
+            'japan_hot_list' : japan_hot_list,
+            'fix_notice': fix_notice,
+            'main_notice': main_notice,
+        }
+    else:
+        context={
+            'context_daily' : context_daily,
+            'korea_hot_list' : korea_hot_list,
+            'china_hot_list' : china_hot_list,
+            'japan_hot_list' : japan_hot_list,
+            'fix_notice': fix_notice,
+            'main_notice': main_notice,
+        }
     return render(request, 'main.html', context)
 
 # 게시글 목록

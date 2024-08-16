@@ -9,11 +9,8 @@
             function checklogin() {
                 if (!isLoggedIn) {
                     if (confirm("로그인이 필요합니다.")) {
-                        window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
+                        
                     }
-                }
-                else{
-                    window.location.href="recipeRegistration.hrml";
                 }
             };
         </script>
@@ -104,6 +101,5 @@
             </table>
         </div>
     <br><br>
-    <a href="{% url 'post:write' %}">글 작성</a>
     </body>
 </html>

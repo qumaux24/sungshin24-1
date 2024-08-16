@@ -131,11 +131,11 @@
                 </div>
                 <div class="recipe-ingredients">
                     <h2>재료</h2>
-                    {{ post.ingredient }}
+                    <p>{{ post.ingredient }}</p>
                 </div>
                 <div class="recipe-instructions">
                     <h2>만드는 방법</h2>
-                    {{ post.cookmethod }}
+                    <textarea class="form-control" id="cookmethod" rows="1" style=" height: 400px; max-height: 600px; width: 100%; max-width: 600px;" readonly>{{ post.cookmethod }}</textarea>
                 </div>
                 <div class="button-container">
                     {% if post.writer == request.user %}

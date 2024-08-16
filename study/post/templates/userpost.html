@@ -58,7 +58,7 @@
     <br>
     <h1>사용자 게시판</h1>
     {% if user.is_authenticated %}
-        <a href="{% url 'post:write' %}"><button class="btn">글 작성</button></a>
+        <a href="{% url 'post:userWrite' %}"><button class="btn">글 작성</button></a>
         {%else%}
         <a href="javascript:void(0);" onclick="checklogin()"><button class="btn">글 작성</button></a>
         {%endif%}
