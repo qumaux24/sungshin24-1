@@ -30,17 +30,27 @@
                 {% csrf_token %} 
                     
                 <div class="search-bar">
-                    <input type="text" placeholder="search" name="noticesearched">
+                    <select id="search-type" name="search_select">
+                        <option value="전체">전체</option>
+                        <option value="제목">제목</option>
+                        <option value="재료">재료</option>
+                    </select>
+                    <input type="text" placeholder="search" name="searched">
                     <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
                 </div>
             </form>
     
             {% else %}
-            <form method="POST" action="{% url 'post:notice_outsearch'%}">
+            <form method="POST" action="{% url 'post:outsearch'%}">
             {% csrf_token %} 
                 
                 <div class="search-bar">
-                    <input type="text" placeholder="search" name="noticesearched">
+                    <select id="search-type" name="search_select">
+                        <option value="전체">전체</option>
+                        <option value="제목">제목</option>
+                        <option value="재료">재료</option>
+                    </select>
+                    <input type="text" placeholder="search" name="searched">
                     <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
                 </div>
             </form>
