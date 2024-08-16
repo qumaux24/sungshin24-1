@@ -5,18 +5,15 @@
         {% load static %}
         <link rel="stylesheet" href="{%static 'css/styles-main.css' %}">
     <script>
-        let isLoggedIn = false; 
-        function checklogin() {
-            if (!isLoggedIn) {
-                if (confirm("로그인이 필요합니다.")) {
-                    window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
+            let isLoggedIn = false; 
+            function checklogin() {
+                if (!isLoggedIn) {
+                    if (confirm("로그인이 필요합니다.")) {
+                        
+                    }
                 }
-            }
-            else{
-                window.location.href="recipeRegistration.html";
-            }
-        };
-    </script>
+            };
+        </script>
     
        
 </head>
@@ -63,7 +60,7 @@
                 <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
                 <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
                 <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
-                <a href="notice.html">공지사항</a>
+                <a href="{% url 'post:noticelist' %}">공지사항</a>
                 <a href="{% url 'post:write' %}">레시피 등록</a>
             </div>
         </div>

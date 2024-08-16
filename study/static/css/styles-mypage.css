@@ -2,6 +2,7 @@
 body {
     font-family: Arial, sans-serif;
     margin: 0 auto;
+
     padding: 0;
     text-align: center;
     width: 960px;
@@ -42,7 +43,6 @@ a:hover {
 
 #search-type {
     margin-top: 6px;
-    margin-left: 10px;
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -64,7 +64,7 @@ a:hover {
 }
 
 .search-bar input {
-    width: 590px;
+    width: 550px;
     padding: 5px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -133,6 +133,7 @@ a:hover {
     font-size: 35px;
     text-align: center;
 }
+
 button {
     padding: 5px 10px;
     background-color: #7c7c7c;
@@ -148,13 +149,12 @@ button {
     justify-content: space-between;
 }
 
-.dropdown-mypage {
+aside {
     width: 125px;
-
+    max-height:100px;
     background-color: #fff;
     border: 1px solid #ccc;
     border-radius: 5px;
-    
     z-index: 1;
 
     padding: 10px;

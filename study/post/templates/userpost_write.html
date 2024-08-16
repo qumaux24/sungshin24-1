@@ -10,56 +10,79 @@
     <!-- {% load static %}
     <link rel="stylesheet" href="styles-post-write.css"> -->
     <script>
-        let isLoggedIn = false; 
-        function checklogin() {
-            if (!isLoggedIn) {
-                if (confirm("로그인이 필요합니다.")) {
-                    window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
+            let isLoggedIn = false; 
+            function checklogin() {
+                if (!isLoggedIn) {
+                    if (confirm("로그인이 필요합니다.")) {
+                        
+                    }
                 }
-            }
-            else{
-                window.location.href="recipeRegistration.html";
-            }
-        };
-    </script>
+            };
+        </script>
     
        
 </head>
 
 <body>
     <header>
-        <div class="logo"><a href="{% url 'post:main' %}">
-            <span class="blue">냉</span>Jango() </a>
-        </div>
-        <form method="POST" action="{% url 'post:user_search' user.id %}">
+            <div class="logo"><a href="{% url 'post:main' %}">
+                <span class="blue">냉</span>Jango() </a>
+            </div>
+            {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'post:search' user.id %}">
+                {% csrf_token %} 
+                    
+                <div class="search-bar">
+                    <select id="search-type" name="search_select">
+                        <option value="전체">전체</option>
+                        <option value="제목">제목</option>
+                        <option value="재료">재료</option>
+                    </select>
+                    <input type="text" placeholder="search" name="searched">
+                    <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
+                </div>
+            </form>
+    
+            {% else %}
+            <form method="POST" action="{% url 'post:outsearch'%}">
             {% csrf_token %} 
                 
-            <div class="search-bar">
-                <select name="usersearch_select">
-                    <option value="전체">전체</option>
-                    <option value="제목">제목</option>
-                    <option value=-"내용">내용</option>
-                </select>
-                <input type="text" placeholder="search" name="usersearched">
-                <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
+                <div class="search-bar">
+                    <select id="search-type" name="search_select">
+                        <option value="전체">전체</option>
+                        <option value="제목">제목</option>
+                        <option value="재료">재료</option>
+                    </select>
+                    <input type="text" placeholder="search" name="searched">
+                    <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
+                </div>
+            </form>
+            {%endif%}
+
+                
+            <div class="menu-icon">
+                <img src="{% static 'image/menu-icon.png' %}" alt="menu">
+                <div class="dropdown-menu">
+                    <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
+                    <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
+                    <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
+                    <a href="{% url 'post:noticelist' %}">공지사항</a>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'post:userlist' %}">사용자 게시판</a>
+                    <a href="{% url 'post:write' %}">레시피 등록</a>
+                    {% else %}
+                    <a href="javascript:void(0);" onclick="checklogin()">사용자 게시판</a>
+                    <a href="javascript:void(0);" onclick="checklogin()">레시피 등록</a>
+
+                    {% endif %}
+                    
+                </div>
             </div>
-        </form>
             
-        <div class="menu-icon">
-            <img src="{% static 'image/menu-icon.png' %}" alt="menu">
-            <div class="dropdown-menu">
-                <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
-                <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
-                <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
-                <a href="notice.html">공지사항</a>
-                <a href="{% url 'post:write' %}">레시피 등록</a>
-            </div>
-        </div>
-        
-    </header>
+        </header>
     
     <main>
-        <section class="post-form">
+        <section class="recipe-form">
             <h2>게시글 등록</h2>
             <form method="POST" enctype="multipart/form-data">
                 <div class="form-group">

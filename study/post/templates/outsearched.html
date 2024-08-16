@@ -3,17 +3,14 @@
     <head>
         <title>검색 결과</title>
         {% load static %}
-        <link rel="stylesheet" href="{%static 'css/styles-searched.css' %}">
+        <link rel="stylesheet" href="{%static 'css/styles-post.css' %}">
         <script>
             let isLoggedIn = false; 
             function checklogin() {
                 if (!isLoggedIn) {
                     if (confirm("로그인이 필요합니다.")) {
-                        window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
+                        
                     }
-                }
-                else{
-                    window.location.href="recipeRegistration.hrml";
                 }
             };
         </script>
@@ -30,7 +27,7 @@
             {% csrf_token %} 
                 
                 <div class="search-bar">
-                    <select name="search_select">
+                    <select id="search-type" name="search_select">
                         <option value="전체">전체</option>
                         <option value="제목">제목</option>
                         <option value="재료">재료</option>
@@ -47,16 +44,27 @@
                     <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
                     <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
                     <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
-                    <a href="noticelist/">공지사항</a>
-                    <a>사용자 게시판</a>
+                    <a href="{% url 'post:noticelist' %}">공지사항</a>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'post:userlist' %}">사용자 게시판</a>
                     <a href="{% url 'post:write' %}">레시피 등록</a>
+                    {% else %}
+                    <a href="javascript:void(0);" onclick="checklogin()">사용자 게시판</a>
+                    <a href="javascript:void(0);" onclick="checklogin()">레시피 등록</a>
+
+                    {% endif %}
+                    
                 </div>
             </div>
             
         </header>
         <!-- 글 목록 뜨는 부분 -->
         <!--  -->
+        <br>
         <h1>게시글 목록</h1>
+        <a href="{% url 'post:write' %}"><button class="btn">글 작성</button></a>
+        <br>
+
         <div class="container">
             <table>
                 <script>
@@ -96,44 +104,6 @@
                 </tbody>
             </table>
         </div>
-        <ul class="pagination justify-content-center">
-            <!-- 이전페이지 -->
-            {% if list.has_previous %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ list.previous_page_number }}">이전</a>
-                </li>
-            {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">이전</a>
-                </li>
-            {% endif %}
-            <!-- 페이지리스트 -->
-            {% for page_number in list.paginator.page_range %}
-            {% if page_number >= list.number|add:-5 and page_number <= list.number|add:5 %}
-            {% if page_number == list.number %}
-                <li class="page-item active" aria-current="page">{#구분을 위해  누른 번호가 파랑으로 보임#}
-                    <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-                </li>
-            {% else %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a>
-                </li>
-            {% endif %}
-            {% endif %}
-            {% endfor %}
-            <!-- 다음페이지 -->
-            {% if list.has_next %}
-                <li class="page-item">
-                    <a class="page-link" href="?page={{ list.next_page_number }}">다음</a>
-                </li>
-            {% else %}
-                <li class="page-item disabled">
-                    <a class="page-link" tabindex="-1" aria-disabled="true" href="#">다음</a>
-                </li>
-            {% endif %}
-        </ul>
-        
-
-    <a href="{% url 'post:write' %}">글 작성</a>
+    <br><br>
     </body>
 </html>

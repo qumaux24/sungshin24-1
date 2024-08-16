@@ -51,8 +51,8 @@ a:hover {
 }
 
 #search-type {
-    margin-top: 6px;
-    margin-left: 10px;
+    margin-top: 2px;
+    margin-right: 10px;
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -73,7 +73,7 @@ a:hover {
 }
 
 .search-bar input {
-    width: 500px;
+    width: 550px;
     padding: 5px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -189,7 +189,8 @@ tr:hover {
 }
 
 .fixed{
-    color:blue;
+    color:black;
+    
 }
 .pagination {
     display: flex;
@@ -221,4 +222,17 @@ tr:hover {
     color: white;
     background-color: #007bff;
     border-color: #007bff;
+}
+
+.btn {
+    background-color: #696969;
+    border-radius: 5px;
+    padding: 10px 13px 10px 13px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #353535;
 }

@@ -3,6 +3,7 @@
     <head>
         <title>회원가입</title>
         {% load static %}
+        {% load bootstrap4 %}
         <link rel="stylesheet" href="{%static 'css/styles-signUp.css' %}">
         <script>
             let isLoggedIn = false; 
@@ -22,7 +23,7 @@
     </head>
 
     <body>
-        {% load bootstrap4 %}
+        
         {% block content %}
         <header>
             <div class="logo"><a href="{% url 'post:main' %}">
@@ -44,7 +45,7 @@
                     <a href="koreapost.html">한식</a>
                     <a href="chinapost.html">중식</a>
                     <a href="japanpost.html">일식</a>
-                    <a href="notice.html">공지사항</a>
+                    <a href="{% url 'post:noticelist' %}">공지사항</a>
                     <a href="{% url 'post:write' %}">레시피 등록</a>
                 </div>
             </div>

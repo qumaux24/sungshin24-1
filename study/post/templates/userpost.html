@@ -33,7 +33,7 @@
             {% csrf_token %} 
                 
             <div class="search-bar">
-                <select name="usersearch_select">
+                <select id="search-type" name="usersearch_select">
                     <option value="전체">전체</option>
                     <option value="제목">제목</option>
                     <option value=-"내용">내용</option>
@@ -49,13 +49,20 @@
                 <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
                 <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
                 <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
-                <a href="notice.html">공지사항</a>
+                <a href="{% url 'post:noticelist' %}">공지사항</a>
                 <a href="{% url 'post:write' %}">레시피 등록</a>
             </div>
         </div>
 
     </header>
+    <br>
     <h1>사용자 게시판</h1>
+    {% if user.is_authenticated %}
+        <a href="{% url 'post:userWrite' %}"><button class="btn">글 작성</button></a>
+        {%else%}
+        <a href="javascript:void(0);" onclick="checklogin()"><button class="btn">글 작성</button></a>
+        {%endif%}
+
     <br>
     <div class="container">
         <table>
@@ -138,7 +145,7 @@
         </ul>
         <!-- 페이징처리 끝 -->
     </div>
-    <a href="{% url 'post:userWrite'%}"><button>글 작성</button></a>
+    
 </body>
 
 </html>
