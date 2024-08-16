@@ -79,7 +79,7 @@
         
         <h1>공지사항</h1>
         {% if request.user.is_superuser %}
-            <a href="{% url 'post:noticeWrite' %}"><button>공지사항 등록</button></a>
+            <a href="{% url 'post:noticeWrite' %}"><button class="btn">공지사항 등록</button></a>
         {% endif %}
         <br>
         <div class="container">
