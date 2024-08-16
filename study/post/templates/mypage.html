@@ -50,8 +50,8 @@
                     <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
                     <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
                     <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
-                    <a href="noticelist/">공지사항</a>
-                    <a>사용자 게시판</a>
+                    <a href="{% url 'post:noticelist' %}">공지사항</a>
+                    <a href="{% url 'post:userlist' %}">사용자 게시판</a>
                     <a href="{% url 'post:write' %}">레시피 등록</a>
                 </div>
             </div>

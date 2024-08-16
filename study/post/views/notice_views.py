@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 
 # 공지사항 게시글 목록
 def noticelist(request):
+    fix=Noticepost.objects.filter(id__in=[2, 3])
     noticeposts = Noticepost.objects.all().order_by('-created_at')
     request.session['previous_page']=request.get_full_path()
     page=request.GET.get('page', '1')
@@ -17,6 +18,7 @@ def noticelist(request):
     page_obj=paginator.get_page(page)
     context={
         'noticelist': page_obj,
+        'fix' : fix
         }
     return render(request, 'notice.html', context)
 
@@ -37,36 +39,19 @@ def noticeWrite(request):
         return render(request,'notice-write.html', {'noticeform':noticeform})
     
 # 공지사항 게시글 보여주기
-def noticeShow(request, post_id):
-    noticepost = get_object_or_404(Noticepost, pk =post_id)
+def noticeShow(request, noticepost_id):
+    noticepost = get_object_or_404(Noticepost, pk =noticepost_id)
     context = {
         'noticepost': noticepost,
     }
     return render(request, 'notice-detail.html', context)
 
 # # 메인 페이지 공지사항 고정 공지 2개
-# def sort_notice_fix(request):
-#     #고정 공지 2개
-#     noticeFix1 = Noticepost.objects.filter(id=2)
-#     noticeFix1_1 = Noticepost.objects.filter(id=3)
-#     fix_notice = []
-#     fix_notice.append(noticeFix1)
-#     fix_notice.append(noticeFix1_1)
-    
-#     return fix_notice
+def sort_notice_fix(request):
+    #고정 공지 2개
+    return Noticepost.objects.filter(id__in=[2, 3])
 
 
 # # 메인 페이지 공지사항 일반 공지 2개
-# def sort_notice(request):    
-#     noticeMain = Noticepost.objects.filter(writer_id=5).order_by('-created_at')
-#     page = request.GET.get('page', '1')
-#     post_notice2 = []
-    
-#     for notice in noticeMain:
-#         post_notice2.append((notice, notice.created_at))
-    
-#     main_notice = []
-#     main_notice.append(post_notice2[0])
-#     main_notice.append(post_notice2[1])
-
-#     return main_notice
+def sort_notice(request):    
+    return Noticepost.objects.order_by('-created_at')[:2]

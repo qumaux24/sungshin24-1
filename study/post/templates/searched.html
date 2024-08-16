@@ -64,8 +64,8 @@
                     <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
                     <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
                     <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
-                    <a href="noticelist/">공지사항</a>
-                    <a>사용자 게시판</a>
+                    <a href="{% url 'post:noticelist' %}">공지사항</a>
+                    <a href="{% url 'post:userlist' %}">사용자 게시판</a>
                     <a href="{% url 'post:write' %}">레시피 등록</a>
                 </div>
             </div>
@@ -116,6 +116,7 @@
     
         <!--페이징부분-->
         <!--클래스 바꿔도 됨. 단, 클래스 바꾸면 css도 바꿔야함-->
+        {% if user.is_authenticated %}
         <ul class="pagination justify-content-center">
             {% if post_list.has_previous %}
                 <li class="page-item">
@@ -151,8 +152,7 @@
                 </li>
             {% endif %}
         </ul>
-        
-        
+        {% endif %}
     </body>
     
     </html>
