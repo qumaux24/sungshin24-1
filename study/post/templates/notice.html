@@ -2,75 +2,58 @@
 <html lang="ko">
     <head>
         <title>공지사항 게시판</title>
+        
         {% load static %}
-        <link rel="stylesheet" href="{%static 'css/styles-koreapost.css' %}">
-    
-    <script>
-        let isLoggedIn = false; 
-        function checklogin() {
-            if (!isLoggedIn) {
-                if (confirm("로그인이 필요합니다.")) {
-                    window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
+        <link rel="stylesheet" href="{%static 'css/styles-post.css' %}">
+        <!-- {% load static %}
+        <link rel="stylesheet" href="styles-post.css"> -->
+        <script>
+            let isLoggedIn = false;
+            function checklogin() {
+                if (!isLoggedIn) {
+                    if (confirm("로그인이 필요합니다.")) {
+                        window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
+                    }
                 }
-            }
-            else{
-                window.location.href="recipeRegistration.html";
-            }
-        };
-    </script>
-    
-    
-</head>
+                else {
+                    window.location.href = "recipeRegistration.html";
+                }
+            };
+        </script>
 
-<body>
-    <header>
+
+    </head>
+
+    <body>
+        <header>
             <div class="logo"><a href="{% url 'post:main' %}">
                 <span class="blue">냉</span>Jango() </a>
             </div>
-            {% if user.is_authenticated %}
-            <form method="POST" action="{% url 'post:search' user.id %}">
+            <form method="POST" action="{% url 'post:user_search' user.id %}">
                 {% csrf_token %} 
                     
                 <div class="search-bar">
-                    <select id="search-type" name="search_select">
+                    <select id="search-type" name="usersearch_select">
                         <option value="전체">전체</option>
                         <option value="제목">제목</option>
-                        <option value="재료">재료</option>
+                        <option value=-"내용">내용</option>
                     </select>
-                    <input type="text" placeholder="search" name="searched">
+                    <input type="text" placeholder="search" name="usersearched">
                     <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
                 </div>
             </form>
-    
-            {% else %}
-            <form method="POST" action="{% url 'post:outsearch'%}">
-            {% csrf_token %} 
-                
-                <div class="search-bar">
-                    <select id="search-type" name="search_select">
-                        <option value="전체">전체</option>
-                        <option value="제목">제목</option>
-                        <option value="재료">재료</option>
-                    </select>
-                    <input type="text" placeholder="search" name="searched">
-                    <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
-                </div>
-            </form>
-            {%endif%}
 
-                
             <div class="menu-icon">
                 <img src="{% static 'image/menu-icon.png' %}" alt="menu">
                 <div class="dropdown-menu">
                     <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
                     <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
                     <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
-                    <a href="noticelist/">공지사항</a>
-                    <a>사용자 게시판</a>
+                    <a href="notice.html">공지사항</a>
                     <a href="{% url 'post:write' %}">레시피 등록</a>
                 </div>
             </div>
-            
+
         </header>
         <h1>공지사항</h1>
         {% if request.user.is_superuser %}
