@@ -4,7 +4,6 @@ body {
     font-family: Arial, sans-serif;
     margin: 0 auto;
     padding: 0;
-
     width: 960px;
     overflow-x: auto;
 }
@@ -38,8 +37,6 @@ a:hover {
     color: blue;
 }
 
-
-
 .logo {
     font-size: 24px;
     font-weight: bold;
@@ -64,8 +61,15 @@ a:hover {
     background-color: #fff;
 }
 
+#search {
+    margin-bottom: 0px;
+    margin-top: 3px;
+}
+
 .search-bar {
     padding-top: 6px;
+    margin-top: 10px;
+
     display: flex;
     align-items: center;
     flex-grow: 1;
@@ -73,7 +77,7 @@ a:hover {
 }
 
 .search-bar input {
-    width: 500px;
+    width: 590px;
     padding: 5px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -135,8 +139,20 @@ a:hover {
     display: block;
 }
 
+
 /*--여기까지 헤더--*/
 
+
+#link {
+    width: 100px;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
 
 
 
@@ -156,12 +172,15 @@ a:hover {
 }
 
 .post-image {
-    width: 260px;
-    height: 150px;
-    object-fit: cover;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-
+.post-image img {
+    width: 500px;
+    height: 300px;
+    object-fit: cover;
+}
 
 .likes {
     height: 30px;
@@ -208,18 +227,17 @@ a:hover {
     padding-top: 7px;
 }
 
-.recipe-info {
+.post-info {
     text-align: center;
     margin-bottom: 20px;
 }
 
-.recipe-info p {
+.post-info p {
     font-size: 18px;
     margin: 5px 0;
 }
 
-.recipe-ingredients,
-.recipe-instructions {
+.post-text {
     margin-bottom: 20px;
 }
 
@@ -244,6 +262,8 @@ a:hover {
     margin: 5px 0;
 }
 
+
+
 .button-container {
     height: 40px;
     display: flex;
@@ -255,6 +275,7 @@ a:hover {
     padding: 5px 20px 5px 20px;
     margin: 0px 10px 10px 10px;
     font-size: 15px;
+
     color: #ffffff;
     background-color: #858585;
     border: none;
@@ -267,7 +288,7 @@ a:hover {
 }
 
 /* 댓글 목록 스타일 */
-#comments {
+#usercomments {
     margin: 20px;
     padding: 20px;
     border: 1px solid #ddd;
@@ -275,35 +296,34 @@ a:hover {
     background-color: #f9f9f9;
 }
 
-#comments h4 {
+#usercomments h4 {
     margin-bottom: 15px;
     font-size: 1.5em;
     color: #333;
 }
 
-#comments ul {
+#usercomments ul {
     list-style-type: none;
     padding: 0;
 }
 
-#comments ul li {
+#usercomments ul li {
     padding: 10px;
     border-bottom: 1px solid #eee;
 }
 
-#comments ul li:last-child {
+#usercomments ul li:last-child {
     border-bottom: none;
 }
 
-#comments ul li .delete-btn {
+#usercomments ul li .delete-btn {
     margin-left: 10px;
     color: red;
-    text-align: center;
     cursor: pointer;
 }
 
 /* 댓글 작성 스타일 */
-#comments form {
+#usercomments form {
     margin-top: 20px;
     padding: 10px;
     border: 1px solid #ddd;
@@ -311,7 +331,7 @@ a:hover {
     background-color: #f1f1f1;
 }
 
-#comments form input[type="submit"] {
+#usercomments form input[type="submit"] {
     background-color: #858585;
     color: white;
     border: none;
@@ -324,17 +344,17 @@ a:hover {
     border-radius: 5px;
 }
 
-#comments form input[type="submit"]:hover {
+#usercomments form input[type="submit"]:hover {
     background-color: #000000;
 }
 
 /* 댓글 작성 폼 스타일 */
-#comments form p {
+#usercomments form p {
     margin-bottom: 10px;
 }
 
-#comments form textarea {
-    width: 300px;
+#usercomments form textarea {
+    width: 800px;
     height: 100px;
     padding: 10px;
     border: 1px solid #ddd;
@@ -342,7 +362,7 @@ a:hover {
     resize: vertical;
 }
 
-#comments form textarea:focus {
+#usercomments form textarea:focus {
     border-color: #000000;
     outline: none;
 }
@@ -409,4 +429,3 @@ table tr:hover {
     color: #fff;
     border-color: #007bff;
 }
-

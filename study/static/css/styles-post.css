@@ -222,3 +222,16 @@ tr:hover {
     background-color: #007bff;
     border-color: #007bff;
 }
+
+.btn {
+    background-color: #696969;
+    border-radius: 5px;
+    padding: 10px 13px 10px 13px;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #353535;
+}
