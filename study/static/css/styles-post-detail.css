@@ -428,3 +428,8 @@ table tr:hover {
     color: #fff;
     border-color: #007bff;
 }
+
+
+textarea{
+    line-height: 30px;
+}
