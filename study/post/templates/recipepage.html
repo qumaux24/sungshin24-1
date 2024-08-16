@@ -17,7 +17,7 @@
                 alert("링크가 복사되었습니다. 필요하신 곳에 붙여넣기 하세요!")
             };
             let isLoggedIn = false; 
-        let isLoggedIn = false; 
+            {% comment %} let isLoggedIn = false;  {% endcomment %}
             function checklogin() {
                 if (!isLoggedIn) {
                     if (confirm("로그인이 필요합니다.")) {
@@ -112,15 +112,19 @@
                     <div id="like-button">
                         <img src="{% static 'image/like-icon.jpg' %}" alt="Like">
                         <br>
+                        {% if user.is_authenticated %}
                         <form action="{% url 'post:likes' post.pk %}" method='POST'>
                             {% csrf_token %}
-                            {% if user in post.like_users.all %}
-                                <input type="submit" value="좋아요 취소">
-                            {% else %}
-                                <input type="submit" value="좋아요">
-                            {% endif %}
                             
+                                {% if user in post.like_users.all %}
+                                    <input type="submit" value="좋아요 취소">
+                                {% else %}
+                                    <input type="submit" value="좋아요">
+                                {% endif %}                            
                         </form>
+                        {%else%}
+                            <input type="button" value="좋아요" href="javascript:void(0);" onclick="checklogin(); return false;">
+                        {%endif%}
                     </div>
                 </div>
                 <br>

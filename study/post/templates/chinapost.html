@@ -28,7 +28,7 @@
             <span class="blue">냉</span>Jango() </a>
         </div>
         {% if user.is_authenticated %}
-        <form method="POST" action="{% url 'post:search' user.id %}">
+        <form method="POST" action="{% url 'post:catesearch' writer_id=user.id category_name='chinapost' %}">
             {% csrf_token %} 
                 
             <div class="search-bar">

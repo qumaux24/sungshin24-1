@@ -55,14 +55,14 @@
 
     <div class="center">
 
-        <h2 class="daily">비밀번호 찾기</h2>
+        <h2 class="daily">ID/PW 수정</h2>
         <br>
         <form method="POST" class="login-box" id="changelogin">
             {% csrf_token %}
 
             <input name="inputID2" type="text" placeholder="기존아이디">
             <br>
-            <input name="inputkeyword2" type="password" placeholder="패스키">
+            <input name="inputkeyword2" type="text" placeholder="패스키">
             <br>
             <input name="newID" type="text" placeholder="새 아이디">
             <br>
