@@ -433,3 +433,6 @@ table tr:hover {
     border-color: #007bff;
 }
 
+textarea {
+    line-height: 30px;
+}
