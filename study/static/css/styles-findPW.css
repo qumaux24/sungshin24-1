@@ -234,4 +234,7 @@ a:hover {
     background-color: #353535;
 }
 
+input[type="textarea"]{
+    width:250px;
+}
 
