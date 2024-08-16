@@ -212,6 +212,10 @@ a:hover {
     margin:auto;
 }
 
+#id_allergies, #id_age {
+    width: 100%
+}
+
 
 
 

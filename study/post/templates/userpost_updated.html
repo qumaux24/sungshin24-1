@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Update Post</title>
-        {% load static %}
-            {% comment %} <link rel="stylesheet" href ="{%static 'css/styles-recipeRegistration.css' %}"> {% endcomment %}
-        <script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 수정</title>
+    {% load static %}
+    <link rel="stylesheet" href="{%static 'css/styles-recipeRegistration.css' %}">
+    <script>
             let isLoggedIn = false; 
             function checklogin() {
                 if (!isLoggedIn) {
@@ -14,25 +16,45 @@
                 }
             };
         </script>
-    </head>
-    <body>
-        <header>
+    
+       
+</head>
+
+<body>
+    <header>
             <div class="logo"><a href="{% url 'post:main' %}">
                 <span class="blue">냉</span>Jango() </a>
             </div>
-            <form method="POST" action="{% url 'post:user_search' user.id %}">
-            {% csrf_token %} 
-                
+            {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'post:search' user.id %}">
+                {% csrf_token %} 
+                    
                 <div class="search-bar">
-                    <select name="usersearch_select">
+                    <select id="search-type" name="search_select">
                         <option value="전체">전체</option>
                         <option value="제목">제목</option>
-                        <option value="내용">내용</option>
+                        <option value="재료">재료</option>
                     </select>
-                    <input type="text" placeholder="search" name="usersearched">
+                    <input type="text" placeholder="search" name="searched">
                     <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
                 </div>
             </form>
+    
+            {% else %}
+            <form method="POST" action="{% url 'post:outsearch'%}">
+            {% csrf_token %} 
+                
+                <div class="search-bar">
+                    <select id="search-type" name="search_select">
+                        <option value="전체">전체</option>
+                        <option value="제목">제목</option>
+                        <option value="재료">재료</option>
+                    </select>
+                    <input type="text" placeholder="search" name="searched">
+                    <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
+                </div>
+            </form>
+            {%endif%}
 
                 
             <div class="menu-icon">
@@ -55,17 +77,23 @@
             </div>
             
         </header>
+
+        <br>
         
-        <section class="recipe-form">
+        <section id="updatepost1" class="recipe-form">
             <h2>글 수정</h2>
+            <br>
             <form method="POST" enctype="multipart/form-data" action="{% url 'post:userpost_updateget' userpost_id %}">
+                <div class="form-group">
                 {% csrf_token %}
                 {{ userpostForm.as_p }}
+                </div>
 
             {% comment %} <h2>이미지 추가</h2>
             <input type="file" name="new_image" multiple accept="image/*" id="id_image"> {% endcomment %}
-                <button type="submit">저장</button>
-
+            <div class="form-group">    
+            <button type="submit">저장</button>
+            </div> 
             </form>
         </section>
     </body>
