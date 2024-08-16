@@ -33,46 +33,65 @@
     <body>
         <header>
             <div class="logo"><a href="{% url 'post:main' %}">
-                <span class="blue">냉</span>Jango() </a>
+                    <span class="blue">냉</span>Jango() </a>
             </div>
-            <form method="POST" action="{% url 'post:user_search' user.id %}">
+            {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'post:search' user.id %}">
                 {% csrf_token %} 
                     
                 <div class="search-bar">
-                    <select name="usersearch_select">
+                    <select id="search-type" name="search_select">
                         <option value="전체">전체</option>
                         <option value="제목">제목</option>
-                        <option value=-"내용">내용</option>
+                        <option value="재료">재료</option>
                     </select>
-                    <input type="text" placeholder="search" name="usersearched">
+                    <input type="text" placeholder="search" name="searched">
                     <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
                 </div>
             </form>
-                
-            <div class="menu-icon">
-                <img src="{% static 'image/menu-icon.png' %}" alt="menu">
-                <div class="dropdown-menu">
-                    <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
-                    <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
-                    <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
-                    <a href="{% url 'post:noticelist' %}">공지사항</a>
-                    {% if user.is_authenticated %}
-                    <a href="{% url 'post:userlist' %}">사용자 게시판</a>
-                    <a href="{% url 'post:write' %}">레시피 등록</a>
-                    {% else %}
-                    <a href="javascript:void(0);" onclick="checklogin()">사용자 게시판</a>
-                    <a href="javascript:void(0);" onclick="checklogin()">레시피 등록</a>
 
-                    {% endif %}
-                    
-                </div>
-            </div>
+        {% else %}
+        <form method="POST" action="{% url 'post:outsearch'%}">
+        {% csrf_token %} 
             
-        </header>
+            <div class="search-bar">
+                <select id="search-type" name="search_select">
+                    <option value="전체">전체</option>
+                    <option value="제목">제목</option>
+                    <option value="재료">재료</option>
+                </select>
+                <input type="text" placeholder="search" name="searched">
+                <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
+            </div>
+        </form>
+        {%endif%}
+
+            
+        <div class="menu-icon">
+            <img src="{% static 'image/menu-icon.png' %}" alt="menu">
+            <div class="dropdown-menu">
+                <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
+                <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
+                <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
+                <a href="{% url 'post:noticelist' %}">공지사항</a>
+                {% if user.is_authenticated %}
+                <a href="{% url 'post:userlist' %}">사용자 게시판</a>
+                <a href="{% url 'post:write' %}">레시피 등록</a>
+                {% else %}
+                <a href="javascript:void(0);" onclick="checklogin()">사용자 게시판</a>
+                <a href="javascript:void(0);" onclick="checklogin()">레시피 등록</a>
+
+                {% endif %}
+                
+            </div>
+        </div>
+        
+    </header>
+
        
         <main>
             <section class="post-details">
-                <h1>게시글 제목 : {{ userpost.title }}</h1>
+                <h1>{{ userpost.title }}</h1>
 
                 <p>작성자 : {{ userpost.writer }}</p>
                 <p>작성 시간 : {{ userpost.created_at }}</p>
@@ -104,11 +123,11 @@
                 <br>
                 <div class="button-container">
                     {% if userpost.writer == request.user %}
-                    <a href="{% url 'post:userpost_updateget' userpost.id %}"><button>수정하기</button></a>
+                    <a href="{% url 'post:userpost_updateget' userpost.id %}"><button class="btn">수정하기</button></a>
                     <br>
                     <form action="{% url 'post:userpost_deleteget' userpost.id %}" method="POST">
                         {% csrf_token %}
-                        <button type="submit">삭제하기</button>
+                        <button class="btn" type="submit">삭제하기</button>
                     </form>
                     {% endif %}
                 </div>

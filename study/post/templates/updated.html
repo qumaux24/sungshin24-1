@@ -93,34 +93,47 @@
                 </form>
             {% endfor %}
         </section> {% endcomment %}
+        <main>
+            <section class="recipe-form">
+                <h2>글 수정</h2>
+                <form method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
 
-        <section class="recipe-form">
-            <h2>글 수정</h2>
-            <form method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ postForm.as_p }}
-    
-                <h2>이미지 추가</h2>
-                <input type="file" name="new_image" multiple accept="image/*" id="id_image">
-                <button type="submit">저장</button>
-            </form>
-            
-            {% if error_message %}
-                <div class="errors">
-                    <p>{{ error_message }}</p>
-                </div>
-            {% endif %}
-    
-            <h2>기존 이미지</h2>
-            {% for image in images %}
-                <!-- 각 이미지에 대해 별도의 폼 사용 -->
-                <form action="{% url 'post:image_delete' post_id %}" method="post" style="display: inline;">
-                    {% csrf_token %}
-                    <input type="hidden" name="image_id" value="{{ image.id }}">
-                    <img src="{{ image.image.url }}" alt="Image" style="max-width: 200px;">
-                    <button type="submit">삭제</button>
+                        {% csrf_token %}
+                        {{ postForm.as_p }}
+                    </div>
+        
+                    <div class="form-group">
+                    
+                        <h2>이미지 추가</h2>
+                        <input type="file" name="new_image" multiple accept="image/*" id="id_image">
+                    </div>
+                    <div class="form-group">
+
+                        <button type="submit">저장</button>
+                    </div>
                 </form>
-            {% endfor %}
-        </section>
+                
+                {% if error_message %}
+                    <div class="errors">
+                        <p>{{ error_message }}</p>
+                    </div>
+                {% endif %}
+        
+                <h2>기존 이미지</h2>
+                {% for image in images %}
+                    <!-- 각 이미지에 대해 별도의 폼 사용 -->
+                    <form action="{% url 'post:image_delete' post_id %}" method="post" style="display: inline;">
+                        {% csrf_token %}
+                        <input type="hidden" name="image_id" value="{{ image.id }}">
+                        <img src="{{ image.image.url }}" alt="Image" style="max-width: 200px;">
+                    <div class="form-group">
+                        
+                        <button type="submit">삭제</button>
+                    </div>
+                    </form>
+                {% endfor %}
+            </section>
+        </main>
     </body>
 </html>

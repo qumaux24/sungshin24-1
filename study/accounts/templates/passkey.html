@@ -1,9 +1,66 @@
-{% load bootstrap4 %}
-{% comment %} {% load custom_filters %} {% endcomment %}
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <title>패스키 설정</title>
+        {% load static %}
+        {% load bootstrap4 %}
+        <link rel="stylesheet" href="{%static 'css/styles-login.css' %}">
+        <script>
+            let isLoggedIn = false; 
+            function checklogin() {
+                if (!isLoggedIn) {
+                    if (confirm("로그인이 필요합니다.")) {
+                        
+                    }
+                }
+            };
+        </script>
+    
+       
+</head>
 
-<form method="POST">
-    {% csrf_token %}
-    키워드 : {{passkeyword.pass_keyword}}
-    {% comment %} |password_mask {% endcomment %}
-    <button type="submit">저장</button>
-</form>
+<body>
+    <header>
+        <div class="logo"><a href="{% url 'post:main' %}">
+            <span class="blue">냉</span>Jango() </a>
+        </div>
+        <select id="search-type">
+            <option value="all">전체</option>
+            <option value="ingredient">재료</option>
+            <option value="title">제목</option>
+        </select>
+        <div class="search-bar">
+            <input type="text" placeholder="search">
+            <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
+        </div>
+            
+        <div class="menu-icon">
+            <img src="{% static 'image/menu-icon.png' %}" alt="menu">
+            <div class="dropdown-menu">
+                <a href="koreapost.html">한식</a>
+                <a href="chinapost.html">중식</a>
+                <a href="japanpost.html">일식</a>
+                <a href="{% url 'post:noticelist' %}">공지사항</a>
+                <a href="{% url 'post:write' %}">레시피 등록</a>
+            </div>
+        </div>
+        
+    </header>
+        <br>
+        <br>
+        <form method="POST" class="login-box">
+            {% csrf_token %}
+        <h2>키워드 설정</h2> 
+        
+        
+        {{passkeyword.pass_keyword}}
+        {% comment %} |password_mask {% endcomment %}
+        <button type="submit">저장</button>
+            
+        </form>
+
+    </body>
+</html>
+
+
+

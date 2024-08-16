@@ -68,25 +68,27 @@
 
     <section class="containers">
         <div class="info-box">
-            <div class="info">
+            <div class="info1">
                 <h3>ID: {{user_detail.user}}</h3>
             </div>
                 <a href="{% url 'post:changelogin'%}"><button id="button">ID/PW 수정</button></a>        
         </div>
         
         <div class="details-box">
-            <div class="info">
+            <div class="info2">
                 <p>성별: {{user_detail.get_gender_display}}</p>
                 <p>나이: {{user_detail.age}}</p>
                 <p>거주지: {{user_detail.get_residence_display}}</p>
-                <p>알러지: 
+                <div id="allergy">알러지: 
                     <ul>
                         {% for allergies in allergies %}
                             <li>{{ allergies }}</li>
                         {% endfor %}
-                        </ul>
-                </p>
+                     </ul>
+                </div>
+
             </div>
+            <br>
             <!--연결:membership.html-->
             <a href="{% url 'post:user_updated' writer_id%}"><button id="button">세부사항 수정</button></a>
         </div>

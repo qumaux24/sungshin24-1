@@ -50,8 +50,8 @@ a:hover {
 }
 
 #search-type {
-    margin-top: 2px;
-    margin-right:3px;
+    margin-top: 1px;
+    margin-right:6px;
     padding: 5px;
     border-radius: 5px;
     border: 1px solid #ccc;
@@ -70,12 +70,12 @@ a:hover {
 
 .search-bar {
     padding-top:6px;
-    margin-top: 10px;
+  
     
     display: flex;
     align-items: center;
     flex-grow: 1;
-    margin: 0 20px;
+    margin: 20px 0px 0px 0px;
 }
 
 .search-bar input {
