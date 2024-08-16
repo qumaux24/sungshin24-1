@@ -27,18 +27,26 @@
             <div class="logo"><a href="{% url 'post:main' %}">
                 <span class="blue">냉</span>Jango() </a>
             </div>
-            <select id="search-type">
-                <option value="all">전체</option>
-                <option value="ingredient">재료</option>
-                <option value="title">제목</option>
-            </select>
-            <div class="search-bar">
-                <form method="POST" action="{% url 'post:search' user.id %}">
-                    {% csrf_token %} 
-                        <input type="text" placeholder="search" name="searched">
-                        <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
-                    </form>
-            </div>
+            {% if user.is_authenticated %}
+            <form method="POST" action="{% url 'post:notice_search' user.id %}">
+                {% csrf_token %} 
+                    
+                <div class="search-bar">
+                    <input type="text" placeholder="search" name="noticesearched">
+                    <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
+                </div>
+            </form>
+    
+            {% else %}
+            <form method="POST" action="{% url 'post:notice_outsearch'%}">
+            {% csrf_token %} 
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="search" name="noticesearched">
+                    <button><img src="{% static 'image/search-icon.png' %}" alt="search"></button>
+                </div>
+            </form>
+            {%endif%}
     
             <div class="menu-icon">
                 <img src="{% static 'image/menu-icon.png' %}" alt="menu">
@@ -46,7 +54,7 @@
                     <a href="{% url 'post:list' category_name='koreapost' %}">한식</a>
                     <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
                     <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
-                    <a href="notice.html">공지사항</a>
+                    <a href="{% url 'post:noticelist' %}">공지사항</a>
                     <a href="{% url 'post:write' %}">레시피 등록</a>
                 </div>
             </div>
@@ -64,23 +72,22 @@
                         <th>제목</th>
                         <th>글쓴이</th>
                         <th>작성 시간</th>
-                        <th>최종 수정</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% csrf_token %}
+                    {%for fixnotice in fix%}
+                    <tr class ="fixed">
+                        <td><a href="{% url 'post:noticeShow' fixnotice.id %}">{{ fixnotice.title }}</a></td>
+                        <td>{{ fixnotice.writer }}</td>
+                        <td>{{ fixnotice.created_at }}</td>
+                    </tr>
+                    {%endfor%}
                     {% for noticepost in noticelist %}
                     <tr class ="fixed">
                         <td><a href="{% url 'post:noticeShow' noticepost.id %}">{{ noticepost.title }}</a></td>
                         <td>{{ noticepost.writer }}</td>
                         <td>{{ noticepost.created_at }}</td>
-                        <td>
-                        {% if noticepost.updated_at != noticepost.created_at %}
-                            {{ noticepost.updated_at }}
-                        {% else %}
-                            &nbsp;
-                        {% endif %}
-                        </td>
                     </tr>
                     {% endfor %}
                 
