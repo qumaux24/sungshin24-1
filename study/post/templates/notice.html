@@ -5,19 +5,16 @@
         {% load static %}
         <link rel="stylesheet" href="{%static 'css/styles-post.css' %}">
         
-    <script>
-        let isLoggedIn = false;
-        function checklogin() {
-            if (!isLoggedIn) {
-                if (confirm("로그인이 필요합니다.")) {
-                    window.location.href = "login.html"; // 로그인 페이지로 이동합니다.
+        <script>
+            let isLoggedIn = false; 
+            function checklogin() {
+                if (!isLoggedIn) {
+                    if (confirm("로그인이 필요합니다.")) {
+                        
+                    }
                 }
-            }
-            else {
-                window.location.href = "recipeRegistration.html";
-            }
-        };
-    </script>
+            };
+        </script>
     
     
     </head>
@@ -55,7 +52,15 @@
                     <a href="{% url 'post:list' category_name='chinapost' %}">중식</a>
                     <a href="{% url 'post:list' category_name='japanpost' %}">일식</a>
                     <a href="{% url 'post:noticelist' %}">공지사항</a>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'post:userlist' %}">사용자 게시판</a>
                     <a href="{% url 'post:write' %}">레시피 등록</a>
+                    {% else %}
+                    <a href="javascript:void(0);" onclick="checklogin()">사용자 게시판</a>
+                    <a href="javascript:void(0);" onclick="checklogin()">레시피 등록</a>
+
+                    {% endif %}
+                    
                 </div>
             </div>
     
@@ -66,6 +71,16 @@
         {% endif %}
         <br>
         <div class="container">
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    var rows = document.querySelectorAll('tr[data-href]');
+                    rows.forEach(function (row) {
+                        row.addEventListener('click', function () {
+                            window.location.href = this.dataset.href;
+                        });
+                    });
+                });
+            </script>
             <table>
                 <thead>
                     <tr>
@@ -77,15 +92,15 @@
                 <tbody>
                     {% csrf_token %}
                     {%for fixnotice in fix%}
-                    <tr class ="fixed">
-                        <td><a href="{% url 'post:noticeShow' fixnotice.id %}">{{ fixnotice.title }}</a></td>
+                    <tr class ="fixed" data-href="{% url 'post:noticeShow' fixnotice.id %}">
+                        <td>{{ fixnotice.title }}</td>
                         <td>{{ fixnotice.writer }}</td>
                         <td>{{ fixnotice.created_at }}</td>
                     </tr>
                     {%endfor%}
                     {% for noticepost in noticelist %}
-                    <tr class ="fixed">
-                        <td><a href="{% url 'post:noticeShow' noticepost.id %}">{{ noticepost.title }}</a></td>
+                    <tr class ="fixed" data-href="{% url 'post:noticeShow' noticepost.id %}">
+                        <td>{{ noticepost.title }}</td>
                         <td>{{ noticepost.writer }}</td>
                         <td>{{ noticepost.created_at }}</td>
                     </tr>

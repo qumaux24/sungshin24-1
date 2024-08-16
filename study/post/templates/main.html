@@ -16,12 +16,9 @@
                         
                     }
                 }
-                else{
-                    window.location.href="recipeRegistration.html";
-                }
             };
         </script>
-        
+        {% comment %} window.location.href="recipeRegistration.html"; {% endcomment %}
         
     </head>
 
@@ -136,8 +133,8 @@
                         <div class="box1">
                             <h2>PROFILE</h2>
                             <p id="user-id">아이디: {{user}}</p>
-                            <p id="user-gender">성별: </p>
-                            <p id="user-posts">게시글 수: </p>
+                            <p id="user-gender">성별: {{user_detail.get_gender_display}}</p>
+                            <p id="user-posts">게시글 수: {{ post_count }}</p>
                             <a href="{% url 'post:mypage' user.id %}"><button>마이페이지</button>
                         
                             <a href="{% url 'accounts:logout' %}"><button>로그아웃</button></a>
