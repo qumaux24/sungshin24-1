@@ -433,3 +433,7 @@ table tr:hover {
 textarea{
     line-height: 30px;
 }
+
+.post-text{
+    line-height: 40px;
+}
