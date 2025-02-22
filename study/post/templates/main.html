@@ -198,25 +198,34 @@
                 <div class="category">
                     <h3>HOT 한식 게시판</h3>
                     <ul>
-                        {% for post in korea_hot_list %}
-                        <li><a href="{% url 'post:show' post.id %}">{{post.title}}</a></li>
-                        {% endfor %}
+                        {% if korea_hot_list is not None %}
+                            {% for post in korea_hot_list %}
+                            <li><a href="{% url 'post:show' post.id %}">{{post.title}}</a></li>
+                            {% endfor %}
+                        {% else %}
+                        {% endif %}
                     </ul>
                 </div>
                 <div class="category">
                     <h3>HOT 중식 게시판</h3>
                     <ul>
-                        {% for post in china_hot_list %}
-                        <li><a href="{% url 'post:show' post.id %}">{{post.title}}</a></li>
-                        {% endfor %}
+                        {% if china_hot_list is not None %}
+                            {% for post in china_hot_list %}
+                            <li><a href="{% url 'post:show' post.id %}">{{post.title}}</a></li>
+                            {% endfor %}
+                        {% else %}
+                        {% endif %}
                     </ul>
                 </div>
                 <div class="category">
                     <h3>HOT 일식 게시판</h3>
                     <ul>
-                        {% for post in japan_hot_list %}
-                        <li><a href="{% url 'post:show' post.id %}">{{post.title}}</a></li>
-                        {% endfor %}
+                        {% if japan_hot_list is not None %}
+                            {% for post in japan_hot_list %}
+                            <li><a href="{% url 'post:show' post.id %}">{{post.title}}</a></li>
+                            {% endfor %}
+                        {% else %}
+                        {% endif %}
                     </ul>
                 </div>
             </section>
