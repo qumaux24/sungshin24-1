@@ -161,11 +161,16 @@ def sort_hot_korea(request):
         
     post_likes.sort(key=lambda x: (x[1], x[2]), reverse=True)
     sorted_posts_like = [post for post, likes_count, created_at in post_likes]
-    
+    print(sorted_posts_like)
     korea_hot_list = []
-    korea_hot_list.append(sorted_posts_like[0])
-    korea_hot_list.append(sorted_posts_like[1])
-
+    if len(sorted_posts_like)==0:
+        return None
+    elif len(sorted_posts_like)==1:
+        korea_hot_list.append(sorted_posts_like[0])
+        
+    elif len(sorted_posts_like)>=2:
+        korea_hot_list.append(sorted_posts_like[0])
+        korea_hot_list.append(sorted_posts_like[1])
     return korea_hot_list
 
 def sort_hot_china(request):
@@ -182,9 +187,14 @@ def sort_hot_china(request):
     sorted_posts_like = [post for post, likes_count, created_at in post_likes]
     
     china_hot_list = []
-    china_hot_list.append(sorted_posts_like[0])
-    china_hot_list.append(sorted_posts_like[1])
-
+    if len(sorted_posts_like)==0:
+        return None
+    elif len(sorted_posts_like)==1:
+        china_hot_list.append(sorted_posts_like[0])
+        
+    elif len(sorted_posts_like)>=2:
+        china_hot_list.append(sorted_posts_like[0])
+        china_hot_list.append(sorted_posts_like[1])
     return china_hot_list
 
 def sort_hot_japan(request):
@@ -201,7 +211,12 @@ def sort_hot_japan(request):
     sorted_posts_like = [post for post, likes_count, created_at in post_likes]
     
     japan_hot_list = []
-    japan_hot_list.append(sorted_posts_like[0])
-    japan_hot_list.append(sorted_posts_like[1])
-
+    if len(sorted_posts_like)==0:
+        return None
+    elif len(sorted_posts_like)==1:
+        japan_hot_list.append(sorted_posts_like[0])
+        
+    elif len(sorted_posts_like)>=2:
+        japan_hot_list.append(sorted_posts_like[0])
+        japan_hot_list.append(sorted_posts_like[1])
     return japan_hot_list

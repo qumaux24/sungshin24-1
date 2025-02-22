@@ -150,7 +150,7 @@ def user_search(request, writer_id):
                 query |= Q(content__icontains=term)
             else:
                 query |= Q(title__icontains=term) | Q(content__icontains=term)
-        posts = Userpost.objects.filter(query).annotate(comment_count=Count('comment'))
+        posts = Userpost.objects.filter(query).annotate(comment_count=Count('usercomment'))
         return render(request, 'searched_userpost.html', {'searched': searched, 'post_list': posts})
     else:
         return render(request, 'searched_userpost.html', {})
@@ -162,6 +162,7 @@ def notice_search(request, writer_id):
             searched = request.POST.get('noticesearched', '')
         
         intermediate_terms = searched.split()
+        term=''
         
         search_terms = []
         for term in intermediate_terms:
@@ -173,7 +174,7 @@ def notice_search(request, writer_id):
         
         query |= Q(title__icontains=term) | Q(content__icontains=term)
         
-        posts = Noticepost.objects.filter(query).annotate(comment_count=Count('comment'))
+        posts = Noticepost.objects.filter(query)
         return render(request, 'searched_notice.html', {'searched': searched, 'post_list': posts})
     else:
         return render(request, 'searched_notice.html', {})

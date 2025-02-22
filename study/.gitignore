@@ -1,0 +1,10 @@
+/venv/
+/workspace.xml
+/shelf/
+/__pyache__/
+db.sqlite3
+/migrations/
+/media/
+/media
+/myvenv/
+/makers/migrations
