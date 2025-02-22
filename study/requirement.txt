@@ -1,0 +1,2 @@
+pip install django-apscheduler
+python manage.py init_daily_numbers

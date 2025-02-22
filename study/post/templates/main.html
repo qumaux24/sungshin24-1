@@ -85,9 +85,10 @@
                 <section class="daily-recipe">
                     <br>
                     <h2>DAILY ♡</h2>
+
+                    {%if context_daily is not None %}
                     <br>
                     <div class="recipe-card">
-                        
                         <a href="{% url 'post:show' post_id=context_daily.post1.id %}"><h3>{{ context_daily.post1.title }}</h3></a>
                         <div class="likes">
                             <img src="{% static 'image/like-icon.jpg' %}" alt="Like">
@@ -96,7 +97,7 @@
                         <br>
                         <img src="{% if context_daily.image1 %}{{ context_daily.image1.image.url }}{% else %}{% static 'image/recipe-image.png' %}{% endif %}" alt="Image">
                         <br>
-
+                        
                     </div>
 
                     <div class="recipe-card">
@@ -109,10 +110,11 @@
                         <br>
                         <img src="{% if context_daily.image2 %}{{ context_daily.image2.image.url }}{% else %}{% static 'image/recipe-image.png' %}{% endif %}" alt="Image">
                         <br>
-
+                        
                     </div>
                     <br>
                     <div class="recipe-card">
+                        
                         <a href="{% url 'post:show' post_id=context_daily.post3.id %}"><h3>{{ context_daily.post3.title }}</h3></a>                    
                         <div class="likes">
                             
@@ -122,8 +124,11 @@
                         <br>
                         <img src="{% if context_daily.image3 %}{{ context_daily.image3.image.url }}{% else %}{% static 'image/recipe-image.png' %}{% endif %}" alt="Image">
                         <br>
-
+                        
                     </div>
+                    {%else%}
+                    <div id="nodaily"><p>게시글 수가 부족합니다!</p></div>
+                    {%endif%}
 
                 </section>
             

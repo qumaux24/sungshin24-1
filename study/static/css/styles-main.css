@@ -507,3 +507,16 @@ a:hover {
     font-size: 18px;
     margin: 5px 0;
 }
+
+#nodaily {
+    display: inline-block;
+    font-size: 20px;
+    position: relative;
+    /* align-items: center; */
+    /* text-align: center; */
+    /* align-content: center; */
+    margin-top: 200px;
+    background-color: #e0e0e0;
+    padding: 0 30px;
+    border-radius: 20px;
+}
